@@ -14,14 +14,22 @@
     <nav class="nav">
       <a href="#home" class="logo">Kyoungmin Roh</a>
       <ul class="nav-links">
-        <li><a href="#about">About</a></li>
-        <li><a href="#education">Education</a></li>
-        <li><a href="#work">Experience</a></li>
-        <li><a href="#publications">Publications</a></li>
-        <li><a href="#awards">Awards</a></li>
-        <li><a href="#patent">Patent</a></li>
-        <li><a href="#projects">Projects</a></li>
-        <li><a href="#contact">Contact</a></li>
+        <li><a href="#about" data-i18n="nav.about">About</a></li>
+        <li><a href="#education" data-i18n="nav.education">Education</a></li>
+        <li><a href="#work" data-i18n="nav.experience">Experience</a></li>
+        <li><a href="#publications" data-i18n="nav.publications">Publications</a></li>
+        <li><a href="#awards" data-i18n="nav.awards">Awards</a></li>
+        <li><a href="#patent" data-i18n="nav.patent">Patent</a></li>
+        <li><a href="#projects" data-i18n="nav.projects">Projects</a></li>
+        <li><a href="#contact" data-i18n="nav.contact">Contact</a></li>
+        <li class="nav-lang-wrap">
+          <button type="button" class="lang-btn active" data-lang="en" aria-label="English" title="English">
+            <img src="elements/Flag_of_the_United_States.svg.png" alt="" width="24" height="16" />
+          </button>
+          <button type="button" class="lang-btn" data-lang="ko" aria-label="한국어" title="한국어">
+            <img src="elements/Flag_of_South_Korea.svg.webp" alt="" width="24" height="16" />
+          </button>
+        </li>
         <li class="nav-theme-wrap">
           <button type="button" class="theme-toggle" aria-label="Toggle dark/light mode" title="Toggle theme">
             <span class="theme-icon sun" aria-hidden="true">☀️</span>
@@ -37,56 +45,56 @@
 
   <main>
     <section id="home" class="hero">
-      <p class="hero-label">Hello, I'm</p>
+      <p class="hero-label" data-i18n="hero.label">Hello, I'm</p>
       <h1 class="hero-title">
-        <span class="line">Kyoungmin Roh,</span>
-        <span class="line accent">Cybersecurity Researcher</span>
+        <span class="line" data-i18n="hero.title1">Kyoungmin Roh,</span>
+        <span class="line accent" data-i18n="hero.title2">Cybersecurity Researcher</span>
       </h1>
-      <p class="hero-desc">Pursuing an academic career in cybersecurity.</p>
-      <p class="hero-focus-label">Research focus:</p>
+      <p class="hero-desc" data-i18n="hero.desc">Pursuing an academic career in cybersecurity.</p>
+      <p class="hero-focus-label" data-i18n="hero.focusLabel">Research focus:</p>
       <ul class="hero-focus-list">
-        <li>Learning-based IDS under concept drift</li>
-        <li>Post-quantum cryptography in CPS and embedded systems</li>
-        <li>Secure system design that remains trustworthy over time</li>
+        <li data-i18n="hero.focus1">Learning-based IDS under concept drift</li>
+        <li data-i18n="hero.focus2">Post-quantum cryptography in CPS and embedded systems</li>
+        <li data-i18n="hero.focus3">Secure system design that remains trustworthy over time</li>
       </ul>
-      <a href="#publications" class="btn btn-primary">View Publications</a>
+      <a href="#publications" class="btn btn-primary" data-i18n="hero.btn">View Publications</a>
       <div class="hero-scroll">
-        <span>Scroll</span>
+        <span data-i18n="hero.scroll">Scroll</span>
         <div class="scroll-line"></div>
       </div>
     </section>
 
     <section id="about" class="section about">
-      <h2 class="section-title">About</h2>
+      <h2 class="section-title" data-i18n="section.about">About</h2>
       <div class="about-content">
-        <h3 class="about-subtitle">Objective</h3>
-        <p class="about-text">To pursue an academic career in cybersecurity as a professor, contributing to society through impactful research and education. I aim to develop technologies that enhance security and people's lives while mentoring the next generation of researchers who will advance the field beyond my own contributions.</p>
-        <h3 class="about-subtitle">Research Interests</h3>
-        <p class="about-text">I am interested in the security of complex systems that must operate reliably under evolving threats and broken assumptions. My current research focuses on CPS and system security, with a particular emphasis on learning-based intrusion detection (IDS) under concept drift and the secure deployment of post-quantum cryptography (PQC) in CPS and embedded systems. My research goal is to establish principled foundations for designing secure systems that remain trustworthy over time, across various environments, and during the post-quantum transition.</p>
+        <h3 class="about-subtitle" data-i18n="about.objectiveTitle">Objective</h3>
+        <p class="about-text" data-i18n="about.objectiveText">To pursue an academic career in cybersecurity as a professor, contributing to society through impactful research and education. I aim to develop technologies that enhance security and people's lives while mentoring the next generation of researchers who will advance the field beyond my own contributions.</p>
+        <h3 class="about-subtitle" data-i18n="about.interestsTitle">Research Interests</h3>
+        <p class="about-text" data-i18n="about.interestsText">I am interested in the security of complex systems that must operate reliably under evolving threats and broken assumptions. My current research focuses on CPS and system security, with a particular emphasis on learning-based intrusion detection (IDS) under concept drift and the secure deployment of post-quantum cryptography (PQC) in CPS and embedded systems. My research goal is to establish principled foundations for designing secure systems that remain trustworthy over time, across various environments, and during the post-quantum transition.</p>
       </div>
     </section>
 
     <section id="education" class="section education">
-      <h2 class="section-title">Education</h2>
+      <h2 class="section-title" data-i18n="section.education">Education</h2>
       <div class="edu-card">
         <div class="edu-logo-wrap">
           <img src="elements/dankook_logo.png" alt="Dankook University" class="edu-logo" />
         </div>
         <div class="edu-body">
           <h3>Dankook University</h3>
-          <p class="edu-degree">B.E. in Cybersecurity</p>
-          <p class="edu-meta">Mar 2021 – Expected Jan 2027 · Yongin, Republic of Korea</p>
+          <p class="edu-degree" data-i18n="edu.degree">B.E. in Cybersecurity</p>
+          <p class="edu-meta" data-i18n="edu.meta">Mar 2021 – Expected Jan 2027 · Yongin, Republic of Korea</p>
           <ul class="edu-desc-list">
-            <li>Undergraduate (Junior → Senior)</li>
-            <li>GPA: 3.0 / 4.5</li>
-            <li>Relevant coursework: AI Security, CPS Security, Embedded Security, Cryptography</li>
+            <li data-i18n="edu.li1">Undergraduate (Junior → Senior)</li>
+            <li data-i18n="edu.li2">GPA: 3.0 / 4.5</li>
+            <li data-i18n="edu.li3">Relevant coursework: AI Security, CPS Security, Embedded Security, Cryptography</li>
           </ul>
         </div>
       </div>
     </section>
 
     <section id="work" class="section work">
-      <h2 class="section-title">Experience</h2>
+      <h2 class="section-title" data-i18n="section.experience">Experience</h2>
       <div class="work-list">
         <article class="work-card">
           <div class="work-logo-wrap">
@@ -94,16 +102,16 @@
           </div>
           <div class="work-body">
             <h3>IU SEC Lab</h3>
-            <p class="work-org">Department of Computer Science, Indiana University Bloomington</p>
-            <a href="https://kimhyungsub.github.io/" target="_blank" rel="noopener" class="work-lab-link">Lab Homepage →</a>
+            <p class="work-org" data-i18n="work.iuOrg">Department of Computer Science, Indiana University Bloomington</p>
+            <a href="https://kimhyungsub.github.io/" target="_blank" rel="noopener" class="work-lab-link" data-i18n="work.labLink">Lab Homepage →</a>
             <ul class="work-meta-list">
-              <li>Position: Research Intern</li>
+              <li data-i18n="work.position">Position: Research Intern</li>
               <li>Advisor: Prof. Hyungsub Kim</li>
-              <li>Period: Oct 2025 – Present · Bloomington, U.S.</li>
-              <li>Analyzing security risks and failure modes in open-source CPS software</li>
-              <li>Investigating vulnerability patterns and attack surfaces in long-lived CPS</li>
-              <li>Surveying CPS-related vulnerabilities using OSV, GitHub Issues, and forums</li>
-              <li>Developing CPS-specific vulnerability characterization</li>
+              <li data-i18n="work.iuPeriod">Period: Oct 2025 – Present · Bloomington, U.S.</li>
+              <li data-i18n="work.iu1">Analyzing security risks and failure modes in open-source CPS software</li>
+              <li data-i18n="work.iu2">Investigating vulnerability patterns and attack surfaces in long-lived CPS</li>
+              <li data-i18n="work.iu3">Surveying CPS-related vulnerabilities using OSV, GitHub Issues, and forums</li>
+              <li data-i18n="work.iu4">Developing CPS-specific vulnerability characterization</li>
             </ul>
           </div>
         </article>
@@ -113,17 +121,17 @@
           </div>
           <div class="work-body">
             <h3>CSOS Lab</h3>
-            <p class="work-org">Department of Software Science, Dankook University</p>
-            <a href="https://securesw.dankook.ac.kr/" target="_blank" rel="noopener" class="work-lab-link">Lab Homepage →</a>
+            <p class="work-org" data-i18n="work.csosOrg">Department of Software Science, Dankook University</p>
+            <a href="https://securesw.dankook.ac.kr/" target="_blank" rel="noopener" class="work-lab-link" data-i18n="work.labLink">Lab Homepage →</a>
             <ul class="work-meta-list">
-              <li>Position: Research Intern</li>
+              <li data-i18n="work.position">Position: Research Intern</li>
               <li>Advisor: Prof. Seong-je Cho</li>
-              <li>Period: Mar 2025 – Present · Yongin, Republic of Korea</li>
-              <li>Researching learning-based IDS under severe concept drift without retraining</li>
-              <li>Studying graph-based IDS using API co-occurrence & SNA</li>
-              <li>Investigating TEE-based lightweight PQC deployment on ARM TrustZone</li>
-              <li>Collaborative research on Android Intrusion Detection System (IDS) with <strong>Illinois State University (Advisor: Prof. Hyoil Han, Prof. Kyoungwon Seo)</strong></li>
-              <li>Collaborative research on Automotive Cyber-Physical System (CPS) Security with <strong>Seoul National University SORLab (Advisor: Prof. Jiwon Seo, Ph.D Martin Kayondo)</strong></li>
+              <li data-i18n="work.csosPeriod">Period: Mar 2025 – Present · Yongin, Republic of Korea</li>
+              <li data-i18n="work.csos1">Researching learning-based IDS under severe concept drift without retraining</li>
+              <li data-i18n="work.csos2">Studying graph-based IDS using API co-occurrence & SNA</li>
+              <li data-i18n="work.csos3">Investigating TEE-based lightweight PQC deployment on ARM TrustZone</li>
+              <li data-i18n-html="work.csos4">Collaborative research on Android Intrusion Detection System (IDS) with <strong>Illinois State University (Advisor: Prof. Hyoil Han, Prof. Kyoungwon Seo)</strong></li>
+              <li data-i18n-html="work.csos5">Collaborative research on Automotive Cyber-Physical System (CPS) Security with <strong>Seoul National University SORLab (Advisor: Prof. Jiwon Seo, Ph.D Martin Kayondo)</strong></li>
             </ul>
           </div>
         </article>
@@ -132,14 +140,14 @@
             <img src="elements/8th army.png" alt="U.S. 8th Army" class="work-logo" />
           </div>
           <div class="work-body">
-            <h3>KATUSA (Korean Augmentation to the U.S. Army)</h3>
-            <p class="work-org">U.S. 8th Army, Camp Carroll, 35th ADA Brigade, Echo Company · Waegwan, South Korea</p>
+            <h3 data-i18n="work.katusaTitle">KATUSA (Korean Augmentation to the U.S. Army)</h3>
+            <p class="work-org" data-i18n="work.kaOrg">U.S. 8th Army, Camp Carroll, 35th ADA Brigade, Echo Company · Waegwan, South Korea</p>
             <ul class="work-meta-list">
               <li>Period: Aug 2023 – Feb 2025</li>
-              <li>Served as interpreter and liaison during joint U.S.–ROK operations</li>
-              <li>Appointed as Environmental Officer; conducted environmental and operational safety inspections in accordance with military compliance standards</li>
-              <li>Awarded the <em>Army Commendation Medal (ARCOM)</em> by a U.S. Brigadier General</li>
-              <li>Won <em>Best KATUSA Award</em> and <em>Best Warrior Squad</em> for duty performance</li>
+              <li data-i18n="work.ka1">Served as interpreter and liaison during joint U.S.–ROK operations</li>
+              <li data-i18n="work.ka2">Appointed as Environmental Officer; conducted environmental and operational safety inspections in accordance with military compliance standards</li>
+              <li data-i18n-html="work.ka3">Awarded the <em>Army Commendation Medal (ARCOM)</em> by a U.S. Brigadier General</li>
+              <li data-i18n-html="work.ka4">Won <em>Best KATUSA Award</em> and <em>Best Warrior Squad</em> for duty performance</li>
             </ul>
           </div>
         </article>
@@ -147,16 +155,16 @@
     </section>
 
     <section id="publications" class="section publications">
-      <h2 class="section-title">Publications</h2>
+      <h2 class="section-title" data-i18n="section.publications">Publications</h2>
 
-      <div class="pub-cat-card">SCI Journals</div>
+      <div class="pub-cat-card" data-i18n="pub.catSCI">SCI Journals</div>
       <article class="paper-card">
         <h3 class="paper-title">SCAN: Structural Clustering with Adaptive Thresholds for Intelligent and Robust Android Malware Detection under Concept Drift</h3>
         <p class="paper-authors"><span class="paper-author-me">Kyoungmin Roh</span>, Seungmin Lee, Seongje Cho, Youngsup Hwang, Dongjae Kim</p>
         <p class="paper-venue"><em>Computer Modeling in Engineering & Sciences (CMES)</em>, 2025 [SCIE Q1] (Accepted)</p>
       </article>
 
-      <div class="pub-cat-card">Domestic Journals</div>
+      <div class="pub-cat-card" data-i18n="pub.catDomestic">Domestic Journals</div>
       <article class="paper-card">
         <h3 class="paper-title">Concept Drift-Resilient Android Malware Detection via API Co-occurrence Graphs and Louvain Communities</h3>
         <p class="paper-authors"><span class="paper-author-me">Kyoungmin Roh</span>, Seongje Cho</p>
@@ -164,14 +172,14 @@
         <a href="https://www.kci.go.kr/kciportal/ci/sereArticleSearch/ciSereArtiView.kci?sereArticleSearchBean.artiId=ART003297268" target="_blank" rel="noopener" class="paper-link">View Paper →</a>
       </article>
 
-      <div class="pub-cat-card">International Conferences</div>
+      <div class="pub-cat-card" data-i18n="pub.catIntl">International Conferences</div>
       <article class="paper-card">
         <h3 class="paper-title">ALARM: Android Malware Detection with Leiden API Communities and Robust Mixture of Experts</h3>
         <p class="paper-authors"><span class="paper-author-me">Kyoungmin Roh</span>, Seungmin Lee, Seongje Cho, Youngsup Hwang</p>
         <p class="paper-venue"><em>The 41st ACM/SIGAPP Symposium on Applied Computing (SAC 2026)</em>, Thessaloniki, Greece, Mar. 2026 (Accepted)</p>
       </article>
 
-      <div class="pub-cat-card">Domestic Conferences</div>
+      <div class="pub-cat-card" data-i18n="pub.catDomConf">Domestic Conferences</div>
       <article class="paper-card">
         <h3 class="paper-title">Drift-Aware Security Module based on Louvain Communities for Retraining-Free Android Malware Detection</h3>
         <p class="paper-authors"><span class="paper-author-me">Kyoungmin Roh</span>, Suhyeon Park, Seongje Cho</p>
@@ -181,229 +189,229 @@
         <h3 class="paper-title">Android Malware Detection using Co-occurrence Graphs of APIs and Louvain Method for Community Detection</h3>
         <p class="paper-authors"><span class="paper-author-me">Kyoungmin Roh</span>, Seungmin Lee, Yudam Kim, Seokhyun Ahn, Seongje Cho</p>
         <p class="paper-venue"><em>WDSC 2025: Workshop on Dependable and Secure Computing</em>, Jeju, Republic of Korea, Aug. 2025 — <strong>Best Paper Award</strong></p>
-        <a href="https://github.com/rohkyoungmin/Research-Papers/blob/main/WDSC/API%EB%93%A4%EC%9D%98%20%EB%8F%99%EC%8B%9C%20%EC%B6%9C%ED%98%84%20%EA%B7%B8%EB%9E%98%ED%94%84%EC%99%80%20%EC%BB%A4%EB%AE%A4%EB%8B%88%ED%8B%B0%20%ED%83%90%EC%A7%80%EC%9A%A9%20Louvain%20%EB%B0%A9%EB%B2%95%EC%9D%84%20%EC%9D%B4%EC%9A%A9%ED%95%9C%20%EC%95%88%EB%93%9C%EB%A1%9C%EC%9D%B4%EB%93%9C%20%EC%95%85%EC%84%B1%20%EC%95%B1%20%ED%83%90%EC%A7%80/WDSC2025_paper_6.pdf" target="_blank" rel="noopener" class="paper-link">View Paper →</a>
+        <a href="https://github.com/rohkyoungmin/Research-Papers/blob/main/WDSC/API%EB%93%A4%EC%9D%98%20%EB%8F%99%EC%8B%9C%20%EC%B6%9C%ED%98%84%20%EA%B7%B8%EB%9E%98%ED%94%84%EC%99%80%20%EC%BB%A4%EB%AE%A4%EB%8B%88%ED%8B%B0%20%ED%83%90%EC%A7%80%EC%9A%A9%20Louvain%20%EB%B0%A9%EB%B2%95%EC%9D%84%20%EC%9D%B4%EC%9A%A9%ED%95%9C%20%EC%95%88%EB%93%9C%EB%A1%9C%EC%9D%B4%EB%93%9C%20%EC%95%85%EC%84%B1%20%EC%95%B1%20%ED%83%90%EC%A7%80/WDSC2025_paper_6.pdf" target="_blank" rel="noopener" class="paper-link" data-i18n="pub.viewPaper">View Paper →</a>
       </article>
       <article class="paper-card">
         <h3 class="paper-title">Classifying File Fragment Types for IVI System Forensics</h3>
         <p class="paper-authors">Seungmin Lee, <span class="paper-author-me">Kyoungmin Roh</span>, Jiheon Jung, Suhyeon Park, Seongje Cho</p>
         <p class="paper-venue"><em>WDSC 2025</em>, Jeju, Republic of Korea, Aug. 2025</p>
-        <a href="https://github.com/rohkyoungmin/Research-Papers/blob/main/WDSC/IVI%20%EC%8B%9C%EC%8A%A4%ED%85%9C%20%ED%8F%AC%EB%A0%8C%EC%8B%9D%EC%9D%84%20%EC%9C%84%ED%95%9C%20%ED%8C%8C%EC%9D%BC%20%ED%8C%8C%ED%8E%B8%20%EC%9C%A0%ED%98%95%20%EB%B6%84%EB%A5%98/Classifying%20File%20Fragment%20Types%20for%20IVI%20System%20Forensics.pdf" target="_blank" rel="noopener" class="paper-link">View Paper →</a>
+        <a href="https://github.com/rohkyoungmin/Research-Papers/blob/main/WDSC/IVI%20%EC%8B%9C%EC%8A%A4%ED%85%9C%20%ED%8F%AC%EB%A0%8C%EC%8B%9D%EC%9D%84%20%EC%9C%84%ED%95%9C%20%ED%8C%8C%EC%9D%BC%20%ED%8C%8C%ED%8E%B8%20%EC%9C%A0%ED%98%95%20%EB%B6%84%EB%A5%98/Classifying%20File%20Fragment%20Types%20for%20IVI%20System%20Forensics.pdf" target="_blank" rel="noopener" class="paper-link" data-i18n="pub.viewPaper">View Paper →</a>
       </article>
 
-      <div class="pub-cat-card">Thesis</div>
+      <div class="pub-cat-card" data-i18n="pub.catThesis">Thesis</div>
       <article class="paper-card">
         <h3 class="paper-title">Qrust: AI-powered QR Phishing Detection and Secure QR Generation</h3>
         <p class="paper-authors"><span class="paper-author-me">Kyoungmin Roh</span>, Junhyeong Kim, Minseok Seong</p>
         <p class="paper-venue">Bachelor's Degree Thesis, Department of Cybersecurity, Dankook University, Dec. 2025 — <strong>Audience Choice Award</strong></p>
-        <a href="https://github.com/rohkyoungmin/Research-Papers/blob/main/Thesis/Bachelor's%20Degree%20Thesis/%5B%EC%82%AC%EC%9D%B4%EB%B2%84%EB%B3%B4%EC%95%88%ED%95%99%EA%B3%BC%5D%20Spring_Qrust_AI-powered%20Phishing%20Detection%20and%20Secure%20QR%20Generation.pdf" target="_blank" rel="noopener" class="paper-link">View Paper →</a>
+        <a href="https://github.com/rohkyoungmin/Research-Papers/blob/main/Thesis/Bachelor's%20Degree%20Thesis/%5B%EC%82%AC%EC%9D%B4%EB%B2%84%EB%B3%B4%EC%95%88%ED%95%99%EA%B3%BC%5D%20Spring_Qrust_AI-powered%20Phishing%20Detection%20and%20Secure%20QR%20Generation.pdf" target="_blank" rel="noopener" class="paper-link" data-i18n="pub.viewPaper">View Paper →</a>
       </article>
 
-      <div class="pub-cat-card">Other Research Papers</div>
+      <div class="pub-cat-card" data-i18n="pub.catOther">Other Research Papers</div>
       <article class="paper-card">
         <h3 class="paper-title">A Lightweight Secret-Isolated Post-Quantum Cryptographic Architecture for ARM TrustZone</h3>
         <p class="paper-authors"><span class="paper-author-me">Kyoungmin Roh</span>, Nahee Kwon, Bogyeom Kim, Subin Jeon</p>
         <p class="paper-venue"><em>Cyber Security Contest</em>, Department of Cybersecurity, Dankook University, Dec. 2025 — <strong>1st Place Award</strong></p>
-        <a href="https://github.com/rohkyoungmin/Research-Papers/blob/main/Cyber%20Security%20Contest%202025/ARM%20TrustZone%20%EA%B8%B0%EB%B0%98%20%EA%B2%BD%EB%9F%89%20%EB%B9%84%EB%B0%80%20%EB%B6%84%EB%A6%AC%ED%98%95%20%EC%96%91%EC%9E%90%EB%82%B4%EC%84%B1%20%EC%95%94%ED%98%B8%20%EC%95%84%ED%82%A4%ED%85%8D%EC%B2%98.pdf" target="_blank" rel="noopener" class="paper-link">View Paper →</a>
+        <a href="https://github.com/rohkyoungmin/Research-Papers/blob/main/Cyber%20Security%20Contest%202025/ARM%20TrustZone%20%EA%B8%B0%EB%B0%98%20%EA%B2%BD%EB%9F%89%20%EB%B9%84%EB%B0%80%20%EB%B6%84%EB%A6%AC%ED%98%95%20%EC%96%91%EC%9E%90%EB%82%B4%EC%84%B1%20%EC%95%94%ED%98%B8%20%EC%95%84%ED%82%A4%ED%85%8D%EC%B2%98.pdf" target="_blank" rel="noopener" class="paper-link" data-i18n="pub.viewPaper">View Paper →</a>
       </article>
     </section>
 
-    <section id="awards" class="section awards">
-      <h2 class="section-title">Awards & Honors</h2>
+<section id="awards" class="section awards">
+      <h2 class="section-title" data-i18n="section.awards">Awards & Honors</h2>
       <div class="awards-timeline">
         <div class="awards-line" aria-hidden="true"></div>
         <div class="award-item">
           <div class="award-date-wrap"><span class="award-dot" aria-hidden="true"></span><span class="award-date">Dec 2025</span></div>
           <article class="award-card">
-            <h3 class="award-title">Specialized Project Scholarship</h3>
-            <p class="award-desc">Awarded for strong track record of academic awards and high-quality project execution; recognized for excellence in AI security–oriented research.</p>
-            <p class="award-org">Dankook University, Department of Cybersecurity</p>
+            <h3 class="award-title" data-i18n="award.t1">Specialized Project Scholarship</h3>
+            <p class="award-desc" data-i18n="award.d1">Awarded for strong track record of academic awards and high-quality project execution; recognized for excellence in AI security–oriented research.</p>
+            <p class="award-org" data-i18n="award.o1">Dankook University, Department of Cybersecurity</p>
           </article>
         </div>
         <div class="award-item">
           <div class="award-date-wrap"><span class="award-dot" aria-hidden="true"></span><span class="award-date">Dec 2025</span></div>
           <article class="award-card">
-            <h3 class="award-title">Academic Research Scholarship</h3>
-            <p class="award-desc">Published a paper at a leading domestic academic conference as an undergraduate; awarded for research potential and academic excellence.</p>
-            <p class="award-org">Dankook University, National Center of Excellence in Software</p>
+            <h3 class="award-title" data-i18n="award.t2">Academic Research Scholarship</h3>
+            <p class="award-desc" data-i18n="award.d2">Published a paper at a leading domestic academic conference as an undergraduate; awarded for research potential and academic excellence.</p>
+            <p class="award-org" data-i18n="award.o2">Dankook University, National Center of Excellence in Software</p>
           </article>
         </div>
         <div class="award-item">
           <div class="award-date-wrap"><span class="award-dot" aria-hidden="true"></span><span class="award-date">Dec 2025</span></div>
           <article class="award-card">
-            <h3 class="award-title">Cyber Security Contest 1st Place Award</h3>
-          <p class="award-desc">"A Lightweight Secret-Isolated Post-Quantum Cryptographic Architecture for ARM TrustZone"; isolated secret-based computation in PQC Kyber.</p>
-            <p class="award-org">Dankook University, Department of Cybersecurity</p>
+            <h3 class="award-title" data-i18n="award.t3">Cyber Security Contest 1st Place Award</h3>
+          <p class="award-desc" data-i18n="award.d3">"A Lightweight Secret-Isolated Post-Quantum Cryptographic Architecture for ARM TrustZone"; isolated secret-based computation in PQC Kyber.</p>
+            <p class="award-org" data-i18n="award.o1">Dankook University, Department of Cybersecurity</p>
           </article>
         </div>
         <div class="award-item">
           <div class="award-date-wrap"><span class="award-dot" aria-hidden="true"></span><span class="award-date">Dec 2025</span></div>
           <article class="award-card">
-            <h3 class="award-title">KSC 2025 Best Paper Award</h3>
-          <p class="award-desc">"Drift-Aware Security Module Based on Louvain Communities for Retraining-Free Android Malware Detection"; recognized for robustness and scalability under concept drift.</p>
-            <p class="award-org">Korean Institute of Information Scientists and Engineers (KIISE)</p>
+            <h3 class="award-title" data-i18n="award.t4">KSC 2025 Best Paper Award</h3>
+          <p class="award-desc" data-i18n="award.d4">"Drift-Aware Security Module Based on Louvain Communities for Retraining-Free Android Malware Detection"; recognized for robustness and scalability under concept drift.</p>
+            <p class="award-org" data-i18n="award.o4">Korean Institute of Information Scientists and Engineers (KIISE)</p>
           </article>
         </div>
         <div class="award-item">
           <div class="award-date-wrap"><span class="award-dot" aria-hidden="true"></span><span class="award-date">Dec 2025</span></div>
           <article class="award-card">
-            <h3 class="award-title">Audience Choice Award, Capstone Festival</h3>
-          <p class="award-desc">Qrust: Secure QR & AI-Based Phishing Detection System; HMAC-signed QR validation, ML-based malicious URL detection.</p>
-            <p class="award-org">Dankook University, National Center of Excellence in Software</p>
+            <h3 class="award-title" data-i18n="award.t5">Audience Choice Award, Capstone Festival</h3>
+          <p class="award-desc" data-i18n="award.d5">Qrust: Secure QR & AI-Based Phishing Detection System; HMAC-signed QR validation, ML-based malicious URL detection.</p>
+            <p class="award-org" data-i18n="award.o2">Dankook University, National Center of Excellence in Software</p>
           </article>
         </div>
         <div class="award-item">
           <div class="award-date-wrap"><span class="award-dot" aria-hidden="true"></span><span class="award-date">Sep 2025</span></div>
           <article class="award-card">
-            <h3 class="award-title">Participation Prize (3rd Place), Dankook Startup Hackathon</h3>
-          <p class="award-desc">Lead developer and planner for <em>Ddobak</em>, an LLM-based speech correction app; recognized for innovative AI-driven assistive healthcare design.</p>
-            <p class="award-org">Dankook University, National Center of Excellence in Software</p>
+            <h3 class="award-title" data-i18n="award.t6">Participation Prize (3rd Place), Dankook Startup Hackathon</h3>
+          <p class="award-desc" data-i18n-html="award.d6">Lead developer and planner for <em>Ddobak</em>, an LLM-based speech correction app; recognized for innovative AI-driven assistive healthcare design.</p>
+            <p class="award-org" data-i18n="award.o2">Dankook University, National Center of Excellence in Software</p>
           </article>
         </div>
         <div class="award-item">
           <div class="award-date-wrap"><span class="award-dot" aria-hidden="true"></span><span class="award-date">Aug 2025</span></div>
           <article class="award-card">
-            <h3 class="award-title">WDSC 2025 Best Paper Award</h3>
-            <p class="award-desc">Android malware detection using API co-occurrence graphs and Louvain communities; selected for robustness under concept drift.</p>
-            <p class="award-org">KIISE</p>
-            <a href="https://github.com/rohkyoungmin/Research-Papers/blob/main/WDSC/API%EB%93%A4%EC%9D%98%20%EB%8F%99%EC%8B%9C%20%EC%B6%9C%ED%98%84%20%EA%B7%B8%EB%9E%98%ED%94%84%EC%99%80%20%EC%BB%A4%EB%AE%A4%EB%8B%88%ED%8B%B0%20%ED%83%90%EC%A7%80%EC%9A%A9%20Louvain%20%EB%B0%A9%EB%B2%95%EC%9D%84%20%EC%9D%B4%EC%9A%A9%ED%95%9C%20%EC%95%88%EB%93%9C%EB%A1%9C%EC%9D%B4%EB%93%9C%20%EC%95%85%EC%84%B1%20%EC%95%B1%20%ED%83%90%EC%A7%80/%EC%83%81%EC%9E%A5-%EC%B5%9C%EC%9A%B0%EC%88%98%EB%85%BC%EB%AC%B8%EC%83%81.pdf" target="_blank" rel="noopener" class="award-cert-link">View certificate →</a>
+            <h3 class="award-title" data-i18n="award.t7">WDSC 2025 Best Paper Award</h3>
+          <p class="award-desc" data-i18n="award.d7">Android malware detection using API co-occurrence graphs and Louvain communities; selected for robustness under concept drift.</p>
+            <p class="award-org" data-i18n="award.o5">KIISE</p>
+            <a href="https://github.com/rohkyoungmin/Research-Papers/blob/main/WDSC/API%EB%93%A4%EC%9D%98%20%EB%8F%99%EC%8B%9C%20%EC%B6%9C%ED%98%84%20%EA%B7%B8%EB%9E%98%ED%94%84%EC%99%80%20%EC%BB%A4%EB%AE%A4%EB%8B%88%ED%8B%B0%20%ED%83%90%EC%A7%80%EC%9A%A9%20Louvain%20%EB%B0%A9%EB%B2%95%EC%9D%84%20%EC%9D%B4%EC%9A%A9%ED%95%9C%20%EC%95%88%EB%93%9C%EB%A1%9C%EC%9D%B4%EB%93%9C%20%EC%95%85%EC%84%B1%20%EC%95%B1%20%ED%83%90%EC%A7%80/%EC%83%81%EC%9E%A5-%EC%B5%9C%EC%9A%B0%EC%88%98%EB%85%BC%EB%AC%B8%EC%83%81.pdf" target="_blank" rel="noopener" class="award-cert-link" data-i18n="pub.viewCert">View certificate →</a>
           </article>
         </div>
         <div class="award-item">
           <div class="award-date-wrap"><span class="award-dot" aria-hidden="true"></span><span class="award-date">Dec 2024</span></div>
           <article class="award-card">
-            <h3 class="award-title">The Army Commendation Medal (ARCOM)</h3>
-          <p class="award-desc">For commendable service as equipment records and parts clerk KATUSA; supported the unit's mission.</p>
-            <p class="award-org">United States Department of the Army</p>
+            <h3 class="award-title" data-i18n="award.t8">The Army Commendation Medal (ARCOM)</h3>
+          <p class="award-desc" data-i18n="award.d8">For commendable service as equipment records and parts clerk KATUSA; supported the unit's mission.</p>
+            <p class="award-org" data-i18n="award.o6">United States Department of the Army</p>
           </article>
         </div>
         <div class="award-item">
           <div class="award-date-wrap"><span class="award-dot" aria-hidden="true"></span><span class="award-date">Oct 2024</span></div>
           <article class="award-card">
-            <h3 class="award-title">Best KATUSA Award</h3>
-          <p class="award-desc">Outstanding marksmanship performance; set an example for fellow KATUSA soldiers.</p>
-            <p class="award-org">Eighth United States Army Republic of Korea Army Support Group</p>
+            <h3 class="award-title" data-i18n="award.t9">Best KATUSA Award</h3>
+          <p class="award-desc" data-i18n="award.d9">Outstanding marksmanship performance; set an example for fellow KATUSA soldiers.</p>
+            <p class="award-org" data-i18n="award.o7">Eighth United States Army Republic of Korea Army Support Group</p>
           </article>
         </div>
         <div class="award-item">
           <div class="award-date-wrap"><span class="award-dot" aria-hidden="true"></span><span class="award-date">Sep 2023</span></div>
           <article class="award-card">
-            <h3 class="award-title">1st Place, Turing Cipher Idea Contest</h3>
-          <p class="award-desc">Hybrid post-quantum signature scheme combining Lamport signatures and Merkle trees; evaluated on originality, cryptographic soundness, and feasibility.</p>
-            <p class="award-org">Dankook University, Department of Cybersecurity</p>
+            <h3 class="award-title" data-i18n="award.t10">1st Place, Turing Cipher Idea Contest</h3>
+          <p class="award-desc" data-i18n="award.d10">Hybrid post-quantum signature scheme combining Lamport signatures and Merkle trees; evaluated on originality, cryptographic soundness, and feasibility.</p>
+            <p class="award-org" data-i18n="award.o1">Dankook University, Department of Cybersecurity</p>
           </article>
         </div>
         <div class="award-item">
           <div class="award-date-wrap"><span class="award-dot" aria-hidden="true"></span><span class="award-date">Jun 2022</span></div>
           <article class="award-card">
-            <h3 class="award-title">Specialized Project Scholarship</h3>
-          <p class="award-desc">Awarded for research initiative in AI security and high-quality project execution.</p>
-            <p class="award-org">Dankook University, Department of Cybersecurity</p>
+            <h3 class="award-title" data-i18n="award.t11">Specialized Project Scholarship</h3>
+          <p class="award-desc" data-i18n="award.d11">Awarded for research initiative in AI security and high-quality project execution.</p>
+            <p class="award-org" data-i18n="award.o1">Dankook University, Department of Cybersecurity</p>
           </article>
         </div>
         <div class="award-item">
           <div class="award-date-wrap"><span class="award-dot" aria-hidden="true"></span><span class="award-date">Mar 2021</span></div>
           <article class="award-card">
-            <h3 class="award-title">Admission Scholarship</h3>
-            <p class="award-desc">Awarded for academic excellence and demonstrated leadership potential.</p>
-            <p class="award-org">Dankook University</p>
+            <h3 class="award-title" data-i18n="award.t12">Admission Scholarship</h3>
+          <p class="award-desc" data-i18n="award.d12">Awarded for academic excellence and demonstrated leadership potential.</p>
+            <p class="award-org" data-i18n="award.o8">Dankook University</p>
           </article>
         </div>
       </div>
     </section>
 
     <section id="patent" class="section patent">
-      <h2 class="section-title">Patent</h2>
+      <h2 class="section-title" data-i18n="section.patent">Patent</h2>
       <div class="content-card patent-card">
         <h3 class="patent-title">A Malware Detection Method Combining Clustering and Supervised Learning Models</h3>
         <p class="patent-authors"><span class="paper-author-me">Kyoungmin Roh</span>, Seungmin Lee, Seongje Cho, and Yoonho Choi</p>
-        <p class="patent-meta">Korean Patent Application No. 10-2025-0098855 <em>(Filed)</em></p>
+        <p class="patent-meta" data-i18n-html="patent.meta">Korean Patent Application No. 10-2025-0098855 <em>(Filed)</em></p>
       </div>
     </section>
 
     <section id="projects" class="section projects">
-      <h2 class="section-title">Projects</h2>
+      <h2 class="section-title" data-i18n="section.projects">Projects</h2>
       <div class="project-grid">
         <article class="project-card">
-          <h3>Split-Kyber for ARM TrustZone-A</h3>
-          <p class="project-tag">Secret-Isolated PQC · 1st Place, Cyber Security Contest</p>
-          <p>Implemented a split execution framework for CRYSTALS-Kyber (ML-KEM) on ARM TrustZone-A. Secret-dependent operations run exclusively in Secure World (TEE), ensuring strict key isolation. Aims to minimize the Trusted Computing Base (TCB) while maintaining correctness and performance.</p>
-          <a href="https://github.com/Cyber-Security-Contest/Kyber-Split" target="_blank" rel="noopener">GitHub →</a>
+          <h3 data-i18n="proj.1.title">Split-Kyber for ARM TrustZone-A</h3>
+          <p class="project-tag" data-i18n="proj.1.tag">Secret-Isolated PQC · 1st Place, Cyber Security Contest</p>
+          <p data-i18n="proj.1.desc">Implemented a split execution framework for CRYSTALS-Kyber (ML-KEM) on ARM TrustZone-A. Secret-dependent operations run exclusively in Secure World (TEE), ensuring strict key isolation. Aims to minimize the Trusted Computing Base (TCB) while maintaining correctness and performance.</p>
+          <a href="https://github.com/Cyber-Security-Contest/Kyber-Split" target="_blank" rel="noopener" data-i18n="proj.link">GitHub →</a>
         </article>
         <article class="project-card">
-          <h3>LV.0: LLM Vulnerability Zero</h3>
-          <p class="project-tag">LLM-powered Security Vulnerability Reporter</p>
-          <p>Developed an AI-based static analysis and automated reporting framework for open-source vulnerabilities. Integrated GitHub workflow automation and NLP-based risk summarization. Led backend and AI system design using Flask and FastAPI.</p>
-          <a href="https://github.com/Gaurdians-of-the-Open-Source" target="_blank" rel="noopener">GitHub →</a>
+          <h3 data-i18n="proj.2.title">LV.0: LLM Vulnerability Zero</h3>
+          <p class="project-tag" data-i18n="proj.2.tag">LLM-powered Security Vulnerability Reporter</p>
+          <p data-i18n="proj.2.desc">Developed an AI-based static analysis and automated reporting framework for open-source vulnerabilities. Integrated GitHub workflow automation and NLP-based risk summarization. Led backend and AI system design using Flask and FastAPI.</p>
+          <a href="https://github.com/Gaurdians-of-the-Open-Source" target="_blank" rel="noopener" data-i18n="proj.link">GitHub →</a>
         </article>
         <article class="project-card">
-          <h3>ASX: Android API Sequence Extractor</h3>
-          <p class="project-tag">Static Analysis · Electron GUI</p>
-          <p>Designed a static analysis pipeline to extract API-level call sequences from DEX files. Built preprocessing logic for multi-instance learning (MIL) workflows. Developed as a cross-platform Electron-based GUI tool.</p>
-          <a href="https://github.com/rohkyoungmin/api-sequence-extractor-gui" target="_blank" rel="noopener">GitHub →</a>
+          <h3 data-i18n="proj.3.title">ASX: Android API Sequence Extractor</h3>
+          <p class="project-tag" data-i18n="proj.3.tag">Static Analysis · Electron GUI</p>
+          <p data-i18n="proj.3.desc">Designed a static analysis pipeline to extract API-level call sequences from DEX files. Built preprocessing logic for multi-instance learning (MIL) workflows. Developed as a cross-platform Electron-based GUI tool.</p>
+          <a href="https://github.com/rohkyoungmin/api-sequence-extractor-gui" target="_blank" rel="noopener" data-i18n="proj.link">GitHub →</a>
         </article>
         <article class="project-card">
-          <h3>Qrust: Secure QR & AI Phishing Detector</h3>
-          <p class="project-tag">Capstone · Audience Choice Award</p>
-          <p>Developed a secure QR generator and mobile phishing detection system using ML classifiers. Implemented HMAC-signed QR content and Flask-based malicious URL detection API. End-to-end security workflow: scanning → validation → risk scoring.</p>
-          <a href="https://github.com/dku-capstone" target="_blank" rel="noopener">GitHub →</a>
+          <h3 data-i18n="proj.4.title">Qrust: Secure QR & AI Phishing Detector</h3>
+          <p class="project-tag" data-i18n="proj.4.tag">Capstone · Audience Choice Award</p>
+          <p data-i18n="proj.4.desc">Developed a secure QR generator and mobile phishing detection system using ML classifiers. Implemented HMAC-signed QR content and Flask-based malicious URL detection API. End-to-end security workflow: scanning → validation → risk scoring.</p>
+          <a href="https://github.com/dku-capstone" target="_blank" rel="noopener" data-i18n="proj.link">GitHub →</a>
         </article>
         <article class="project-card">
-          <h3>Digital Forensic Toolkit for Hyundai Avante (CN7)</h3>
-          <p class="project-tag">IVI Forensics · Log-based Event Reconstruction</p>
-          <p>Developed a forensic extraction and log-based event reconstruction system for Android-based IVI systems. Automated vehicle log parsing and visualization for forensic workflows. Designed for researchers analyzing Hyundai vehicle platforms.</p>
-          <a href="https://github.com/bogamie/Log" target="_blank" rel="noopener">GitHub →</a>
+          <h3 data-i18n="proj.5.title">Digital Forensic Toolkit for Hyundai Avante (CN7)</h3>
+          <p class="project-tag" data-i18n="proj.5.tag">IVI Forensics · Log-based Event Reconstruction</p>
+          <p data-i18n="proj.5.desc">Developed a forensic extraction and log-based event reconstruction system for Android-based IVI systems. Automated vehicle log parsing and visualization for forensic workflows. Designed for researchers analyzing Hyundai vehicle platforms.</p>
+          <a href="https://github.com/bogamie/Log" target="_blank" rel="noopener" data-i18n="proj.link">GitHub →</a>
         </article>
         <article class="project-card">
-          <h3>Post-Quantum Signature System</h3>
-          <p class="project-tag">Lamport + Merkle Tree · 1st Place, Turing Cipher Idea Contest</p>
-          <p>Implemented a hybrid post-quantum signature system combining Lamport OTS and Merkle tree aggregation. Python-based prototype demonstrating signing, verification, and one-time key management.</p>
-          <a href="https://github.com/rohkyoungmin/Post-Quantum-Signature-System" target="_blank" rel="noopener">GitHub →</a>
+          <h3 data-i18n="proj.6.title">Post-Quantum Signature System</h3>
+          <p class="project-tag" data-i18n="proj.6.tag">Lamport + Merkle Tree · 1st Place, Turing Cipher Idea Contest</p>
+          <p data-i18n="proj.6.desc">Implemented a hybrid post-quantum signature system combining Lamport OTS and Merkle tree aggregation. Python-based prototype demonstrating signing, verification, and one-time key management.</p>
+          <a href="https://github.com/rohkyoungmin/Post-Quantum-Signature-System" target="_blank" rel="noopener" data-i18n="proj.link">GitHub →</a>
         </article>
         <article class="project-card">
-          <h3>AI-powered Document Summarization Web Application</h3>
-          <p class="project-tag">FastAPI · Claude API · Docker</p>
-          <p>Developed a FastAPI-based backend API for user authentication and project management. Implemented PDF/TXT upload and AI summarization via Claude API integration. Provided Swagger UI / ReDoc documentation, SQLite persistence, and Docker-based deployment.</p>
-          <a href="https://github.com/orgs/DKU-OSS-development/repositories" target="_blank" rel="noopener">GitHub →</a>
+          <h3 data-i18n="proj.7.title">AI-powered Document Summarization Web Application</h3>
+          <p class="project-tag" data-i18n="proj.7.tag">FastAPI · Claude API · Docker</p>
+          <p data-i18n="proj.7.desc">Developed a FastAPI-based backend API for user authentication and project management. Implemented PDF/TXT upload and AI summarization via Claude API integration. Provided Swagger UI / ReDoc documentation, SQLite persistence, and Docker-based deployment.</p>
+          <a href="https://github.com/orgs/DKU-OSS-development/repositories" target="_blank" rel="noopener" data-i18n="proj.link">GitHub →</a>
         </article>
         <article class="project-card">
-          <h3>Ddobak — LLM-based Speech & Hearing Therapy App</h3>
-          <p class="project-tag">Flutter · 3rd Place, Dankook Startup Hackathon</p>
-          <p>Developed an LLM-powered pronunciation correction app supporting hearing-impaired users. Led UI/UX design and ideation. Built a Flutter prototype integrated with an AI feedback system.</p>
-          <a href="https://github.com/rohkyoungmin/dku_startup_hackathon" target="_blank" rel="noopener">GitHub →</a>
+          <h3 data-i18n="proj.8.title">Ddobak — LLM-based Speech & Hearing Therapy App</h3>
+          <p class="project-tag" data-i18n="proj.8.tag">Flutter · 3rd Place, Dankook Startup Hackathon</p>
+          <p data-i18n="proj.8.desc">Developed an LLM-powered pronunciation correction app supporting hearing-impaired users. Led UI/UX design and ideation. Built a Flutter prototype integrated with an AI feedback system.</p>
+          <a href="https://github.com/rohkyoungmin/dku_startup_hackathon" target="_blank" rel="noopener" data-i18n="proj.link">GitHub →</a>
         </article>
         <article class="project-card">
-          <h3>Smart Greenhouse AI</h3>
-          <p class="project-tag">CNN · Transfer Learning · IoT-ready ML</p>
-          <p>Trained a CNN-based classifier for pest detection in agriculture. Applied image augmentation and transfer learning for robustness. Developed an IoT-ready ML pipeline using Google Colab.</p>
-          <a href="https://github.com/rohkyoungmin/smart-greenhouse-disease-detector" target="_blank" rel="noopener">GitHub →</a>
+          <h3 data-i18n="proj.9.title">Smart Greenhouse AI</h3>
+          <p class="project-tag" data-i18n="proj.9.tag">CNN · Transfer Learning · IoT-ready ML</p>
+          <p data-i18n="proj.9.desc">Trained a CNN-based classifier for pest detection in agriculture. Applied image augmentation and transfer learning for robustness. Developed an IoT-ready ML pipeline using Google Colab.</p>
+          <a href="https://github.com/rohkyoungmin/smart-greenhouse-disease-detector" target="_blank" rel="noopener" data-i18n="proj.link">GitHub →</a>
         </article>
         <article class="project-card">
-          <h3>Selenium Web Crawler</h3>
-          <p class="project-tag">Automation · Dataset for LLM Research</p>
-          <p>Built an automation script for scraping product reviews to generate datasets for LLM research. Used Selenium for DOM traversal and text extraction/cleaning.</p>
-          <a href="https://github.com/rohkyoungmin/web_crawling" target="_blank" rel="noopener">GitHub →</a>
+          <h3 data-i18n="proj.10.title">Selenium Web Crawler</h3>
+          <p class="project-tag" data-i18n="proj.10.tag">Automation · Dataset for LLM Research</p>
+          <p data-i18n="proj.10.desc">Built an automation script for scraping product reviews to generate datasets for LLM research. Used Selenium for DOM traversal and text extraction/cleaning.</p>
+          <a href="https://github.com/rohkyoungmin/web_crawling" target="_blank" rel="noopener" data-i18n="proj.link">GitHub →</a>
         </article>
       </div>
     </section>
 
     <section id="contact" class="section contact">
-      <h2 class="section-title">Contact</h2>
+      <h2 class="section-title" data-i18n="section.contact">Contact</h2>
       <div class="contact-info">
-        <p class="contact-line"><span class="contact-label">Phone:</span> +82-10-2506-3409</p>
-        <p class="contact-line"><span class="contact-label">Location:</span> Seongnam-si, Gyeonggi-do, Republic of Korea</p>
+        <p class="contact-line"><span class="contact-label" data-i18n="contact.phone">Phone:</span> +82-10-2506-3409</p>
+        <p class="contact-line"><span class="contact-label" data-i18n="contact.location">Location:</span> Seongnam-si, Gyeonggi-do, Republic of Korea</p>
       </div>
       <div class="contact-links">
-        <a href="mailto:kyoungminroh01@gmail.com">Email</a>
+        <a href="mailto:kyoungminroh01@gmail.com" data-i18n="contact.email">Email</a>
         <a href="https://github.com/rohkyoungmin" target="_blank" rel="noopener">GitHub</a>
         <a href="https://www.linkedin.com/in/kyoungmin-roh-88bb09343/" target="_blank" rel="noopener">LinkedIn</a>
         <a href="https://medium.com/@kyoungminroh01" target="_blank" rel="noopener">Medium</a>
-        <a href="https://github.com/rohkyoungmin/CV/raw/main/Kyoungmin_Roh___CV.pdf" target="_blank" rel="noopener">Download CV (PDF)</a>
+        <a href="https://github.com/rohkyoungmin/CV/raw/main/Kyoungmin_Roh___CV.pdf" target="_blank" rel="noopener" data-i18n="contact.cv">Download CV (PDF)</a>
       </div>
     </section>
   </main>
 
   <footer class="footer">
-    <p>© 2025 Kyoungmin Roh. All rights reserved.</p>
+    <p data-i18n="footer.copyright">© 2025 Kyoungmin Roh. All rights reserved.</p>
   </footer>
 
   <script src="js/main.js"></script>

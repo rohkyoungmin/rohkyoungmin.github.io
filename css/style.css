@@ -120,6 +120,45 @@ ul { list-style: none; margin: 0; padding: 0; }
   align-items: center;
 }
 
+.nav-lang-wrap {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.lang-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 28px;
+  padding: 0;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  cursor: pointer;
+  transition: var(--transition);
+  overflow: hidden;
+}
+
+.lang-btn img {
+  width: 22px;
+  height: 15px;
+  object-fit: cover;
+  display: block;
+}
+
+.lang-btn:hover {
+  border-color: var(--accent);
+  background: var(--accent-dim);
+}
+
+.lang-btn.active {
+  border-color: var(--accent);
+  background: var(--accent-dim);
+  box-shadow: 0 0 0 1px var(--accent);
+}
+
 .nav-theme-wrap {
   display: flex;
   align-items: center;
