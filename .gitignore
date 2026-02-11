@@ -1,0 +1,13 @@
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Optional: don't commit large PDFs if you prefer (uncomment if needed)
+# references/*.pdf
