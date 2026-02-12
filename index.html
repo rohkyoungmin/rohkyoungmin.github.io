@@ -10,6 +10,7 @@
   <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
+  <div id="grid-hover-overlay" class="grid-hover-overlay" aria-hidden="true"></div>
   <header class="header">
     <nav class="nav">
       <a href="#home" class="logo">Kyoungmin Roh</a>
@@ -43,11 +44,24 @@
     </nav>
   </header>
 
+  <!-- 오른쪽 리모컨: 선으로 이어진 점, 호버 시 섹션명 표시 -->
+  <nav class="page-remote" aria-label="Page sections">
+    <div class="remote-line" aria-hidden="true"></div>
+    <a href="#home" class="remote-dot" data-section="home"><span class="remote-dot-inner"></span><span class="remote-label" data-i18n="nav.home">Home</span></a>
+    <a href="#about" class="remote-dot" data-section="about"><span class="remote-dot-inner"></span><span class="remote-label" data-i18n="nav.about">About</span></a>
+    <a href="#education" class="remote-dot" data-section="education"><span class="remote-dot-inner"></span><span class="remote-label" data-i18n="nav.education">Education</span></a>
+    <a href="#work" class="remote-dot" data-section="work"><span class="remote-dot-inner"></span><span class="remote-label" data-i18n="nav.experience">Experience</span></a>
+    <a href="#publications" class="remote-dot" data-section="publications"><span class="remote-dot-inner"></span><span class="remote-label" data-i18n="nav.publications">Publications</span></a>
+    <a href="#awards" class="remote-dot" data-section="awards"><span class="remote-dot-inner"></span><span class="remote-label" data-i18n="nav.awards">Awards</span></a>
+    <a href="#patent" class="remote-dot" data-section="patent"><span class="remote-dot-inner"></span><span class="remote-label" data-i18n="nav.patent">Patent</span></a>
+    <a href="#projects" class="remote-dot" data-section="projects"><span class="remote-dot-inner"></span><span class="remote-label" data-i18n="nav.projects">Projects</span></a>
+    <a href="#contact" class="remote-dot" data-section="contact"><span class="remote-dot-inner"></span><span class="remote-label" data-i18n="nav.contact">Contact</span></a>
+  </nav>
+
   <main>
     <section id="home" class="hero">
-      <p class="hero-label" data-i18n="hero.label">Hello, I'm</p>
       <h1 class="hero-title">
-        <span class="line" data-i18n="hero.title1">Kyoungmin Roh,</span>
+        <span class="line" data-i18n="hero.title1">Kyoungmin Roh</span>
         <span class="line accent" data-i18n="hero.title2">Cybersecurity Researcher</span>
       </h1>
       <p class="hero-desc" data-i18n="hero.desc">Pursuing an academic career in cybersecurity.</p>
@@ -66,11 +80,16 @@
 
     <section id="about" class="section about">
       <h2 class="section-title" data-i18n="section.about">About</h2>
-      <div class="about-content">
-        <h3 class="about-subtitle" data-i18n="about.objectiveTitle">Objective</h3>
-        <p class="about-text" data-i18n="about.objectiveText">To pursue an academic career in cybersecurity as a professor, contributing to society through impactful research and education. I aim to develop technologies that enhance security and people's lives while mentoring the next generation of researchers who will advance the field beyond my own contributions.</p>
-        <h3 class="about-subtitle" data-i18n="about.interestsTitle">Research Interests</h3>
-        <p class="about-text" data-i18n="about.interestsText">I am interested in the security of complex systems that must operate reliably under evolving threats and broken assumptions. My current research focuses on CPS and system security, with a particular emphasis on learning-based intrusion detection (IDS) under concept drift and the secure deployment of post-quantum cryptography (PQC) in CPS and embedded systems. My research goal is to establish principled foundations for designing secure systems that remain trustworthy over time, across various environments, and during the post-quantum transition.</p>
+      <div class="about-wrap">
+        <div class="about-photo-wrap">
+          <img src="elements/Roh.jpg" alt="Kyoungmin Roh" class="about-photo" />
+        </div>
+        <div class="about-content">
+          <h3 class="about-subtitle" data-i18n="about.objectiveTitle">Objective</h3>
+          <p class="about-text" data-i18n="about.objectiveText">To pursue an academic career in cybersecurity as a professor, contributing to society through impactful research and education. I aim to develop technologies that enhance security and people's lives while mentoring the next generation of researchers who will advance the field beyond my own contributions.</p>
+          <h3 class="about-subtitle" data-i18n="about.interestsTitle">Research Interests</h3>
+          <p class="about-text" data-i18n="about.interestsText">I am interested in the security of complex systems that must operate reliably under evolving threats and broken assumptions. My current research focuses on CPS and system security, with a particular emphasis on learning-based intrusion detection (IDS) under concept drift and the secure deployment of post-quantum cryptography (PQC) in CPS and embedded systems. My research goal is to establish principled foundations for designing secure systems that remain trustworthy over time, across various environments, and during the post-quantum transition.</p>
+        </div>
       </div>
     </section>
 
@@ -107,7 +126,8 @@
             <ul class="work-meta-list">
               <li data-i18n="work.position">Position: Research Intern</li>
               <li>Advisor: Prof. Hyungsub Kim</li>
-              <li data-i18n="work.iuPeriod">Period: Oct 2025 – Present · Bloomington, U.S.</li>
+              <li data-i18n="work.iuPeriod">Period: Oct 2025 – Present</li>
+              <li data-i18n="work.iuLocation">Location: Bloomington, U.S.</li>
               <li data-i18n="work.iu1">Analyzing security risks and failure modes in open-source CPS software</li>
               <li data-i18n="work.iu2">Investigating vulnerability patterns and attack surfaces in long-lived CPS</li>
               <li data-i18n="work.iu3">Surveying CPS-related vulnerabilities using OSV, GitHub Issues, and forums</li>
@@ -126,7 +146,8 @@
             <ul class="work-meta-list">
               <li data-i18n="work.position">Position: Research Intern</li>
               <li>Advisor: Prof. Seong-je Cho</li>
-              <li data-i18n="work.csosPeriod">Period: Mar 2025 – Present · Yongin, Republic of Korea</li>
+              <li data-i18n="work.csosPeriod">Period: Mar 2025 – Present</li>
+              <li data-i18n="work.csosLocation">Location: Yongin, Republic of Korea</li>
               <li data-i18n="work.csos1">Researching learning-based IDS under severe concept drift without retraining</li>
               <li data-i18n="work.csos2">Studying graph-based IDS using API co-occurrence & SNA</li>
               <li data-i18n="work.csos3">Investigating TEE-based lightweight PQC deployment on ARM TrustZone</li>
@@ -141,9 +162,10 @@
           </div>
           <div class="work-body">
             <h3 data-i18n="work.katusaTitle">KATUSA (Korean Augmentation to the U.S. Army)</h3>
-            <p class="work-org" data-i18n="work.kaOrg">U.S. 8th Army, Camp Carroll, 35th ADA Brigade, Echo Company · Waegwan, South Korea</p>
+            <p class="work-org" data-i18n="work.kaOrg">U.S. 8th Army, Camp Carroll, 35th Brigade, 2-1 Air Defense Artillery Battalion, Echo Company</p>
             <ul class="work-meta-list">
               <li>Period: Aug 2023 – Feb 2025</li>
+              <li data-i18n="work.kaLocation">Location: Waegwan, South Korea</li>
               <li data-i18n="work.ka1">Served as interpreter and liaison during joint U.S.–ROK operations</li>
               <li data-i18n="work.ka2">Appointed as Environmental Officer; conducted environmental and operational safety inspections in accordance with military compliance standards</li>
               <li data-i18n-html="work.ka3">Awarded the <em>Army Commendation Medal (ARCOM)</em> by a U.S. Brigadier General</li>
@@ -161,13 +183,13 @@
       <article class="paper-card">
         <h3 class="paper-title">SCAN: Structural Clustering with Adaptive Thresholds for Intelligent and Robust Android Malware Detection under Concept Drift</h3>
         <p class="paper-authors"><span class="paper-author-me">Kyoungmin Roh</span>, Seungmin Lee, Seongje Cho, Youngsup Hwang, Dongjae Kim</p>
-        <p class="paper-venue"><em>Computer Modeling in Engineering & Sciences (CMES)</em>, 2025 [SCIE Q1] (Accepted)</p>
+        <p class="paper-venue"><em>Computer Modeling in Engineering & Sciences (CMES)</em>, 2026 [SCIE Q1] (Accepted)</p>
       </article>
 
       <div class="pub-cat-card" data-i18n="pub.catDomestic">Domestic Journals</div>
       <article class="paper-card">
         <h3 class="paper-title">Concept Drift-Resilient Android Malware Detection via API Co-occurrence Graphs and Louvain Communities</h3>
-        <p class="paper-authors"><span class="paper-author-me">Kyoungmin Roh</span>, Seongje Cho</p>
+        <p class="paper-authors"><span class="paper-author-me">Kyoungmin Roh</span>, Seungmin Lee, Seokhyun Ahn, Seong-je Cho</p>
         <p class="paper-venue"><em>KIISE Transactions on Computing Practices (KTCP)</em>, 2025 (Invited)</p>
         <a href="https://www.kci.go.kr/kciportal/ci/sereArticleSearch/ciSereArtiView.kci?sereArticleSearchBean.artiId=ART003297268" target="_blank" rel="noopener" class="paper-link">View Paper →</a>
       </article>
@@ -175,7 +197,7 @@
       <div class="pub-cat-card" data-i18n="pub.catIntl">International Conferences</div>
       <article class="paper-card">
         <h3 class="paper-title">ALARM: Android Malware Detection with Leiden API Communities and Robust Mixture of Experts</h3>
-        <p class="paper-authors"><span class="paper-author-me">Kyoungmin Roh</span>, Seungmin Lee, Seongje Cho, Youngsup Hwang</p>
+        <p class="paper-authors"><span class="paper-author-me">Kyoungmin Roh</span>, Seungmin Lee, Seong-je Cho, Youngsup Hwang</p>
         <p class="paper-venue"><em>The 41st ACM/SIGAPP Symposium on Applied Computing (SAC 2026)</em>, Thessaloniki, Greece, Mar. 2026 (Accepted)</p>
       </article>
 
@@ -194,7 +216,7 @@
       <article class="paper-card">
         <h3 class="paper-title">Classifying File Fragment Types for IVI System Forensics</h3>
         <p class="paper-authors">Seungmin Lee, <span class="paper-author-me">Kyoungmin Roh</span>, Jiheon Jung, Suhyeon Park, Seongje Cho</p>
-        <p class="paper-venue"><em>WDSC 2025</em>, Jeju, Republic of Korea, Aug. 2025</p>
+        <p class="paper-venue"><em>WDSC 2025: Workshop on Dependable and Secure Computing</em>, Jeju, Republic of Korea, Aug. 2025</p>
         <a href="https://github.com/rohkyoungmin/Research-Papers/blob/main/WDSC/IVI%20%EC%8B%9C%EC%8A%A4%ED%85%9C%20%ED%8F%AC%EB%A0%8C%EC%8B%9D%EC%9D%84%20%EC%9C%84%ED%95%9C%20%ED%8C%8C%EC%9D%BC%20%ED%8C%8C%ED%8E%B8%20%EC%9C%A0%ED%98%95%20%EB%B6%84%EB%A5%98/Classifying%20File%20Fragment%20Types%20for%20IVI%20System%20Forensics.pdf" target="_blank" rel="noopener" class="paper-link" data-i18n="pub.viewPaper">View Paper →</a>
       </article>
 
@@ -272,7 +294,7 @@
           <article class="award-card">
             <h3 class="award-title" data-i18n="award.t7">WDSC 2025 Best Paper Award</h3>
           <p class="award-desc" data-i18n="award.d7">Android malware detection using API co-occurrence graphs and Louvain communities; selected for robustness under concept drift.</p>
-            <p class="award-org" data-i18n="award.o5">KIISE</p>
+            <p class="award-org" data-i18n="award.o5">Korean Institute of Information Scientists and Engineers (KIISE)</p>
             <a href="https://github.com/rohkyoungmin/Research-Papers/blob/main/WDSC/API%EB%93%A4%EC%9D%98%20%EB%8F%99%EC%8B%9C%20%EC%B6%9C%ED%98%84%20%EA%B7%B8%EB%9E%98%ED%94%84%EC%99%80%20%EC%BB%A4%EB%AE%A4%EB%8B%88%ED%8B%B0%20%ED%83%90%EC%A7%80%EC%9A%A9%20Louvain%20%EB%B0%A9%EB%B2%95%EC%9D%84%20%EC%9D%B4%EC%9A%A9%ED%95%9C%20%EC%95%88%EB%93%9C%EB%A1%9C%EC%9D%B4%EB%93%9C%20%EC%95%85%EC%84%B1%20%EC%95%B1%20%ED%83%90%EC%A7%80/%EC%83%81%EC%9E%A5-%EC%B5%9C%EC%9A%B0%EC%88%98%EB%85%BC%EB%AC%B8%EC%83%81.pdf" target="_blank" rel="noopener" class="award-cert-link" data-i18n="pub.viewCert">View certificate →</a>
           </article>
         </div>
@@ -396,16 +418,18 @@
 
     <section id="contact" class="section contact">
       <h2 class="section-title" data-i18n="section.contact">Contact</h2>
-      <div class="contact-info">
-        <p class="contact-line"><span class="contact-label" data-i18n="contact.phone">Phone:</span> +82-10-2506-3409</p>
-        <p class="contact-line"><span class="contact-label" data-i18n="contact.location">Location:</span> Seongnam-si, Gyeonggi-do, Republic of Korea</p>
-      </div>
-      <div class="contact-links">
-        <a href="mailto:kyoungminroh01@gmail.com" data-i18n="contact.email">Email</a>
-        <a href="https://github.com/rohkyoungmin" target="_blank" rel="noopener">GitHub</a>
-        <a href="https://www.linkedin.com/in/kyoungmin-roh-88bb09343/" target="_blank" rel="noopener">LinkedIn</a>
-        <a href="https://medium.com/@kyoungminroh01" target="_blank" rel="noopener">Medium</a>
-        <a href="https://github.com/rohkyoungmin/CV/raw/main/Kyoungmin_Roh___CV.pdf" target="_blank" rel="noopener" data-i18n="contact.cv">Download CV (PDF)</a>
+      <div class="contact-card">
+        <div class="contact-info">
+          <p class="contact-line"><span class="contact-label" data-i18n="contact.phone">Phone:</span> +82-10-2506-3409</p>
+          <p class="contact-line"><span class="contact-label" data-i18n="contact.location">Location:</span> Seongnam-si, Gyeonggi-do, Republic of Korea</p>
+        </div>
+        <div class="contact-links">
+          <a href="mailto:kyoungminroh01@gmail.com" data-i18n="contact.email">Email</a>
+          <a href="https://github.com/rohkyoungmin" target="_blank" rel="noopener">GitHub</a>
+          <a href="https://www.linkedin.com/in/kyoungmin-roh-88bb09343/" target="_blank" rel="noopener">LinkedIn</a>
+          <a href="https://medium.com/@kyoungminroh01" target="_blank" rel="noopener">Medium</a>
+          <a href="https://github.com/rohkyoungmin/CV/raw/main/Kyoungmin_Roh___CV.pdf" target="_blank" rel="noopener" data-i18n="contact.cv">Download CV (PDF)</a>
+        </div>
       </div>
     </section>
   </main>

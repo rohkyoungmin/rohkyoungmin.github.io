@@ -55,16 +55,189 @@
 html { scroll-behavior: smooth; }
 body {
   margin: 0;
+  position: relative;
   font-family: var(--font);
   background-color: var(--bg);
   background-image:
     linear-gradient(var(--border) 1px, transparent 1px),
     linear-gradient(90deg, var(--border) 1px, transparent 1px);
   background-size: 32px 32px;
+  background-attachment: scroll;
   color: var(--text);
   line-height: 1.65;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
+}
+
+/* 그리드 칸 호버: 커서 있는 칸만 살짝 어두움 (스크롤·다크 모드 대응) */
+.grid-hover-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  min-height: 100%;
+  z-index: 0;
+  pointer-events: none;
+  display: grid;
+  grid-template-columns: repeat(var(--grid-cols, 60), 32px);
+  grid-template-rows: repeat(var(--grid-rows, 40), 32px);
+  align-content: start;
+  justify-content: start;
+}
+
+.grid-hover-cell {
+  width: 32px;
+  height: 32px;
+  background: transparent;
+  transition: background 0.2s ease;
+}
+
+/* 스포트라이트: 다크 모드 — 얕은 민트색(액센트)으로 칸이 살짝 밝아짐 */
+.grid-hover-cell.hover-ring-0 {
+  background: rgba(0, 212, 170, 0.12);
+}
+.grid-hover-cell.hover-ring-1 {
+  background: rgba(0, 212, 170, 0.06);
+}
+.grid-hover-cell.hover-ring-2 {
+  background: rgba(0, 212, 170, 0.02);
+}
+
+/* 라이트 모드 — 살짝 어두운 톤 유지 */
+[data-theme="light"] .grid-hover-cell.hover-ring-0 {
+  background: rgba(0, 0, 0, 0.08);
+}
+[data-theme="light"] .grid-hover-cell.hover-ring-1 {
+  background: rgba(0, 0, 0, 0.04);
+}
+[data-theme="light"] .grid-hover-cell.hover-ring-2 {
+  background: rgba(0, 0, 0, 0.02);
+}
+
+/* ===== 오른쪽 리모컨: 선으로 이어진 점, 호버 시 섹션명 표시 ===== */
+.page-remote {
+  position: fixed;
+  top: 50%;
+  right: 0;
+  transform: translate(100%, -50%);
+  z-index: 90;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  padding: 1.5rem 0;
+  min-height: 280px;
+  background: var(--header-bg);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--border);
+  border-right: none;
+  border-radius: 14px 0 0 14px;
+  box-shadow: -4px 0 24px rgba(0, 0, 0, 0.12);
+  transition: transform 0.35s ease, opacity 0.35s ease;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.page-remote.visible {
+  transform: translate(0, -50%);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* 점들을 잇는 세로선 */
+.remote-line {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 2px;
+  height: calc(100% - 2rem);
+  background: linear-gradient(to bottom, transparent, var(--border), var(--border), transparent);
+  border-radius: 1px;
+  pointer-events: none;
+}
+
+.remote-dot {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 28px;
+  padding: 0;
+  margin: 0;
+  border: none;
+  background: none;
+  cursor: pointer;
+  border-radius: 0;
+  transition: var(--transition);
+  z-index: 1;
+}
+
+.remote-dot-inner {
+  display: block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--text-muted);
+  opacity: 0.5;
+  transition: var(--transition);
+}
+
+.remote-dot:hover .remote-dot-inner {
+  opacity: 0.9;
+  background: var(--text);
+  transform: scale(1.15);
+}
+
+/* 현재 섹션: 민트색으로 빛남 */
+.remote-dot.active .remote-dot-inner {
+  width: 12px;
+  height: 12px;
+  background: var(--accent);
+  opacity: 1;
+  box-shadow: 0 0 12px var(--accent-glow), 0 0 24px rgba(0, 212, 170, 0.25);
+}
+
+[data-theme="light"] .remote-dot.active .remote-dot-inner {
+  box-shadow: 0 0 10px var(--accent-glow), 0 0 20px rgba(0, 153, 122, 0.2);
+}
+
+/* 호버 시 동그라미 옆에 섹션명 표시 */
+.remote-label {
+  position: absolute;
+  right: 100%;
+  margin-right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease, color 0.2s ease;
+}
+
+.remote-dot:hover .remote-label,
+.remote-dot.active .remote-label {
+  opacity: 1;
+}
+
+.remote-dot:hover .remote-label {
+  color: var(--text);
+}
+
+.remote-dot.active .remote-label {
+  color: var(--accent);
+}
+
+/* 그리드 위에 콘텐츠가 보이도록 */
+main,
+.footer {
+  position: relative;
+  z-index: 1;
 }
 
 a { color: inherit; text-decoration: none; }
@@ -82,10 +255,15 @@ ul { list-style: none; margin: 0; padding: 0; }
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   border-bottom: 1px solid var(--border);
-  transition: var(--transition);
+  transition: transform 0.35s ease, background var(--transition);
 }
 
 .header.scrolled { background: var(--header-bg-scroll); }
+
+/* 스크롤 내렸을 때 상단바 숨김 */
+.header.remote-mode {
+  transform: translateY(-100%);
+}
 
 .nav {
   max-width: 1100px;
@@ -390,10 +568,12 @@ ul { list-style: none; margin: 0; padding: 0; }
 
 /* ===== 섹션 공통 ===== */
 .section {
+  position: relative;
   max-width: 920px;
   margin: 0 auto;
   padding: 5.5rem 2rem;
 }
+
 
 .section-title {
   font-size: 0.8rem;
@@ -416,7 +596,34 @@ ul { list-style: none; margin: 0; padding: 0; }
 }
 
 /* ===== About ===== */
+.about-wrap {
+  display: flex;
+  align-items: flex-start;
+  gap: 2.5rem;
+  flex-wrap: wrap;
+}
+
+.about-photo-wrap {
+  flex-shrink: 0;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 3px solid var(--accent);
+  box-shadow: var(--shadow-card), 0 0 0 1px var(--border);
+  background: var(--bg-card);
+}
+
+.about-photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
 .about-content {
+  flex: 1;
+  min-width: 280px;
   max-width: 640px;
   padding: 2rem;
   background: var(--bg-card);
@@ -817,7 +1024,8 @@ ul { list-style: none; margin: 0; padding: 0; }
   transition: border-color var(--transition), transform var(--transition), box-shadow var(--transition), background var(--transition);
 }
 
-.project-card:hover {
+.project-card:hover,
+.section.visible .project-card:hover {
   border-color: var(--accent);
   transform: translateY(-5px);
   box-shadow: var(--shadow-card-hover);
@@ -850,17 +1058,32 @@ ul { list-style: none; margin: 0; padding: 0; }
 .project-card .card-cta:hover { color: var(--accent-bright); }
 
 /* ===== Contact ===== */
-.contact-info {
-  margin-bottom: 2rem;
-  padding: 2rem;
+.contact-card {
+  width: 100%;
+  padding: 2.25rem 2.5rem;
   background: var(--bg-card);
   border: 1px solid var(--border);
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-card);
-  max-width: 480px;
+  transition: border-color var(--transition), transform var(--transition), box-shadow var(--transition), background var(--transition);
 }
+
+.contact-card:hover,
+.section.visible .contact-card:hover {
+  border-color: var(--accent);
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-card-hover);
+  background: var(--bg-card-hover);
+}
+
+.contact-info {
+  margin-bottom: 0;
+  padding-bottom: 1.75rem;
+  border-bottom: 1px solid var(--border);
+}
+
 .contact-line {
-  margin: 0 0 0.6rem;
+  margin: 0 0 0.5rem;
   font-size: 1.05rem;
   color: var(--text-muted);
 }
@@ -874,13 +1097,17 @@ ul { list-style: none; margin: 0; padding: 0; }
 .contact-links {
   display: flex;
   flex-wrap: wrap;
-  gap: 1.75rem;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem 2rem;
+  padding-top: 1.75rem;
 }
 
 .contact-links a {
   font-weight: 600;
+  font-size: 0.95rem;
   color: var(--text);
-  padding: 0.5rem 0;
+  padding: 0.4rem 0;
   border-bottom: 2px solid transparent;
   transition: var(--transition);
 }
@@ -901,7 +1128,7 @@ ul { list-style: none; margin: 0; padding: 0; }
 
 /* ===== 스크롤 등장 애니메이션 ===== */
 .section .section-title,
-.about-content,
+.about-wrap,
 .edu-card,
 .work-list,
 .pub-cat-card,
@@ -911,15 +1138,14 @@ ul { list-style: none; margin: 0; padding: 0; }
 .content-card,
 .patent-card,
 .project-grid,
-.contact-info,
-.contact-links {
+.contact-card {
   opacity: 0;
   transform: translateY(28px);
   transition: opacity 0.55s ease-out, transform 0.55s ease-out;
 }
 
 .section.visible .section-title,
-.section.visible .about-content,
+.section.visible .about-wrap,
 .section.visible .edu-card,
 .section.visible .work-list,
 .section.visible .pub-cat-card,
@@ -929,8 +1155,7 @@ ul { list-style: none; margin: 0; padding: 0; }
 .section.visible .content-card,
 .section.visible .patent-card,
 .section.visible .project-grid,
-.section.visible .contact-info,
-.section.visible .contact-links {
+.section.visible .contact-card {
   opacity: 1;
   transform: translateY(0);
 }
@@ -951,6 +1176,21 @@ ul { list-style: none; margin: 0; padding: 0; }
 
 /* ===== 반응형 ===== */
 @media (max-width: 768px) {
+  .page-remote { display: none; }
+
+  .about-wrap {
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+  }
+  .about-photo-wrap {
+    width: 180px;
+    height: 180px;
+  }
+  .about-content {
+    max-width: 100%;
+  }
+
   .nav-links {
     position: fixed;
     top: 0;
