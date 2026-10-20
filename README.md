@@ -12,6 +12,8 @@ The site uses static HTML, CSS, JavaScript, and original SVG cover art. It needs
 
 Manuscripts marked `In preparation` appear in a separate section and are excluded from publication filters and counts. Accepted papers remain in the main list with their status shown.
 
+The About introduction in `professionalSummary` is copied verbatim from the Notion Full CV’s Professional Summary. Preserve its wording when adjusting layout.
+
 Styling lives in `css/portfolio.css`; mobile navigation and publication filters live in `js/portfolio.js`. Research artwork and the favicon are in `assets/`. The existing portrait is retained in `elements/Roh.jpg`.
 
 CV links point to the PDF in the separate `rohkyoungmin/CV` repository. Content was reconciled with the public GitHub profile in October 2026. Keep publication status, award names, project roles, and benchmark conditions accurate when updating it.
