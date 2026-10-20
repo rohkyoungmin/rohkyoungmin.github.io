@@ -44,7 +44,7 @@ def head(title, description, path='', prefix=''):
     <a href="{prefix}index.html" class="brand" aria-label="Kyoungmin Roh, home"><span class="brand-mark">KR.</span><span class="brand-description">KYOUNGMIN ROH<br>RESEARCH &amp; SELECTED WORK</span></a>
     <button class="menu-button" aria-controls="main-navigation" aria-expanded="false" type="button">Menu +</button>
     <div id="main-navigation" class="nav-links">
-      <a href="{prefix}index.html#work">Work</a><a href="{prefix}index.html#about">About</a><a href="{prefix}index.html#publications">Publications</a><a href="{prefix}index.html#contact">Contact</a>
+      <a href="{prefix}index.html#about">About</a><a href="{prefix}index.html#gallery">Gallery</a><a href="{prefix}index.html#work">Research</a><a href="{prefix}index.html#publications">Publications</a><a href="{prefix}index.html#contact">Contact</a>
       {external(CV, 'CV ↗')}
     </div>
   </nav>
@@ -76,9 +76,12 @@ def research_card(case, number):
       <a href="research/{slug}.html" aria-label="Read {e(case['title'])}">
         <div class="art-frame"><img src="assets/{slug}.svg" width="1600" height="1100" alt="Conceptual illustration for {e(case['title'])}" loading="lazy"><span class="art-arrow" aria-hidden="true">↗</span></div>
         <div class="card-info"><div><p class="mono card-overline">{number:02d} / {e(case['category'])}</p><h3>{e(CARD_TITLES[slug])}</h3></div><span class="mono">{tag}</span></div>
-        <p class="card-summary">{e(CARD_DESCS[slug])}</p>
       </a>
     </article>'''
+
+def research_summary(case, number):
+    slug=case['id']
+    return f'''<a href="research/{slug}.html" class="research-summary-row"><span class="mono muted">{number:02d}</span><div><h3>{e(CARD_TITLES[slug])}</h3><p>{e(CARD_DESCS[slug])}</p></div><div class="research-summary-meta"><span>{e(case['category'])}</span><span>{e(case['status'])}</span></div><span class="arrow" aria-hidden="true">↗</span></a>'''
 
 def experience_row(item):
     dates=item['period'].replace(' – ', '<br>— ')
@@ -114,6 +117,7 @@ def award_row(award):
 
 def build_home():
     research=''.join(research_card(case,i+1) for i,case in enumerate(DATA['caseStudies']))
+    research_summaries=''.join(research_summary(case,i+1) for i,case in enumerate(DATA['caseStudies']))
     experience=''.join(experience_row(item) for item in DATA['experience'])
     listed_publications=[pub for pub in DATA['publications'] if pub['status'].strip().casefold()!='in preparation']
     preparation_publications=[pub for pub in DATA['publications'] if pub['status'].strip().casefold()=='in preparation']
@@ -128,29 +132,31 @@ def build_home():
     patent=next(p for p in DATA['patents'] if p['status']=='Filed')
     text=head('Kyoungmin Roh — Cybersecurity, Machine Learning & Systems',DATA['summary'])
     text+=f'''<main id="main" class="wrap">
-  <section id="top" class="hero" aria-labelledby="hero-title">
-    <div class="hero-top"><p class="eyebrow">RESEARCH PORTFOLIO</p><p class="mono location">South Korea</p></div>
-    <div class="hero-content"><div><h1 id="hero-title" class="hero-name">Kyoungmin Roh</h1><p class="hero-role">Cybersecurity researcher</p></div><p class="hero-summary">I study Android malware detection under concept drift, post-quantum cryptography in trusted execution environments, and confidential computing for automotive systems.</p></div>
-    <div class="hero-foot"><a class="text-link" href="#work">Selected research <span class="arrow" aria-hidden="true">↓</span></a><div class="hero-foot-right"><span class="mono">RESEARCH INTERN<br>SEOUL NATIONAL UNIVERSITY</span><span class="mono">2025—2026</span></div></div>
-  </section>
-  <section id="work" class="section" aria-labelledby="work-title">
-    <div class="section-heading"><div><p class="eyebrow section-kicker">01 / RESEARCH</p><h2 id="work-title" class="section-title">Selected research</h2></div><p>Work on malware detection, embedded cryptography, and confidential computing.</p></div>
-    <div class="research-grid">{research}</div>
-    <div class="interest-strip" aria-label="Research interests"><span>Concept drift</span><span>Machine learning for security</span><span>Trusted execution environments</span><span>Confidential computing</span></div>
-  </section>
-  <section id="about" class="section" aria-labelledby="about-title">
-    <div class="section-heading"><div><p class="eyebrow section-kicker">02 / ABOUT &amp; EXPERIENCE</p><h2 id="about-title" class="section-title">About</h2></div></div>
-    <div class="about-layout"><div><p class="about-intro">I work on machine learning for cybersecurity and secure system design.</p><p class="about-note">My work includes Android malware detection under concept drift, split ML-KEM in OP-TEE, and automotive virtual ECUs with Arm CCA.</p><div class="portrait-row"><img class="portrait" src="elements/Roh.jpg" width="88" height="104" alt="Portrait of Kyoungmin Roh" loading="lazy"><p>Research intern at Seoul National University.<br>Undergraduate at Dankook University.<br>Based in South Korea.</p></div><div class="about-links">{external(CV,'Curriculum vitae <span aria-hidden="true">↗</span>','text-link')}{external('https://scholar.google.com/citations?user=6O2OMlwAAAAJ','Google Scholar <span aria-hidden="true">↗</span>','text-link')}</div></div><div class="timeline">{experience}</div></div>
+  <h1 id="top" class="sr-only">Kyoungmin Roh — Research portfolio</h1>
+  <section id="about" class="section about-first" aria-labelledby="about-title">
+    <div class="section-heading"><div><p class="eyebrow section-kicker">01 / ABOUT &amp; EXPERIENCE</p><h2 id="about-title" class="section-title">About</h2></div></div>
+    <div class="about-layout"><div><p class="about-intro">I work on machine learning for cybersecurity and secure system design.</p><p class="about-note">My work includes Android malware detection under concept drift, split ML-KEM in OP-TEE, and automotive virtual ECUs with Arm CCA.</p><div class="portrait-row"><img class="portrait" src="elements/Roh.jpg" width="88" height="104" alt="Portrait of Kyoungmin Roh" decoding="async"><p><strong>Kyoungmin Roh</strong><br>Research intern at Seoul National University.<br>Undergraduate at Dankook University.<br>Based in South Korea.</p></div><div class="about-links">{external(CV,'Curriculum vitae <span aria-hidden="true">↗</span>','text-link')}{external('https://scholar.google.com/citations?user=6O2OMlwAAAAJ','Google Scholar <span aria-hidden="true">↗</span>','text-link')}</div></div><div class="timeline">{experience}</div></div>
     <div class="edu-line"><p class="eyebrow">EDUCATION</p><div><h3>{e(DATA['education']['organization'])}</h3><p>{e(DATA['education']['degree'])}<br>{e(DATA['education']['period'])}</p></div></div>
   </section>
+  <section id="gallery" class="section gallery-section" aria-labelledby="gallery-title">
+    <div class="section-heading"><div><p class="eyebrow section-kicker">02 / GALLERY</p><h2 id="gallery-title" class="section-title">Gallery</h2></div><p>Conceptual illustrations from selected research. Select an image to view the project.</p></div>
+    <div id="gallery-track" class="gallery-track" role="region" aria-label="Research image gallery" tabindex="0">{research}</div>
+    <div class="gallery-footer"><span class="mono muted">4 RESEARCH ILLUSTRATIONS</span><div class="gallery-controls" role="group" aria-label="Gallery navigation"><button type="button" class="gallery-button" data-gallery-direction="-1" aria-label="Previous gallery images" aria-controls="gallery-track" disabled><span aria-hidden="true">←</span></button><button type="button" class="gallery-button" data-gallery-direction="1" aria-label="Next gallery images" aria-controls="gallery-track"><span aria-hidden="true">→</span></button></div></div>
+  </section>
+  <section id="work" class="section research-overview" aria-labelledby="overview-title">
+    <p class="eyebrow section-kicker">03 / RESEARCH</p>
+    <div class="research-overview-intro"><div><h2 id="overview-title" class="section-title">Research overview</h2><p class="hero-role">Cybersecurity researcher</p></div><p class="hero-summary">I study Android malware detection under concept drift, post-quantum cryptography in trusted execution environments, and confidential computing for automotive systems.</p></div>
+    <div class="interest-strip" aria-label="Research interests"><span>Concept drift</span><span>Machine learning for security</span><span>Trusted execution environments</span><span>Confidential computing</span></div>
+    <div class="research-summary-list">{research_summaries}</div>
+  </section>
   <section id="publications" class="section" aria-labelledby="publications-title">
-    <div class="section-heading"><div><p class="eyebrow section-kicker">03 / PUBLICATIONS</p><h2 id="publications-title" class="section-title">Publications</h2></div><p>Journal articles and conference papers. Accepted work is marked.</p></div>
+    <div class="section-heading"><div><p class="eyebrow section-kicker">04 / PUBLICATIONS</p><h2 id="publications-title" class="section-title">Publications</h2></div><p>Journal articles and conference papers. Accepted work is marked.</p></div>
     <div class="publication-tools"><div class="filter-buttons" role="group" aria-label="Filter publications"><button type="button" class="filter-button" data-publication-filter="all" aria-pressed="true">All</button><button type="button" class="filter-button" data-publication-filter="international" aria-pressed="false">International</button><button type="button" class="filter-button" data-publication-filter="domestic" aria-pressed="false">Domestic &amp; other</button></div><span id="publication-count" class="mono muted" role="status" aria-live="polite">{len(listed_publications):02d} entries</span></div>
     <div class="publication-list">{publications}</div><p class="pub-status-note">Authors are listed in contribution order. † Co-first authors.</p>
   </section>
   {preparation}
-  <section id="projects" class="section" aria-labelledby="projects-title"><div class="section-heading"><div><p class="eyebrow section-kicker">04 / PROJECTS &amp; TOOLS</p><h2 id="projects-title" class="section-title">Projects</h2></div><p>Security tools, AI applications, and research software.</p></div><div>{projects}</div><div class="project-links">{external('https://github.com/rohkyoungmin?tab=repositories','More on GitHub <span aria-hidden="true">↗</span>','text-link')}</div></section>
-  <section id="recognition" class="section" aria-labelledby="recognition-title"><div class="recognition-grid"><div><p class="eyebrow section-kicker">05 / RECOGNITION</p><h2 id="recognition-title" class="section-title">Awards</h2><p class="about-note">Selected awards for research and military service.</p><div class="patent-block"><span class="eyebrow">PATENT APPLICATION / {patent['year']}</span><p>{e(patent['title'])}</p><p class="mono">{e(patent['reference'])}<br>{e(patent['status'])}</p></div></div><div>{awards}</div></div></section>
+  <section id="projects" class="section" aria-labelledby="projects-title"><div class="section-heading"><div><p class="eyebrow section-kicker">05 / PROJECTS &amp; TOOLS</p><h2 id="projects-title" class="section-title">Projects</h2></div><p>Security tools, AI applications, and research software.</p></div><div>{projects}</div><div class="project-links">{external('https://github.com/rohkyoungmin?tab=repositories','More on GitHub <span aria-hidden="true">↗</span>','text-link')}</div></section>
+  <section id="recognition" class="section" aria-labelledby="recognition-title"><div class="recognition-grid"><div><p class="eyebrow section-kicker">06 / RECOGNITION</p><h2 id="recognition-title" class="section-title">Awards</h2><p class="about-note">Selected awards for research and military service.</p><div class="patent-block"><span class="eyebrow">PATENT APPLICATION / {patent['year']}</span><p>{e(patent['title'])}</p><p class="mono">{e(patent['reference'])}<br>{e(patent['status'])}</p></div></div><div>{awards}</div></div></section>
 </main>'''
     text+=footer()
     schema={'@context':'https://schema.org','@type':'Person','name':DATA['name'],'url':BASE,'email':DATA['email'],'description':DATA['summary'],'sameAs':[p['url'] for p in DATA['profiles']]}
