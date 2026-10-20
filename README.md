@@ -6,13 +6,15 @@ The site uses static HTML, CSS, JavaScript, and original SVG cover art. It needs
 
 ## Update content
 
-1. Edit `content/site-content.json` for publications, experience, awards, projects, and research case studies.
+1. Edit `content/site-content.json` for publications, experience, awards, scholarships, projects, and research case studies.
 2. Run `python scripts/build.py` from the repository root.
 3. Commit the generated pages together with the content changes to `main`.
 
 All publications appear in one list: published work first, followed by unpublished manuscripts (including accepted work awaiting publication and manuscripts in preparation). The International and Domestic filters show published work; the Unpublished filter shows all unpublished entries. Each manuscript retains its status.
 
 The About introduction in `professionalSummary` is copied verbatim from the Notion Full CV’s Professional Summary. Preserve its wording when adjusting layout.
+
+Projects, awards, and scholarships render in full, in content order. A project's application, frontend, backend, and related prototype repositories are shown as links under one entry. Scholarships include their recorded dates, organizations, descriptions, and KRW amounts.
 
 Styling lives in `css/portfolio.css`; mobile navigation and publication filters live in `js/portfolio.js`. Research artwork and the favicon are in `assets/`. The existing portrait is retained in `elements/Roh.jpg`.
 

@@ -310,72 +310,174 @@
   ],
   "awards": [
     {
-      "date": "Jun 2026",
-      "title": "KCC Outstanding Paper Award",
-      "organization": "KIISE",
-      "description": "ML-KEM partitioning for embedded TrustZone-A.",
+      "date": "Jun 25, 2026",
+      "title": "KCC 2026 Outstanding Paper Award",
+      "organization": "Korean Institute of Information Scientists and Engineers",
+      "description": "Awarded for the paper on ML-KEM partitioning for embedded TrustZone-A",
       "source": "https://github.com/rohkyoungmin/rohkyoungmin/blob/main/README.md"
     },
     {
-      "date": "Dec 2025",
-      "title": "KSC Best Paper Award",
-      "organization": "KIISE",
-      "description": "Retraining-free Android malware detection with Louvain communities.",
+      "date": "Dec 18, 2025",
+      "title": "KSC 2025 Best Paper Award",
+      "organization": "Korean Institute of Information Scientists and Engineers",
+      "description": "Awarded for retraining-free Android malware detection with Louvain communities",
       "source": "https://github.com/rohkyoungmin/rohkyoungmin/blob/main/README.md"
     },
     {
-      "date": "Dec 2025",
-      "title": "Cyber Security Contest · 1st Place",
-      "organization": "Dankook University",
-      "description": "Split ML-KEM research-paper track.",
+      "date": "Dec 9, 2025",
+      "title": "Cyber Security Contest, 1st Place Award",
+      "organization": "Dankook University, National Center of Excellence in Software",
+      "description": "Won the research-paper track for split ML-KEM on TrustZone-A",
       "source": "https://github.com/rohkyoungmin/rohkyoungmin/blob/main/README.md"
     },
     {
-      "date": "Dec 2025",
+      "date": "Dec 5, 2025",
       "title": "Capstone Festival Audience Choice Award",
-      "organization": "Dankook University",
-      "description": "QRust secure-QR and phishing detection project.",
+      "organization": "Dankook University, National Center of Excellence in Software",
+      "description": "Audience-selected award for the Qrust secure-QR phishing detector",
       "source": "https://github.com/rohkyoungmin/rohkyoungmin/blob/main/README.md"
     },
     {
-      "date": "Sep 2025",
-      "title": "Startup Hackathon · 3rd Place",
-      "organization": "Dankook University",
-      "description": "DDobak accessibility-focused speech-training prototype.",
+      "date": "Sep 27, 2025",
+      "title": "Dankook Startup Hackathon, 3rd Place Award",
+      "organization": "Dankook University, National Center of Excellence in Software",
+      "description": "Third place for the accessibility-focused DDobak speech-therapy prototype",
       "source": "https://github.com/rohkyoungmin/rohkyoungmin/blob/main/README.md"
     },
     {
-      "date": "Aug 2025",
-      "title": "WDSC Best Paper Award",
-      "organization": "KIISE",
-      "description": "API co-occurrence graphs and Louvain communities for malware detection.",
+      "date": "Aug 20, 2025",
+      "title": "WDSC 2025 Best Paper Award",
+      "organization": "Korean Institute of Information Scientists and Engineers",
+      "description": "Awarded for Android malware detection using API co-occurrence graphs and Louvain communities",
       "source": "https://github.com/rohkyoungmin/rohkyoungmin/blob/main/README.md"
     },
     {
-      "date": "Dec 2024",
-      "title": "Army Commendation Medal",
-      "organization": "U.S. Department of the Army",
-      "description": "Meritorious military service.",
+      "date": "Feb 6, 2025",
+      "title": "Republic of Korea Army Soldier Award",
+      "organization": "Republic of Korea Army",
+      "description": "Awarded upon honorable discharge",
       "source": "https://github.com/rohkyoungmin/rohkyoungmin/blob/main/README.md"
     },
     {
-      "date": "Oct 2024",
+      "date": "Feb 6, 2025",
+      "title": "Certificate of Appreciation",
+      "organization": "United States Army Garrison Daegu",
+      "description": "Awarded upon honorable discharge",
+      "source": "https://github.com/rohkyoungmin/rohkyoungmin/blob/main/README.md"
+    },
+    {
+      "date": "Dec 13, 2024",
+      "title": "Army Commendation Medal (ARCOM)",
+      "organization": "United States Department of the Army",
+      "description": "Recognized outstanding performance, including passing an environmental inspection and winning the Best Warrior Competition",
+      "source": "https://github.com/rohkyoungmin/rohkyoungmin/blob/main/README.md"
+    },
+    {
+      "date": "Oct 17, 2024",
       "title": "Best KATUSA Award",
       "organization": "Eighth U.S. Army ROK Army Support Group",
-      "description": "Duty performance and rifle marksmanship.",
+      "description": "Recognized outstanding duty performance and rifle marksmanship",
+      "source": "https://github.com/rohkyoungmin/rohkyoungmin/blob/main/README.md"
+    },
+    {
+      "date": "Sep 27, 2023",
+      "title": "Cipher Application Competition, 1st Place Award",
+      "organization": "Dankook University, Department of Industrial Security",
+      "description": "First place for a post-quantum cryptographic application combining Lamport signatures and a Merkle tree",
       "source": "https://github.com/rohkyoungmin/rohkyoungmin/blob/main/README.md"
     }
   ],
   "projects": [
     {
+      "id": "scan",
+      "title": "SCAN",
+      "category": "Malware detection",
+      "description": "Android malware detection using structural clustering and adaptive thresholds (CMES 2026).",
+      "role": null,
+      "tags": [
+        "Python",
+        "Machine Learning"
+      ],
+      "links": [
+        {
+          "label": "Repository",
+          "url": "https://github.com/rohkyoungmin/SCAN"
+        }
+      ],
+      "source": "https://github.com/rohkyoungmin/rohkyoungmin/blob/main/README.md"
+    },
+    {
+      "id": "alarm",
+      "title": "ALARM",
+      "category": "Malware detection",
+      "description": "Android malware detection using Leiden communities and mixture of experts (ACM SAC 2026).",
+      "role": null,
+      "tags": [
+        "Python",
+        "Mixture of Experts"
+      ],
+      "links": [
+        {
+          "label": "Repository",
+          "url": "https://github.com/rohkyoungmin/ALARM"
+        }
+      ],
+      "source": "https://github.com/rohkyoungmin/rohkyoungmin/blob/main/README.md"
+    },
+    {
+      "id": "mlkem-split",
+      "title": "ML-KEM / Kyber Split",
+      "category": "Post-quantum cryptography",
+      "description": "Related TrustZone-A research prototypes: information-flow-based ML-KEM partitioning and secret-isolation interfaces, plus Kyber split-design documentation and an OP-TEE client/TA scaffold.",
+      "role": null,
+      "tags": [
+        "C",
+        "OP-TEE"
+      ],
+      "links": [
+        {
+          "label": "ML-KEM prototype",
+          "url": "https://github.com/rohkyoungmin/MLKEM-Split"
+        },
+        {
+          "label": "Kyber / OP-TEE",
+          "url": "https://github.com/Cyber-Security-Contest/Kyber-Split"
+        }
+      ],
+      "source": "https://github.com/rohkyoungmin/rohkyoungmin/blob/main/README.md"
+    },
+    {
+      "id": "cca-vecu",
+      "title": "Confidential vECUs with Arm CCA",
+      "category": "Systems security",
+      "description": "Ongoing automotive virtual ECU research integrating Zephyr OS and Arm CCA through a custom shim layer.",
+      "role": "Research Intern · Seoul National University",
+      "tags": [
+        "Arm CCA",
+        "Zephyr OS",
+        "vECU"
+      ],
+      "links": [
+        {
+          "label": "Project details",
+          "url": "research/cca.html"
+        },
+        {
+          "label": "Security Optimization Research Lab",
+          "url": "https://sor.snu.ac.kr/"
+        }
+      ],
+      "source": "https://github.com/rohkyoungmin/rohkyoungmin/blob/main/README.md"
+    },
+    {
       "id": "aisecapp",
       "title": "AISECApp",
       "category": "AI security",
-      "description": "C/C++ vulnerability analysis agents combining NVD CVE mapping, LLM finding proposals, and deterministic evidence verification.",
+      "description": "C/C++ source-code vulnerability analysis agents combining NVD CVE mapping, LLM finding proposals, and deterministic evidence verification, with JSON/Markdown/PDF reporting.",
       "role": null,
       "tags": [
         "FastAPI",
-        "LLM agents",
+        "LLM Agents",
         "Evidence verification"
       ],
       "links": [
@@ -390,15 +492,20 @@
       "id": "lv0",
       "title": "LV.0 — LLM Vulnerability Zero",
       "category": "AI security",
-      "description": "Source-code security review using Semgrep, Claude-assisted explanations, and PDF reports, with a React, TypeScript, and Electron interface.",
+      "description": "Source-code security review platform combining Semgrep static analysis, Claude-assisted vulnerability explanations, and PDF reporting through Flask services, with a React/TypeScript/Electron interface.",
       "role": "Team lead · AI/security",
       "tags": [
+        "Python",
         "Semgrep",
         "Flask",
         "React",
         "Electron"
       ],
       "links": [
+        {
+          "label": "Overview",
+          "url": "https://github.com/Gaurdians-of-the-Open-Source"
+        },
         {
           "label": "Application",
           "url": "https://github.com/Gaurdians-of-the-Open-Source/final-result"
@@ -411,15 +518,35 @@
       "source": "https://github.com/rohkyoungmin/rohkyoungmin/blob/main/README.md"
     },
     {
+      "id": "ros2",
+      "title": "ROS 2 LiDAR Robot Car",
+      "category": "Robotics",
+      "description": "ROS 2 robot car with web control, live LiDAR scans, and obstacle detection.",
+      "role": null,
+      "tags": [
+        "ROS 2",
+        "LiDAR",
+        "Arduino"
+      ],
+      "links": [
+        {
+          "label": "Repository",
+          "url": "https://github.com/rohkyoungmin/lidar_car_project"
+        }
+      ],
+      "source": "https://github.com/rohkyoungmin/rohkyoungmin/blob/main/README.md"
+    },
+    {
       "id": "qrust",
       "title": "QRust",
       "category": "Applied machine learning",
-      "description": "QR phishing detection and secure QR-code generation with a Flutter client, Random Forest URL classifier, Flask inference API, and Spring Boot backend.",
+      "description": "QR phishing detection and QR-code generation service with a Flutter client, Random Forest URL classification, a Flask inference API, and a Spring Boot backend.",
       "role": "Frontend · AI",
       "tags": [
         "Flutter",
         "Random Forest",
-        "Flask"
+        "Flask",
+        "Spring Boot"
       ],
       "links": [
         {
@@ -442,10 +569,29 @@
       "source": "https://github.com/rohkyoungmin/rohkyoungmin/blob/main/README.md"
     },
     {
+      "id": "vehicle-forensics",
+      "title": "Vehicle Forensics Suite",
+      "category": "Digital forensics",
+      "description": "React/TypeScript frontend prototype for vehicle-forensics case and evidence management, with a sample event timeline, date/category/tag filters, and event annotations.",
+      "role": null,
+      "tags": [
+        "React",
+        "TypeScript",
+        "Vite"
+      ],
+      "links": [
+        {
+          "label": "Frontend prototype",
+          "url": "https://github.com/rohkyoungmin/forensic_tool"
+        }
+      ],
+      "source": "https://github.com/rohkyoungmin/forensic_tool/blob/main/src/pages/Timeline.tsx"
+    },
+    {
       "id": "summarizer",
       "title": "Document Summarizer",
       "category": "AI applications",
-      "description": "Claude-assisted PDF, TXT, and DOCX summarization with project management, JWT authentication, and Kubernetes deployment manifests.",
+      "description": "Claude-assisted PDF, TXT, and DOCX summarization with project-based summary management, JWT authentication, a React frontend, FastAPI backend, and Kubernetes deployment manifests.",
       "role": null,
       "tags": [
         "FastAPI",
@@ -465,25 +611,46 @@
         {
           "label": "Infrastructure",
           "url": "https://github.com/DKU-OSS-development/Infrastructure"
+        },
+        {
+          "label": "Documentation",
+          "url": "https://github.com/DKU-OSS-development/Documentary"
         }
       ],
       "source": "https://github.com/rohkyoungmin/rohkyoungmin/blob/main/README.md"
     },
     {
-      "id": "ros2",
-      "title": "ROS 2 LiDAR Robot Car",
-      "category": "Robotics",
-      "description": "A robot-car project with web control, live LiDAR scans, and obstacle detection.",
+      "id": "acsac-artifact",
+      "title": "ACSAC_ARTIFACT",
+      "category": "Research tooling",
+      "description": "Experiment code and results for semantic cluster-guided Android malware drift detection.",
       "role": null,
       "tags": [
-        "ROS 2",
-        "LiDAR",
-        "Arduino"
+        "Python",
+        "Concept Drift"
       ],
       "links": [
         {
           "label": "Repository",
-          "url": "https://github.com/rohkyoungmin/lidar_car_project"
+          "url": "https://github.com/rohkyoungmin/ACSAC_ARTIFACT"
+        }
+      ],
+      "source": "https://github.com/rohkyoungmin/rohkyoungmin/blob/main/README.md"
+    },
+    {
+      "id": "post-quantum-signature",
+      "title": "Post-Quantum-Signature-System",
+      "category": "Post-quantum cryptography",
+      "description": "Python prototype combining Lamport one-time signatures and Merkle trees.",
+      "role": null,
+      "tags": [
+        "Python",
+        "Post-Quantum Cryptography"
+      ],
+      "links": [
+        {
+          "label": "Repository",
+          "url": "https://github.com/rohkyoungmin/Post-Quantum-Signature-System"
         }
       ],
       "source": "https://github.com/rohkyoungmin/rohkyoungmin/blob/main/README.md"
@@ -492,7 +659,7 @@
       "id": "asx",
       "title": "Android API Sequence Extractor",
       "category": "Research tooling",
-      "description": "Method-level Android API sequence extraction with a Python pipeline and Electron GUI.",
+      "description": "Method-level Android API sequence extraction with Python and an Electron GUI.",
       "role": null,
       "tags": [
         "Python",
@@ -511,7 +678,7 @@
       "id": "ddobak",
       "title": "DDobak",
       "category": "Accessibility",
-      "description": "An AI-assisted pronunciation-training and visual-feedback prototype developed for the Dankook Startup Hackathon.",
+      "description": "Ttobak Ttobak: AI-assisted pronunciation training and visual feedback prototype.",
       "role": null,
       "tags": [
         "Accessibility",
@@ -522,6 +689,79 @@
         {
           "label": "Repository",
           "url": "https://github.com/rohkyoungmin/dku_startup_hackathon"
+        }
+      ],
+      "source": "https://github.com/rohkyoungmin/rohkyoungmin/blob/main/README.md"
+    },
+    {
+      "id": "greenhouse-disease-detector",
+      "title": "Smart Greenhouse Disease Detector",
+      "category": "Applied machine learning",
+      "description": "EfficientNetB0-based crop leaf disease classification.",
+      "role": null,
+      "tags": [
+        "TensorFlow",
+        "EfficientNet"
+      ],
+      "links": [
+        {
+          "label": "Repository",
+          "url": "https://github.com/rohkyoungmin/smart-greenhouse-disease-detector"
+        }
+      ],
+      "source": "https://github.com/rohkyoungmin/rohkyoungmin/blob/main/README.md"
+    },
+    {
+      "id": "web-crawling",
+      "title": "Product Review Crawler",
+      "category": "Utilities",
+      "description": "Product review collection with sentiment and emotion keyword classification.",
+      "role": null,
+      "tags": [
+        "Python",
+        "Selenium"
+      ],
+      "links": [
+        {
+          "label": "Repository",
+          "url": "https://github.com/rohkyoungmin/web_crawling"
+        }
+      ],
+      "source": "https://github.com/rohkyoungmin/rohkyoungmin/blob/main/README.md"
+    },
+    {
+      "id": "image-expander",
+      "title": "Image Expander",
+      "category": "Utilities",
+      "description": "Tkinter and Pillow GUI for adding transparent padding to PNG images.",
+      "role": null,
+      "tags": [
+        "Python",
+        "Tkinter",
+        "Pillow"
+      ],
+      "links": [
+        {
+          "label": "Repository",
+          "url": "https://github.com/rohkyoungmin/image-expander"
+        }
+      ],
+      "source": "https://github.com/rohkyoungmin/rohkyoungmin/blob/main/README.md"
+    },
+    {
+      "id": "ico-converter",
+      "title": "ICO Converter",
+      "category": "Utilities",
+      "description": "CLI for converting PNG and SVG images into multi-resolution ICO files.",
+      "role": null,
+      "tags": [
+        "Python",
+        "Pillow"
+      ],
+      "links": [
+        {
+          "label": "Repository",
+          "url": "https://github.com/rohkyoungmin/ico_converter"
         }
       ],
       "source": "https://github.com/rohkyoungmin/rohkyoungmin/blob/main/README.md"
@@ -654,5 +894,79 @@
   ],
   "professionalSummary": "Resilient Machine Learning Engineer & Researcher with 2 years of research experience focused on designing and building decision-making models in the cybersecurity domain, with accuracy and F1 scores above 90%. Published several research papers, including a first-author SCIE Q1 article and a BK21+ outstanding conference paper.",
   "professionalSummarySource": "Full CV / Professional Summary (Notion)",
-  "profileRole": "Machine Learning Engineer & Researcher"
+  "profileRole": "Machine Learning Engineer & Researcher",
+  "scholarships": [
+    {
+      "date": "Aug 2026",
+      "title": "Danwoo Academic Merit Scholarship",
+      "organization": "Dankook University",
+      "amountKrw": 1430000,
+      "currency": "KRW",
+      "description": "Academic performance ranking in the top 6% of the department in spring 2026",
+      "source": "https://github.com/rohkyoungmin/rohkyoungmin/blob/main/README.md"
+    },
+    {
+      "date": "Aug 2026",
+      "title": "Academic Research Scholarship",
+      "organization": "Dankook University, National Center of Excellence in Software",
+      "amountKrw": 1500000,
+      "currency": "KRW",
+      "description": "Awarded for authoring KCC 2026 research papers",
+      "source": "https://github.com/rohkyoungmin/rohkyoungmin/blob/main/README.md"
+    },
+    {
+      "date": "Dec 2025",
+      "title": "Academic Research Scholarship",
+      "organization": "Dankook University, National Center of Excellence in Software",
+      "amountKrw": 2000000,
+      "currency": "KRW",
+      "description": "Awarded for authoring a KSC 2025 research paper",
+      "source": "https://github.com/rohkyoungmin/rohkyoungmin/blob/main/README.md"
+    },
+    {
+      "date": "Dec 2025",
+      "title": "Specialized Project Scholarship",
+      "organization": "Dankook University, Department of Cybersecurity",
+      "amountKrw": 400000,
+      "currency": "KRW",
+      "description": "Recognized extraordinary extracurricular activities within the department",
+      "source": "https://github.com/rohkyoungmin/rohkyoungmin/blob/main/README.md"
+    },
+    {
+      "date": "Dec 2022",
+      "title": "Specialized Project Scholarship",
+      "organization": "Dankook University, Department of Cybersecurity",
+      "amountKrw": 500000,
+      "currency": "KRW",
+      "description": "Recognized extraordinary extracurricular activities within the department",
+      "source": "https://github.com/rohkyoungmin/rohkyoungmin/blob/main/README.md"
+    },
+    {
+      "date": "Aug 2022",
+      "title": "Specialized Academic Merit Scholarship",
+      "organization": "Dankook University",
+      "amountKrw": 287000,
+      "currency": "KRW",
+      "description": "High academic performance in spring 2022",
+      "source": "https://github.com/rohkyoungmin/rohkyoungmin/blob/main/README.md"
+    },
+    {
+      "date": "Mar 2021",
+      "title": "Admission Scholarship",
+      "organization": "Dankook University, National Center of Excellence in Software",
+      "amountKrw": 1600000,
+      "currency": "KRW",
+      "description": "Awarded to an outstanding incoming student in the department",
+      "source": "https://github.com/rohkyoungmin/rohkyoungmin/blob/main/README.md"
+    },
+    {
+      "date": "Feb 2021",
+      "title": "Admission Fee Reduction Support Scholarship",
+      "organization": "Korea Student Aid Foundation (KOSAF)",
+      "amountKrw": 182000,
+      "currency": "KRW",
+      "description": "Tuition waiver scholarship",
+      "source": "https://github.com/rohkyoungmin/rohkyoungmin/blob/main/README.md"
+    }
+  ]
 }

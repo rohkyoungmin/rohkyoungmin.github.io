@@ -92,12 +92,25 @@ def publication_row(pub):
     return f'''<article class="publication" data-category="{category}" data-publication-status="{publication_status(pub)}"><p class="mono pub-year">{e(pub.get('year') or '—')}</p><div><h3 class="pub-title">{title}</h3><p class="pub-authors">{authors}</p><p class="pub-meta">{e(pub['venue'])}</p>{award}</div><div class="pub-links">{''.join(links)}</div></article>'''
 
 def project_row(project, number):
-    url=project['links'][0]['url']
-    role = f' Role: {e(project["role"])}.' if project.get('role') else ''
-    return f'''<a href="{e(url)}" target="_blank" rel="noopener noreferrer" class="project-row"><span class="mono number">{number:02d}</span><div><h3>{e(project['title'])}</h3><div class="tag">{e(' / '.join(project['tags']))}</div></div><div class="project-description"><p>{e(project['description'])}{role}</p></div><span class="arrow" aria-hidden="true">↗</span></a>'''
+    role = f'<p class="project-role">Role: {e(project["role"])}</p>' if project.get('role') else ''
+    links=[]
+    for link in project['links']:
+        label=e(link['label'])
+        if link['url'].startswith('https://'):
+            links.append(external(link['url'],label+' ↗'))
+        else:
+            links.append(f'<a href="{e(link["url"])}">{label} →</a>')
+    case_slug={'scan':'scan','alarm':'alarm','mlkem-split':'mlkem'}.get(project['id'])
+    if case_slug:
+        links.append(f'<a href="research/{case_slug}.html">Research details →</a>')
+    return f'''<article id="project-{e(project['id'])}" class="project-row"><span class="mono number">{number:02d}</span><div><h3>{e(project['title'])}</h3><div class="tag">{e(' / '.join(project['tags']))}</div></div><div class="project-description"><p>{e(project['description'])}</p>{role}<div class="project-resource-links">{''.join(links)}</div></div></article>'''
 
 def award_row(award):
     return f'''<article class="award-row"><span class="mono muted">{e(award['date'])}</span><div><h3>{e(award['title'])}</h3><p>{e(award['organization'])} · {e(award['description'])}</p></div></article>'''
+
+def scholarship_row(item):
+    amount=f'KRW {item["amountKrw"]:,}'
+    return f'''<article class="award-row scholarship-row"><span class="mono muted">{e(item['date'])}</span><div><h3>{e(item['title'])}</h3><p>{e(item['organization'])}</p><p>{e(item['description'])}</p><p class="scholarship-amount">{amount}</p></div></article>'''
 
 def build_home():
     experience=''.join(experience_row(item) for item in DATA['experience'])
@@ -106,8 +119,8 @@ def build_home():
     ordered_publications=published+unpublished
     publications=''.join(publication_row(pub) for pub in ordered_publications)
     projects=''.join(project_row(project,i+1) for i,project in enumerate(DATA['projects']))
-    selected_awards=[a for a in DATA['awards'] if any(t in a['title'] for t in ['KCC','KSC','WDSC','Army Commendation','Best KATUSA'])]
-    awards=''.join(award_row(award) for award in selected_awards)
+    awards=''.join(award_row(award) for award in DATA['awards'])
+    scholarships=''.join(scholarship_row(item) for item in DATA['scholarships'])
     patent=next(p for p in DATA['patents'] if p['status']=='Filed')
     text=head('Kyoungmin Roh — Cybersecurity, Machine Learning & Systems',DATA['summary'])
     text+=f'''<main id="main" class="wrap">
@@ -143,8 +156,9 @@ def build_home():
     <div class="publication-tools"><div class="filter-buttons" role="group" aria-label="Filter publications"><button type="button" class="filter-button" data-publication-filter="all" aria-pressed="true">All</button><button type="button" class="filter-button" data-publication-filter="international" aria-pressed="false">International</button><button type="button" class="filter-button" data-publication-filter="domestic" aria-pressed="false">Domestic</button><button type="button" class="filter-button" data-publication-filter="unpublished" aria-pressed="false">Unpublished</button></div><span id="publication-count" class="mono muted" role="status" aria-live="polite">{len(ordered_publications):02d} entries</span></div>
     <div class="publication-list">{publications}</div><p class="pub-status-note">Authors are listed in contribution order. † Co-first authors.</p>
   </section>
-  <section id="projects" class="section" aria-labelledby="projects-title"><div class="section-heading"><div><p class="eyebrow section-kicker">05 / PROJECTS &amp; TOOLS</p><h2 id="projects-title" class="section-title">Projects</h2></div><p>Security tools, AI applications, and research software.</p></div><div>{projects}</div><div class="project-links">{external('https://github.com/rohkyoungmin?tab=repositories','More on GitHub <span aria-hidden="true">↗</span>','text-link')}</div></section>
-  <section id="recognition" class="section" aria-labelledby="recognition-title"><div class="recognition-grid"><div><p class="eyebrow section-kicker">06 / RECOGNITION</p><h2 id="recognition-title" class="section-title">Awards</h2><p class="about-note">Selected awards for research and military service.</p><div class="patent-block"><span class="eyebrow">PATENT APPLICATION / {patent['year']}</span><p>{e(patent['title'])}</p><p class="mono">{e(patent['reference'])}<br>{e(patent['status'])}</p></div></div><div>{awards}</div></div></section>
+  <section id="projects" class="section" aria-labelledby="projects-title"><div class="section-heading"><div><p class="eyebrow section-kicker">05 / PROJECTS &amp; TOOLS</p><h2 id="projects-title" class="section-title">Projects<sup>{len(DATA['projects']):02d}</sup></h2></div><p>Security tools, AI applications, and research software.</p></div><div>{projects}</div><div class="project-links">{external('https://github.com/rohkyoungmin?tab=repositories','GitHub repositories <span aria-hidden="true">↗</span>','text-link')}</div></section>
+  <section id="recognition" class="section" aria-labelledby="recognition-title"><div class="recognition-grid"><div><p class="eyebrow section-kicker">06 / RECOGNITION</p><h2 id="recognition-title" class="section-title">Awards<sup>{len(DATA['awards']):02d}</sup></h2><p class="about-note">Research, competitions, and military service.</p><div class="recognition-links"><a class="text-link" href="#scholarships">Scholarships ↓</a></div><div class="patent-block"><span class="eyebrow">PATENT APPLICATION / {patent['year']}</span><p>{e(patent['title'])}</p><p class="mono">{e(patent['reference'])}<br>{e(patent['status'])}</p></div></div><div>{awards}</div></div></section>
+  <section id="scholarships" class="section" aria-labelledby="scholarships-title"><div class="recognition-grid"><div><p class="eyebrow section-kicker">07 / SCHOLARSHIPS</p><h2 id="scholarships-title" class="section-title">Scholarships<sup>{len(DATA['scholarships']):02d}</sup></h2><p class="about-note">Academic merit, research, and project scholarships.</p></div><div>{scholarships}</div></div></section>
 </main>'''
     text+=footer()
     schema={'@context':'https://schema.org','@type':'Person','name':DATA['name'],'url':BASE,'email':DATA['email'],'description':DATA['summary'],'sameAs':[p['url'] for p in DATA['profiles']]}
