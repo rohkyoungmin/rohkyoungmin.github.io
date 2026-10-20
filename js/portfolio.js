@@ -22,7 +22,10 @@
     filterButtons.forEach(other => other.setAttribute('aria-pressed', String(other === button)));
     let visible = 0;
     publications.forEach(publication => {
-      const show = selected === 'all' || publication.dataset.category === selected;
+      const unpublished = publication.dataset.publicationStatus === 'unpublished';
+      const show = selected === 'all' || (selected === 'unpublished'
+        ? unpublished
+        : !unpublished && publication.dataset.category === selected);
       publication.hidden = !show;
       if (show) visible++;
     });

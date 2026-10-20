@@ -10,7 +10,7 @@ The site uses static HTML, CSS, JavaScript, and original SVG cover art. It needs
 2. Run `python scripts/build.py` from the repository root.
 3. Commit the generated pages together with the content changes to `main`.
 
-Manuscripts marked `In preparation` appear in a separate section and are excluded from publication filters and counts. Accepted papers remain in the main list with their status shown.
+All publications appear in one list: published work first, followed by unpublished manuscripts (including accepted work awaiting publication and manuscripts in preparation). The International and Domestic filters show published work; the Unpublished filter shows all unpublished entries. Each manuscript retains its status.
 
 The About introduction in `professionalSummary` is copied verbatim from the Notion Full CV’s Professional Summary. Preserve its wording when adjusting layout.
 

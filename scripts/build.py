@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Build the static portfolio from content/site-content.json (standard library only)."""
 from html import escape
+from hashlib import sha256
 import json
 from pathlib import Path
 
@@ -16,6 +17,8 @@ def external(url, text, cls=''):
     return f'<a href="{e(url)}" class="{e(cls)}" target="_blank" rel="noopener noreferrer">{text}</a>'
 
 def head(title, description, path='', prefix=''):
+    style_version=sha256((ROOT/'css/portfolio.css').read_bytes()).hexdigest()[:12]
+    script_version=sha256((ROOT/'js/portfolio.js').read_bytes()).hexdigest()[:12]
     return f'''<!doctype html>
 <html lang="en">
 <head>
@@ -34,8 +37,8 @@ def head(title, description, path='', prefix=''):
   <link rel="icon" href="{prefix}assets/favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="{prefix}css/portfolio.css">
-  <script src="{prefix}js/portfolio.js" defer></script>
+  <link rel="stylesheet" href="{prefix}css/portfolio.css?v={style_version}">
+  <script src="{prefix}js/portfolio.js?v={script_version}" defer></script>
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
@@ -44,7 +47,7 @@ def head(title, description, path='', prefix=''):
     <a href="{prefix}index.html" class="brand" aria-label="Kyoungmin Roh, home"><span class="brand-mark">KR.</span><span class="brand-description">KYOUNGMIN ROH<br>RESEARCH &amp; SELECTED WORK</span></a>
     <button class="menu-button" aria-controls="main-navigation" aria-expanded="false" type="button">Menu +</button>
     <div id="main-navigation" class="nav-links">
-      <a href="{prefix}index.html#about">About</a><a href="{prefix}index.html#work">Research</a><a href="{prefix}index.html#publications">Publications</a><a href="{prefix}index.html#contact">Contact</a>
+      <a href="{prefix}index.html#about">About</a><a href="{prefix}index.html#experience">Experience</a><a href="{prefix}index.html#education">Education</a><a href="{prefix}index.html#publications">Publications</a><a href="{prefix}index.html#contact">Contact</a>
       {external(CV, 'CV ↗')}
     </div>
   </nav>
@@ -61,23 +64,14 @@ def footer(prefix=''):
 </body>
 </html>'''
 
-CARD_TITLES = {'cca':'Arm CCA / vECU', 'mlkem':'Split ML-KEM', 'scan':'SCAN', 'alarm':'ALARM'}
-CARD_DESCS = {
-  'cca':'Integrating Zephyr OS and Arm CCA for automotive virtual ECUs.',
-  'mlkem':'Secret-dependent partitioning for post-quantum cryptography in embedded TEEs.',
-  'scan':'Gaussian mixture clustering and adaptive thresholds for malware detection under drift.',
-  'alarm':'Leiden communities and mixture-of-experts classification for Android malware.'
-}
-
-def research_summary(case, number):
-    slug=case['id']
-    return f'''<a href="research/{slug}.html" class="research-summary-row"><span class="mono muted">{number:02d}</span><div><h3>{e(CARD_TITLES[slug])}</h3><p>{e(CARD_DESCS[slug])}</p></div><div class="research-summary-meta"><span>{e(case['category'])}</span><span>{e(case['status'])}</span></div><span class="arrow" aria-hidden="true">↗</span></a>'''
-
 def experience_row(item):
-    dates=item['period'].replace(' – ', '<br>— ')
+    dates=e(item['period'])
     title=e(item['organization'])
     if item.get('url'): title=external(item['url'],title+' ↗')
-    return f'''<article class="timeline-item"><p class="mono timeline-date">{dates}</p><div><h3>{title}</h3><p class="role">{e(item['role'])}<br><span class="muted">{e(item['lab'])}</span></p><p class="description">{e(item['description'])}</p></div></article>'''
+    return f'''<article class="timeline-item"><p class="mono timeline-date">{dates}</p><div class="timeline-position"><h3>{title}</h3><p class="role">{e(item['role'])}<br><span class="muted">{e(item['lab'])}</span></p></div><p class="description">{e(item['description'])}</p></article>'''
+
+def publication_status(pub):
+    return 'published' if pub['status'].strip().casefold()=='published' else 'unpublished'
 
 def publication_row(pub):
     category='international' if pub['category'].startswith('International') else 'domestic'
@@ -95,7 +89,7 @@ def publication_row(pub):
     status=pub['status']
     if status != 'Published': links.append(f'<span class="status">{e(status)}</span>')
     award=f'<span class="pub-award">{e(pub["award"])}</span>' if pub.get('award') else ''
-    return f'''<article class="publication" data-category="{category}"><p class="mono pub-year">{e(pub.get('year') or '—')}</p><div><h3 class="pub-title">{title}</h3><p class="pub-authors">{authors}</p><p class="pub-meta">{e(pub['venue'])}</p>{award}</div><div class="pub-links">{''.join(links)}</div></article>'''
+    return f'''<article class="publication" data-category="{category}" data-publication-status="{publication_status(pub)}"><p class="mono pub-year">{e(pub.get('year') or '—')}</p><div><h3 class="pub-title">{title}</h3><p class="pub-authors">{authors}</p><p class="pub-meta">{e(pub['venue'])}</p>{award}</div><div class="pub-links">{''.join(links)}</div></article>'''
 
 def project_row(project, number):
     url=project['links'][0]['url']
@@ -106,15 +100,11 @@ def award_row(award):
     return f'''<article class="award-row"><span class="mono muted">{e(award['date'])}</span><div><h3>{e(award['title'])}</h3><p>{e(award['organization'])} · {e(award['description'])}</p></div></article>'''
 
 def build_home():
-    research_summaries=''.join(research_summary(case,i+1) for i,case in enumerate(DATA['caseStudies']))
     experience=''.join(experience_row(item) for item in DATA['experience'])
-    listed_publications=[pub for pub in DATA['publications'] if pub['status'].strip().casefold()!='in preparation']
-    preparation_publications=[pub for pub in DATA['publications'] if pub['status'].strip().casefold()=='in preparation']
-    publications=''.join(publication_row(pub) for pub in listed_publications)
-    preparation=''
-    if preparation_publications:
-        preparation_rows=''.join(publication_row(pub) for pub in preparation_publications)
-        preparation=f'''<section id="in-preparation" class="manuscripts-section" aria-labelledby="preparation-title"><h2 id="preparation-title" class="manuscripts-title">In preparation</h2><div class="preparation-list">{preparation_rows}</div></section>'''
+    published=[pub for pub in DATA['publications'] if publication_status(pub)=='published']
+    unpublished=[pub for pub in DATA['publications'] if publication_status(pub)=='unpublished']
+    ordered_publications=published+unpublished
+    publications=''.join(publication_row(pub) for pub in ordered_publications)
     projects=''.join(project_row(project,i+1) for i,project in enumerate(DATA['projects']))
     selected_awards=[a for a in DATA['awards'] if any(t in a['title'] for t in ['KCC','KSC','WDSC','Army Commendation','Best KATUSA'])]
     awards=''.join(award_row(award) for award in selected_awards)
@@ -139,23 +129,22 @@ def build_home():
         <div class="about-links">{external(CV,'Curriculum vitae <span aria-hidden="true">↗</span>','pill-link')}{external('https://scholar.google.com/citations?user=6O2OMlwAAAAJ','Google Scholar <span aria-hidden="true">↗</span>','pill-link')}</div>
       </div>
     </div>
-    <div class="experience-block"><div class="subsection-heading"><h3>Experience</h3><p>Research and military service</p></div><div class="timeline">{experience}</div></div>
-    <div class="edu-line"><p class="eyebrow">EDUCATION</p><div><h3>{e(DATA['education']['organization'])}</h3><p>{e(DATA['education']['degree'])}<br>{e(DATA['education']['period'])}</p></div></div>
   </section>
-  <section id="work" class="section research-overview" aria-labelledby="overview-title">
-    <p class="eyebrow section-kicker">02 / RESEARCH</p>
-    <div class="research-overview-intro"><div><h2 id="overview-title" class="section-title">Research overview</h2><p class="hero-role">Cybersecurity researcher</p></div><p class="hero-summary">I study Android malware detection under concept drift, post-quantum cryptography in trusted execution environments, and confidential computing for automotive systems.</p></div>
-    <div class="interest-strip" aria-label="Research interests"><span>Concept drift</span><span>Machine learning for security</span><span>Trusted execution environments</span><span>Confidential computing</span></div>
-    <div class="research-summary-list">{research_summaries}</div>
+  <section id="experience" class="section experience-section" aria-labelledby="experience-title">
+    <div class="section-heading"><div><p class="eyebrow section-kicker">02 / EXPERIENCE</p><h2 id="experience-title" class="section-title">Experience</h2></div><p>Research and military service.</p></div>
+    <div class="timeline">{experience}</div>
+  </section>
+  <section id="education" class="section education-section" aria-labelledby="education-title">
+    <div class="section-heading"><div><p class="eyebrow section-kicker">03 / EDUCATION</p><h2 id="education-title" class="section-title">Education</h2></div></div>
+    <div class="education-details"><div><h3>{e(DATA['education']['organization'])}</h3><p>{e(DATA['education']['degree'])}</p></div><p class="education-period">{e(DATA['education']['period'])}</p><p class="education-location">{e(DATA['education']['location'])}</p></div>
   </section>
   <section id="publications" class="section" aria-labelledby="publications-title">
-    <div class="section-heading"><div><p class="eyebrow section-kicker">03 / PUBLICATIONS</p><h2 id="publications-title" class="section-title">Publications</h2></div><p>Journal articles and conference papers. Accepted work is marked.</p></div>
-    <div class="publication-tools"><div class="filter-buttons" role="group" aria-label="Filter publications"><button type="button" class="filter-button" data-publication-filter="all" aria-pressed="true">All</button><button type="button" class="filter-button" data-publication-filter="international" aria-pressed="false">International</button><button type="button" class="filter-button" data-publication-filter="domestic" aria-pressed="false">Domestic &amp; other</button></div><span id="publication-count" class="mono muted" role="status" aria-live="polite">{len(listed_publications):02d} entries</span></div>
+    <div class="section-heading"><div><p class="eyebrow section-kicker">04 / PUBLICATIONS</p><h2 id="publications-title" class="section-title">Publications</h2></div><p>Published papers and manuscripts, with publication status indicated.</p></div>
+    <div class="publication-tools"><div class="filter-buttons" role="group" aria-label="Filter publications"><button type="button" class="filter-button" data-publication-filter="all" aria-pressed="true">All</button><button type="button" class="filter-button" data-publication-filter="international" aria-pressed="false">International</button><button type="button" class="filter-button" data-publication-filter="domestic" aria-pressed="false">Domestic</button><button type="button" class="filter-button" data-publication-filter="unpublished" aria-pressed="false">Unpublished</button></div><span id="publication-count" class="mono muted" role="status" aria-live="polite">{len(ordered_publications):02d} entries</span></div>
     <div class="publication-list">{publications}</div><p class="pub-status-note">Authors are listed in contribution order. † Co-first authors.</p>
   </section>
-  {preparation}
-  <section id="projects" class="section" aria-labelledby="projects-title"><div class="section-heading"><div><p class="eyebrow section-kicker">04 / PROJECTS &amp; TOOLS</p><h2 id="projects-title" class="section-title">Projects</h2></div><p>Security tools, AI applications, and research software.</p></div><div>{projects}</div><div class="project-links">{external('https://github.com/rohkyoungmin?tab=repositories','More on GitHub <span aria-hidden="true">↗</span>','text-link')}</div></section>
-  <section id="recognition" class="section" aria-labelledby="recognition-title"><div class="recognition-grid"><div><p class="eyebrow section-kicker">05 / RECOGNITION</p><h2 id="recognition-title" class="section-title">Awards</h2><p class="about-note">Selected awards for research and military service.</p><div class="patent-block"><span class="eyebrow">PATENT APPLICATION / {patent['year']}</span><p>{e(patent['title'])}</p><p class="mono">{e(patent['reference'])}<br>{e(patent['status'])}</p></div></div><div>{awards}</div></div></section>
+  <section id="projects" class="section" aria-labelledby="projects-title"><div class="section-heading"><div><p class="eyebrow section-kicker">05 / PROJECTS &amp; TOOLS</p><h2 id="projects-title" class="section-title">Projects</h2></div><p>Security tools, AI applications, and research software.</p></div><div>{projects}</div><div class="project-links">{external('https://github.com/rohkyoungmin?tab=repositories','More on GitHub <span aria-hidden="true">↗</span>','text-link')}</div></section>
+  <section id="recognition" class="section" aria-labelledby="recognition-title"><div class="recognition-grid"><div><p class="eyebrow section-kicker">06 / RECOGNITION</p><h2 id="recognition-title" class="section-title">Awards</h2><p class="about-note">Selected awards for research and military service.</p><div class="patent-block"><span class="eyebrow">PATENT APPLICATION / {patent['year']}</span><p>{e(patent['title'])}</p><p class="mono">{e(patent['reference'])}<br>{e(patent['status'])}</p></div></div><div>{awards}</div></div></section>
 </main>'''
     text+=footer()
     schema={'@context':'https://schema.org','@type':'Person','name':DATA['name'],'url':BASE,'email':DATA['email'],'description':DATA['summary'],'sameAs':[p['url'] for p in DATA['profiles']]}
@@ -172,7 +161,7 @@ def build_cases():
         blocks=''.join(f'<section class="case-section"><h2>{label}</h2><p>{e(case[key])}</p></section>' for label,key in [('Problem','problem'),('Approach','approach'),('Contribution','contribution'),('Results','outcome'),('Scope & limitations','limits')])
         resources=''.join(external(link['url'],e(link['label'])+' <span aria-hidden="true">↗</span>','pill-link') for link in case['links'])
         next_case=DATA['caseStudies'][(i+1)%len(DATA['caseStudies'])]
-        text+=f'''<main id="main" class="wrap"><section id="top" class="case-hero"><a href="../index.html#work" class="back-link"><span aria-hidden="true">←</span> Selected research</a><h1 class="case-title">{e(case['title'])}</h1><p class="case-subtitle">{e(case['subtitle'])}</p><div class="case-meta">{meta}</div></section><figure class="case-art" style="margin:0"><img src="../assets/{slug}.svg" width="1600" height="1100" alt="Conceptual illustration for {e(case['title'])}"><figcaption class="art-caption">Conceptual illustration</figcaption></figure><div class="case-body">{blocks}<section class="case-section"><h2>Resources</h2><div class="case-resource-links">{resources}</div></section></div><section class="next-case"><a href="{next_case['id']}.html"><div><span class="eyebrow">NEXT PROJECT</span><h2>{e(next_case['title'])}</h2></div><span class="arrow" aria-hidden="true">↗</span></a></section></main>'''
+        text+=f'''<main id="main" class="wrap"><section id="top" class="case-hero"><a href="../index.html#publications" class="back-link"><span aria-hidden="true">←</span> Publications</a><h1 class="case-title">{e(case['title'])}</h1><p class="case-subtitle">{e(case['subtitle'])}</p><div class="case-meta">{meta}</div></section><figure class="case-art" style="margin:0"><img src="../assets/{slug}.svg" width="1600" height="1100" alt="Conceptual illustration for {e(case['title'])}"><figcaption class="art-caption">Conceptual illustration</figcaption></figure><div class="case-body">{blocks}<section class="case-section"><h2>Resources</h2><div class="case-resource-links">{resources}</div></section></div><section class="next-case"><a href="{next_case['id']}.html"><div><span class="eyebrow">NEXT PROJECT</span><h2>{e(next_case['title'])}</h2></div><span class="arrow" aria-hidden="true">↗</span></a></section></main>'''
         text+=footer('../')
         (folder/f'{slug}.html').write_text(text)
 
