@@ -53,8 +53,7 @@ def head(title, description, path='', prefix=''):
 def footer(prefix=''):
     profiles = ''.join(external(item['url'], e(item['label'])+' ↗') for item in DATA['profiles'])
     return f'''<section id="contact" class="contact wrap" aria-labelledby="contact-title">
-  <p class="eyebrow">CONTACT / RESEARCH &amp; COLLABORATION</p>
-  <h2 id="contact-title" class="contact-heading"><a href="mailto:{e(DATA['email'])}"><span>Let's connect.</span><span aria-hidden="true">↗</span></a></h2>
+  <h2 id="contact-title" class="contact-heading">Contact</h2>
   <p class="contact-email"><a href="mailto:{e(DATA['email'])}">{e(DATA['email'])}</a></p>
   <div class="contact-bottom"><div class="social-links">{profiles}</div><a class="text-link" href="#top">Back to top <span class="arrow" aria-hidden="true">↑</span></a></div>
   <footer class="footer"><span>© 2026 Kyoungmin Roh</span><span>Cybersecurity · Machine learning · Systems</span></footer>
@@ -116,7 +115,13 @@ def award_row(award):
 def build_home():
     research=''.join(research_card(case,i+1) for i,case in enumerate(DATA['caseStudies']))
     experience=''.join(experience_row(item) for item in DATA['experience'])
-    publications=''.join(publication_row(pub) for pub in DATA['publications'])
+    listed_publications=[pub for pub in DATA['publications'] if pub['status'].strip().casefold()!='in preparation']
+    preparation_publications=[pub for pub in DATA['publications'] if pub['status'].strip().casefold()=='in preparation']
+    publications=''.join(publication_row(pub) for pub in listed_publications)
+    preparation=''
+    if preparation_publications:
+        preparation_rows=''.join(publication_row(pub) for pub in preparation_publications)
+        preparation=f'''<section id="in-preparation" class="manuscripts-section" aria-labelledby="preparation-title"><h2 id="preparation-title" class="manuscripts-title">In preparation</h2><div class="preparation-list">{preparation_rows}</div></section>'''
     projects=''.join(project_row(project,i+1) for i,project in enumerate(DATA['projects']))
     selected_awards=[a for a in DATA['awards'] if any(t in a['title'] for t in ['KCC','KSC','WDSC','Army Commendation','Best KATUSA'])]
     awards=''.join(award_row(award) for award in selected_awards)
@@ -124,28 +129,28 @@ def build_home():
     text=head('Kyoungmin Roh — Cybersecurity, Machine Learning & Systems',DATA['summary'])
     text+=f'''<main id="main" class="wrap">
   <section id="top" class="hero" aria-labelledby="hero-title">
-    <div class="hero-top"><p class="eyebrow">CYBERSECURITY / MACHINE LEARNING / SYSTEMS</p><p class="mono location">Based in South Korea</p></div>
-    <h1 id="hero-title" class="hero-name reveal">Kyoungmin<span class="sr-only" style="position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)"> Roh</span></h1>
-    <div class="hero-bottom-line"><span class="hero-name-last reveal" aria-hidden="true">Roh</span><div class="hero-statement"><p>Learning-based defenses.<br>Trustworthy systems.</p><p class="hero-detail">I study how machine learning and system design can strengthen security—from evolving Android malware to embedded cryptography and automotive computing.</p></div></div>
-    <div class="hero-foot"><a class="text-link" href="#work">Explore selected work <span class="arrow" aria-hidden="true">↓</span></a><div class="hero-foot-right"><span class="mono">RESEARCH INTERN<br>SEOUL NATIONAL UNIVERSITY</span><span class="mono">SELECTED WORK<br>2025—2026</span></div></div>
+    <div class="hero-top"><p class="eyebrow">RESEARCH PORTFOLIO</p><p class="mono location">South Korea</p></div>
+    <div class="hero-content"><div><h1 id="hero-title" class="hero-name">Kyoungmin Roh</h1><p class="hero-role">Cybersecurity researcher</p></div><p class="hero-summary">I study Android malware detection under concept drift, post-quantum cryptography in trusted execution environments, and confidential computing for automotive systems.</p></div>
+    <div class="hero-foot"><a class="text-link" href="#work">Selected research <span class="arrow" aria-hidden="true">↓</span></a><div class="hero-foot-right"><span class="mono">RESEARCH INTERN<br>SEOUL NATIONAL UNIVERSITY</span><span class="mono">2025—2026</span></div></div>
   </section>
   <section id="work" class="section" aria-labelledby="work-title">
-    <div class="section-heading"><div><p class="eyebrow section-kicker">01 / SELECTED WORK</p><h2 id="work-title" class="section-title">Research in<br>practice.<sup>(04)</sup></h2></div><p>Four investigations across machine learning, post-quantum cryptography, and the systems they run on.</p></div>
+    <div class="section-heading"><div><p class="eyebrow section-kicker">01 / RESEARCH</p><h2 id="work-title" class="section-title">Selected research</h2></div><p>Work on malware detection, embedded cryptography, and confidential computing.</p></div>
     <div class="research-grid">{research}</div>
     <div class="interest-strip" aria-label="Research interests"><span>Concept drift</span><span>Machine learning for security</span><span>Trusted execution environments</span><span>Confidential computing</span></div>
   </section>
   <section id="about" class="section" aria-labelledby="about-title">
-    <div class="section-heading"><div><p class="eyebrow section-kicker">02 / ABOUT &amp; EXPERIENCE</p><h2 id="about-title" class="section-title">A closer look.</h2></div></div>
-    <div class="about-layout"><div><p class="about-intro">I'm Kyoungmin, a cybersecurity researcher working across machine learning and systems security.</p><p class="about-note">My research asks how security mechanisms behave as data, software, and deployment conditions change. I work on Android malware detection, post-quantum cryptography in TEEs, and confidential computing for automotive systems.</p><div class="portrait-row"><img class="portrait" src="elements/Roh.jpg" width="88" height="104" alt="Portrait of Kyoungmin Roh" loading="lazy"><p>Research intern at Seoul National University.<br>Undergraduate at Dankook University.<br>Based in South Korea.</p></div><div class="about-links">{external(CV,'Curriculum vitae <span aria-hidden="true">↗</span>','text-link')}{external('https://scholar.google.com/citations?user=6O2OMlwAAAAJ','Google Scholar <span aria-hidden="true">↗</span>','text-link')}</div></div><div class="timeline">{experience}</div></div>
+    <div class="section-heading"><div><p class="eyebrow section-kicker">02 / ABOUT &amp; EXPERIENCE</p><h2 id="about-title" class="section-title">About</h2></div></div>
+    <div class="about-layout"><div><p class="about-intro">I work on machine learning for cybersecurity and secure system design.</p><p class="about-note">My work includes Android malware detection under concept drift, split ML-KEM in OP-TEE, and automotive virtual ECUs with Arm CCA.</p><div class="portrait-row"><img class="portrait" src="elements/Roh.jpg" width="88" height="104" alt="Portrait of Kyoungmin Roh" loading="lazy"><p>Research intern at Seoul National University.<br>Undergraduate at Dankook University.<br>Based in South Korea.</p></div><div class="about-links">{external(CV,'Curriculum vitae <span aria-hidden="true">↗</span>','text-link')}{external('https://scholar.google.com/citations?user=6O2OMlwAAAAJ','Google Scholar <span aria-hidden="true">↗</span>','text-link')}</div></div><div class="timeline">{experience}</div></div>
     <div class="edu-line"><p class="eyebrow">EDUCATION</p><div><h3>{e(DATA['education']['organization'])}</h3><p>{e(DATA['education']['degree'])}<br>{e(DATA['education']['period'])}</p></div></div>
   </section>
   <section id="publications" class="section" aria-labelledby="publications-title">
-    <div class="section-heading"><div><p class="eyebrow section-kicker">03 / PUBLICATIONS</p><h2 id="publications-title" class="section-title">Papers &amp;<br>proceedings.</h2></div><p>Journal articles, conference papers, and work in progress. Publication status is shown for accepted and forthcoming work.</p></div>
-    <div class="publication-tools"><div class="filter-buttons" role="group" aria-label="Filter publications"><button type="button" class="filter-button" data-publication-filter="all" aria-pressed="true">All</button><button type="button" class="filter-button" data-publication-filter="international" aria-pressed="false">International</button><button type="button" class="filter-button" data-publication-filter="domestic" aria-pressed="false">Domestic &amp; other</button></div><span id="publication-count" class="mono muted" role="status" aria-live="polite">{len(DATA['publications']):02d} entries</span></div>
+    <div class="section-heading"><div><p class="eyebrow section-kicker">03 / PUBLICATIONS</p><h2 id="publications-title" class="section-title">Publications</h2></div><p>Journal articles and conference papers. Accepted work is marked.</p></div>
+    <div class="publication-tools"><div class="filter-buttons" role="group" aria-label="Filter publications"><button type="button" class="filter-button" data-publication-filter="all" aria-pressed="true">All</button><button type="button" class="filter-button" data-publication-filter="international" aria-pressed="false">International</button><button type="button" class="filter-button" data-publication-filter="domestic" aria-pressed="false">Domestic &amp; other</button></div><span id="publication-count" class="mono muted" role="status" aria-live="polite">{len(listed_publications):02d} entries</span></div>
     <div class="publication-list">{publications}</div><p class="pub-status-note">Authors are listed in contribution order. † Co-first authors.</p>
   </section>
-  <section id="projects" class="section" aria-labelledby="projects-title"><div class="section-heading"><div><p class="eyebrow section-kicker">04 / PROJECTS &amp; TOOLS</p><h2 id="projects-title" class="section-title">Built to explore.</h2></div><p>Security tools, AI applications, and research infrastructure developed through individual and team projects.</p></div><div>{projects}</div><div class="project-links">{external('https://github.com/rohkyoungmin?tab=repositories','More on GitHub <span aria-hidden="true">↗</span>','text-link')}</div></section>
-  <section id="recognition" class="section" aria-labelledby="recognition-title"><div class="recognition-grid"><div><p class="eyebrow section-kicker">05 / RECOGNITION</p><h2 id="recognition-title" class="section-title">Along the way.</h2><p class="about-note">Selected recognition for research and military service.</p><div class="patent-block"><span class="eyebrow">PATENT APPLICATION / {patent['year']}</span><p>{e(patent['title'])}</p><p class="mono">{e(patent['reference'])}<br>{e(patent['status'])}</p></div></div><div>{awards}</div></div></section>
+  {preparation}
+  <section id="projects" class="section" aria-labelledby="projects-title"><div class="section-heading"><div><p class="eyebrow section-kicker">04 / PROJECTS &amp; TOOLS</p><h2 id="projects-title" class="section-title">Projects</h2></div><p>Security tools, AI applications, and research software.</p></div><div>{projects}</div><div class="project-links">{external('https://github.com/rohkyoungmin?tab=repositories','More on GitHub <span aria-hidden="true">↗</span>','text-link')}</div></section>
+  <section id="recognition" class="section" aria-labelledby="recognition-title"><div class="recognition-grid"><div><p class="eyebrow section-kicker">05 / RECOGNITION</p><h2 id="recognition-title" class="section-title">Awards</h2><p class="about-note">Selected awards for research and military service.</p><div class="patent-block"><span class="eyebrow">PATENT APPLICATION / {patent['year']}</span><p>{e(patent['title'])}</p><p class="mono">{e(patent['reference'])}<br>{e(patent['status'])}</p></div></div><div>{awards}</div></div></section>
 </main>'''
     text+=footer()
     schema={'@context':'https://schema.org','@type':'Person','name':DATA['name'],'url':BASE,'email':DATA['email'],'description':DATA['summary'],'sameAs':[p['url'] for p in DATA['profiles']]}
@@ -159,10 +164,10 @@ def build_cases():
         slug=case['id']
         text=head(case['title']+' — Kyoungmin Roh',case['subtitle'],f'research/{slug}.html','../')
         meta=''.join(f'<div><span class="mono muted">{label}</span><p>{e(case[key])}</p></div>' for label,key in [('AREA','category'),('PERIOD','year'),('ROLE','role'),('STATUS','status')])
-        blocks=''.join(f'<section class="case-section"><h2>{label}</h2><p>{e(case[key])}</p></section>' for label,key in [('The problem','problem'),('The approach','approach'),('My contribution','contribution'),('Outcome','outcome'),('Scope & limitations','limits')])
+        blocks=''.join(f'<section class="case-section"><h2>{label}</h2><p>{e(case[key])}</p></section>' for label,key in [('Problem','problem'),('Approach','approach'),('Contribution','contribution'),('Results','outcome'),('Scope & limitations','limits')])
         resources=''.join(external(link['url'],e(link['label'])+' <span aria-hidden="true">↗</span>','pill-link') for link in case['links'])
         next_case=DATA['caseStudies'][(i+1)%len(DATA['caseStudies'])]
-        text+=f'''<main id="main" class="wrap"><section id="top" class="case-hero"><a href="../index.html#work" class="back-link"><span aria-hidden="true">←</span> Selected research</a><h1 class="case-title">{e(case['title'])}</h1><p class="case-subtitle">{e(case['subtitle'])}</p><div class="case-meta">{meta}</div></section><figure class="case-art" style="margin:0"><img src="../assets/{slug}.svg" width="1600" height="1100" alt="Conceptual illustration for {e(case['title'])}"><figcaption class="art-caption">Conceptual illustration · Research overview and resources below.</figcaption></figure><div class="case-body">{blocks}<section class="case-section"><h2>Read &amp; explore</h2><div class="case-resource-links">{resources}</div></section></div><section class="next-case"><a href="{next_case['id']}.html"><div><span class="eyebrow">NEXT RESEARCH PROJECT</span><h2>{e(next_case['title'])}</h2></div><span class="arrow" aria-hidden="true">↗</span></a></section></main>'''
+        text+=f'''<main id="main" class="wrap"><section id="top" class="case-hero"><a href="../index.html#work" class="back-link"><span aria-hidden="true">←</span> Selected research</a><h1 class="case-title">{e(case['title'])}</h1><p class="case-subtitle">{e(case['subtitle'])}</p><div class="case-meta">{meta}</div></section><figure class="case-art" style="margin:0"><img src="../assets/{slug}.svg" width="1600" height="1100" alt="Conceptual illustration for {e(case['title'])}"><figcaption class="art-caption">Conceptual illustration</figcaption></figure><div class="case-body">{blocks}<section class="case-section"><h2>Resources</h2><div class="case-resource-links">{resources}</div></section></div><section class="next-case"><a href="{next_case['id']}.html"><div><span class="eyebrow">NEXT PROJECT</span><h2>{e(next_case['title'])}</h2></div><span class="arrow" aria-hidden="true">↗</span></a></section></main>'''
         text+=footer('../')
         (folder/f'{slug}.html').write_text(text)
 

@@ -15,7 +15,7 @@
     document.addEventListener('click', event => { if (!event.target.closest('.nav')) closeMenu(); });
   }
   const filterButtons = [...document.querySelectorAll('[data-publication-filter]')];
-  const publications = [...document.querySelectorAll('.publication')];
+  const publications = [...document.querySelectorAll('.publication-list .publication')];
   const count = document.getElementById('publication-count');
   filterButtons.forEach(button => button.addEventListener('click', () => {
     const selected = button.dataset.publicationFilter;

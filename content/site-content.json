@@ -531,7 +531,7 @@
     {
       "id": "cca",
       "title": "Confidential vECUs with Arm CCA",
-      "subtitle": "Bringing automotive workloads into a confidential-computing research platform.",
+      "subtitle": "Automotive virtual ECU research using Zephyr OS and Arm CCA.",
       "category": "Systems security",
       "status": "Ongoing research",
       "year": "2026 – Present",
@@ -552,7 +552,7 @@
     {
       "id": "mlkem",
       "title": "Split ML-KEM in TrustZone",
-      "subtitle": "Keep secret-dependent computation inside the TEE and move public work outside.",
+      "subtitle": "Secret-dependent ML-KEM partitioning on Arm TrustZone-A.",
       "category": "Post-quantum cryptography",
       "status": "KCC 2026 · Outstanding Paper Award",
       "year": "2025–2026",
@@ -606,7 +606,7 @@
     {
       "id": "alarm",
       "title": "ALARM",
-      "subtitle": "Community structure meets mixture-of-experts classification.",
+      "subtitle": "Android malware detection with Leiden clustering and mixture-of-experts classification.",
       "category": "Machine learning for security",
       "status": "ACM SAC · Published",
       "year": "2026",
