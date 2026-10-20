@@ -1,0 +1,655 @@
+{
+  "source": "https://github.com/rohkyoungmin/rohkyoungmin/blob/main/README.md",
+  "name": "Kyoungmin Roh",
+  "email": "imsie1@dankook.ac.kr",
+  "summary": "I study machine learning for cybersecurity, post-quantum cryptography in trusted execution environments, and confidential computing for automotive systems.",
+  "education": {
+    "organization": "Dankook University",
+    "degree": "Bachelor of Engineering in Industrial Security",
+    "period": "Mar 2021 – Expected Feb 2027",
+    "location": "Yongin, Republic of Korea",
+    "source": "https://github.com/rohkyoungmin/rohkyoungmin/blob/main/README.md"
+  },
+  "profiles": [
+    {
+      "label": "GitHub",
+      "url": "https://github.com/rohkyoungmin"
+    },
+    {
+      "label": "LinkedIn",
+      "url": "https://www.linkedin.com/in/kyoungmin-roh-88bb09343/"
+    },
+    {
+      "label": "Google Scholar",
+      "url": "https://scholar.google.com/citations?user=6O2OMlwAAAAJ"
+    },
+    {
+      "label": "ORCID",
+      "url": "https://orcid.org/0009-0005-5060-1255"
+    }
+  ],
+  "publications": [
+    {
+      "id": "scan",
+      "category": "International journal",
+      "year": 2026,
+      "title": "SCAN: Structural Clustering with Adaptive Thresholds for Intelligent and Robust Android Malware Detection under Concept Drift",
+      "authors": [
+        "Kyoungmin Roh",
+        "Seungmin Lee",
+        "Seong-je Cho",
+        "Youngsup Hwang",
+        "Dongjae Kim"
+      ],
+      "venue": "Computer Modeling in Engineering & Sciences (CMES)",
+      "status": "Published",
+      "url": "https://www.sciencedirect.com/org/science/article/pii/S1526149226001244",
+      "award": null,
+      "code": "https://github.com/rohkyoungmin/SCAN",
+      "note": "First author; SCIE Q1; April 2026",
+      "source": "https://github.com/rohkyoungmin/rohkyoungmin/blob/main/README.md"
+    },
+    {
+      "id": "taming",
+      "category": "International journal",
+      "year": null,
+      "title": "Taming Concept Drift in Malware Detection via Semantic Clustering",
+      "authors": [
+        "Kyoungmin Roh",
+        "Seong-je Cho",
+        "Kyoungwon Suh",
+        "Hyoil Han"
+      ],
+      "venue": "International Journal of Information Security",
+      "status": "In preparation",
+      "url": null,
+      "award": null,
+      "code": null,
+      "note": "Manuscript in preparation; not a published article",
+      "source": "https://github.com/rohkyoungmin/rohkyoungmin/blob/main/README.md"
+    },
+    {
+      "id": "alarm",
+      "category": "International conference",
+      "year": 2026,
+      "title": "ALARM: An Adaptive Android Malware Detection Framework with Leiden-based Clustering and Mixture-of-Experts Classification",
+      "authors": [
+        "Kyoungmin Roh",
+        "Seungmin Lee",
+        "Seong-je Cho",
+        "Youngsup Hwang"
+      ],
+      "venue": "ACM/SIGAPP Symposium on Applied Computing (SAC 2026)",
+      "status": "Published",
+      "url": "https://dl.acm.org/doi/10.1145/3748522.3779797",
+      "award": null,
+      "code": "https://github.com/rohkyoungmin/ALARM",
+      "note": "First author; Thessaloniki, Greece; March 2026",
+      "source": "https://github.com/rohkyoungmin/rohkyoungmin/blob/main/README.md"
+    },
+    {
+      "id": "cstar",
+      "category": "International conference",
+      "year": 2026,
+      "title": "C-STAR: Cost-Aware Adaptive Learning under Concept Drift for Android Malware Detection",
+      "authors": [
+        "Nahee Kwon",
+        "Kyoungmin Roh",
+        "Youngsup Hwang",
+        "Seong-je Cho",
+        "Boojoong Kang"
+      ],
+      "venue": "International Conference on Security and Cryptography (SECRYPT 2026)",
+      "status": "Published",
+      "url": "https://www.scitepress.org/Link.aspx?doi=10.5220/0015073700004103",
+      "award": null,
+      "code": null,
+      "note": "Coauthor; Porto, Portugal; July 2026",
+      "source": "https://github.com/rohkyoungmin/rohkyoungmin/blob/main/README.md"
+    },
+    {
+      "id": "ktcp",
+      "category": "Domestic journal",
+      "year": 2026,
+      "title": "Concept Drift-Resilient Android Malware Detection via API Co-occurrence Graphs and Louvain Communities",
+      "authors": [
+        "Kyoungmin Roh",
+        "Seong-je Cho"
+      ],
+      "venue": "KIISE Transactions on Computing Practices (KTCP)",
+      "status": "Published",
+      "url": "https://www.dbpia.co.kr/journal/articleDetail?nodeId=NODE12586205",
+      "award": null,
+      "code": null,
+      "note": "First author; KCI; invited article; January 2026",
+      "source": "https://github.com/rohkyoungmin/rohkyoungmin/blob/main/README.md"
+    },
+    {
+      "id": "jok",
+      "category": "Domestic journal",
+      "year": null,
+      "title": "Louvain Community-Based Structural Attribution of Drift Scores in Android Malware Detection",
+      "authors": [
+        "Nahee Kwon",
+        "Kyoungmin Roh",
+        "Seong-je Cho"
+      ],
+      "venue": "Journal of KIISE (JOK)",
+      "status": "Accepted",
+      "url": null,
+      "award": null,
+      "code": null,
+      "note": "KCI; invited article; publication date not listed",
+      "source": "https://github.com/rohkyoungmin/rohkyoungmin/blob/main/README.md"
+    },
+    {
+      "id": "mlkem",
+      "category": "Domestic conference",
+      "year": 2026,
+      "title": "A Lightweight ML-KEM Architecture via Secret-Dependency-Based Partitioning for Embedded TrustZone-A Systems",
+      "authors": [
+        "Kyoungmin Roh †",
+        "Nahee Kwon †",
+        "Suhyeon Park",
+        "Seong-je Cho"
+      ],
+      "venue": "Korea Computer Congress (KCC 2026)",
+      "status": "Published",
+      "url": "https://www.dbpia.co.kr/journal/articleDetail?nodeId=NODE12929715",
+      "award": "Outstanding Paper Award",
+      "code": "https://github.com/rohkyoungmin/MLKEM-Split",
+      "note": "† Co-first authors; Jeju, Republic of Korea; June 2026",
+      "source": "https://github.com/rohkyoungmin/rohkyoungmin/blob/main/README.md"
+    },
+    {
+      "id": "sca",
+      "category": "Domestic conference",
+      "year": 2026,
+      "title": "SCA: A Security Descriptor-Guided Logit Calibration Module for Concept Drift Adaptation in Android Malware Detection",
+      "authors": [
+        "Nahee Kwon",
+        "Kyoungmin Roh",
+        "Suhyeon Park",
+        "Seong-je Cho"
+      ],
+      "venue": "Korea Computer Congress (KCC 2026)",
+      "status": "Published",
+      "url": "https://www.dbpia.co.kr/journal/articleDetail?nodeId=NODE12929707",
+      "award": null,
+      "code": null,
+      "note": "Coauthor; Jeju, Republic of Korea; June 2026",
+      "source": "https://github.com/rohkyoungmin/rohkyoungmin/blob/main/README.md"
+    },
+    {
+      "id": "ksc",
+      "category": "Domestic conference",
+      "year": 2025,
+      "title": "Drift-Aware Security Module Based on Louvain Communities for Retraining-Free Android Malware Detection",
+      "authors": [
+        "Kyoungmin Roh",
+        "Suhyeon Park",
+        "Seong-je Cho"
+      ],
+      "venue": "Korea Software Congress (KSC 2025)",
+      "status": "Published",
+      "url": "https://www.dbpia.co.kr/journal/articleDetail?nodeId=NODE12577588",
+      "award": "Best Paper Award",
+      "code": null,
+      "note": "First author; Yeosu, Republic of Korea; December 2025",
+      "source": "https://github.com/rohkyoungmin/rohkyoungmin/blob/main/README.md"
+    },
+    {
+      "id": "wdsc",
+      "category": "Domestic conference",
+      "year": 2025,
+      "title": "Android Malware Detection Using Co-occurrence Graphs of APIs and Louvain Method for Community Detection",
+      "authors": [
+        "Kyoungmin Roh",
+        "Seungmin Lee",
+        "Yudam Kim",
+        "Seokhyun Ahn",
+        "Seong-je Cho"
+      ],
+      "venue": "Workshop on Dependable and Secure Computing (WDSC 2025)",
+      "status": "Published",
+      "url": "https://github.com/rohkyoungmin/Research-Papers/blob/main/WDSC/API%EB%93%A4%EC%9D%98%20%EB%8F%99%EC%8B%9C%20%EC%B6%9C%ED%98%84%20%EA%B7%B8%EB%9E%98%ED%94%84%EC%99%80%20%EC%BB%A4%EB%AE%A4%EB%8B%88%ED%8B%B0%20%ED%83%90%EC%A7%80%EC%9A%A9%20Louvain%20%EB%B0%A9%EB%B2%95%EC%9D%84%20%EC%9D%B4%EC%9A%A9%ED%95%9C%20%EC%95%88%EB%93%9C%EB%A1%9C%EC%9D%B4%EB%93%9C%20%EC%95%85%EC%84%B1%20%EC%95%B1%20%ED%83%90%EC%A7%80/WDSC2025_paper_6.pdf",
+      "award": "Best Paper Award",
+      "code": null,
+      "note": "First author; Jeju, Republic of Korea; August 2025",
+      "source": "https://github.com/rohkyoungmin/rohkyoungmin/blob/main/README.md"
+    },
+    {
+      "id": "ivi-forensics",
+      "category": "Domestic conference",
+      "year": 2025,
+      "title": "Classifying File Fragment Types for IVI System Forensics",
+      "authors": [
+        "Seungmin Lee",
+        "Kyoungmin Roh",
+        "Jiheon Jung",
+        "Suhyeon Park",
+        "Seong-je Cho"
+      ],
+      "venue": "Workshop on Dependable and Secure Computing (WDSC 2025)",
+      "status": "Published",
+      "url": "https://github.com/rohkyoungmin/Research-Papers/blob/main/WDSC/IVI%20%EC%8B%9C%EC%8A%A4%ED%85%9C%20%ED%8F%AC%EB%A0%8C%EC%8B%9D%EC%9D%84%20%EC%9C%84%ED%95%9C%20%ED%8C%8C%EC%9D%BC%20%ED%8C%8C%ED%8E%B8%20%EC%9C%A0%ED%98%95%20%EB%B6%84%EB%A5%98/Classifying%20File%20Fragment%20Types%20for%20IVI%20System%20Forensics.pdf",
+      "award": null,
+      "code": null,
+      "note": "Coauthor; Jeju, Republic of Korea; August 2025",
+      "source": "https://github.com/rohkyoungmin/rohkyoungmin/blob/main/README.md"
+    },
+    {
+      "id": "pqc-contest",
+      "category": "Research competition",
+      "year": 2025,
+      "title": "A Lightweight Secret-Isolated Post-Quantum Cryptographic Architecture for ARM TrustZone",
+      "authors": [
+        "Kyoungmin Roh",
+        "Nahee Kwon",
+        "Bogyeom Kim",
+        "Subin Jeon"
+      ],
+      "venue": "Cyber Security Contest, Dankook University",
+      "status": "Published",
+      "url": "https://github.com/rohkyoungmin/Research-Papers/blob/main/Cyber%20Security%20Contest%202025/ARM%20TrustZone%20%EA%B8%B0%EB%B0%98%20%EA%B2%BD%EB%9F%89%20%EB%B9%84%EB%B0%80%20%EB%B6%84%EB%A6%AC%ED%98%95%20%EC%96%91%EC%9E%90%EB%82%B4%EC%84%B1%20%EC%95%94%ED%98%B8%20%EC%95%84%ED%82%A4%ED%85%8D%EC%B2%98.pdf",
+      "award": "1st Place Award",
+      "code": null,
+      "note": "Research-paper track; December 2025",
+      "source": "https://github.com/rohkyoungmin/rohkyoungmin/blob/main/README.md"
+    }
+  ],
+  "experience": [
+    {
+      "type": "Research",
+      "organization": "Seoul National University",
+      "lab": "Security Optimization Research Lab",
+      "role": "Research Intern",
+      "period": "Jun 2026 – Present",
+      "location": "Seoul, Republic of Korea",
+      "supervisor": "Prof. Yunheung Paek",
+      "mentor": "Martin Kayondo",
+      "url": "https://sor.snu.ac.kr/",
+      "description": "Developing an automotive vECU research platform with Zephyr OS and Arm CCA. Reviewing robot foundation models, vision-language-action systems, and GPU virtualization security.",
+      "source": "https://github.com/rohkyoungmin/rohkyoungmin/blob/main/README.md"
+    },
+    {
+      "type": "Research",
+      "organization": "Dankook University",
+      "lab": "Computer Security and Operating Systems Lab",
+      "role": "Undergraduate Research Assistant",
+      "period": "Mar 2025 – Jul 2026",
+      "location": "Yongin, Republic of Korea",
+      "supervisor": "Prof. Seong-je Cho",
+      "url": "https://securesw.dankook.ac.kr/index.html",
+      "description": "Research on Android malware detection under concept drift, community-based learning, and split ML-KEM in OP-TEE on Arm TrustZone-A.",
+      "source": "https://github.com/rohkyoungmin/rohkyoungmin/blob/main/README.md"
+    },
+    {
+      "type": "Research",
+      "organization": "Indiana University Bloomington",
+      "lab": "CPS Security Lab",
+      "role": "Research Intern · Remote",
+      "period": "Oct 2025 – Jan 2026",
+      "location": "Remote",
+      "supervisor": "Assoc. Prof. Hyungsub Kim",
+      "url": "https://kimhyungsub.github.io/",
+      "description": "Built a structured CPS vulnerability dataset from OSV, GitHub Issues, and security forums, classifying reports by component, failure mode, attack surface, and impact.",
+      "source": "https://github.com/rohkyoungmin/rohkyoungmin/blob/main/README.md"
+    },
+    {
+      "type": "Military",
+      "organization": "KATUSA · U.S. Eighth Army",
+      "lab": "35th Air Defense Artillery Brigade, 2-1 ADA Battalion",
+      "role": "Sergeant (SGT)",
+      "period": "Aug 2023 – Feb 2025",
+      "location": "Camp Carroll, Republic of Korea",
+      "url": null,
+      "description": "Supported supply logistics and Korean–English interpretation; served as the unit’s first KATUSA Environmental and Hazardous-Materials Safety Officer. Received the Army Commendation Medal and Best KATUSA Award.",
+      "source": "https://github.com/rohkyoungmin/rohkyoungmin/blob/main/README.md"
+    }
+  ],
+  "awards": [
+    {
+      "date": "Jun 2026",
+      "title": "KCC Outstanding Paper Award",
+      "organization": "KIISE",
+      "description": "ML-KEM partitioning for embedded TrustZone-A.",
+      "source": "https://github.com/rohkyoungmin/rohkyoungmin/blob/main/README.md"
+    },
+    {
+      "date": "Dec 2025",
+      "title": "KSC Best Paper Award",
+      "organization": "KIISE",
+      "description": "Retraining-free Android malware detection with Louvain communities.",
+      "source": "https://github.com/rohkyoungmin/rohkyoungmin/blob/main/README.md"
+    },
+    {
+      "date": "Dec 2025",
+      "title": "Cyber Security Contest · 1st Place",
+      "organization": "Dankook University",
+      "description": "Split ML-KEM research-paper track.",
+      "source": "https://github.com/rohkyoungmin/rohkyoungmin/blob/main/README.md"
+    },
+    {
+      "date": "Dec 2025",
+      "title": "Capstone Festival Audience Choice Award",
+      "organization": "Dankook University",
+      "description": "QRust secure-QR and phishing detection project.",
+      "source": "https://github.com/rohkyoungmin/rohkyoungmin/blob/main/README.md"
+    },
+    {
+      "date": "Sep 2025",
+      "title": "Startup Hackathon · 3rd Place",
+      "organization": "Dankook University",
+      "description": "DDobak accessibility-focused speech-training prototype.",
+      "source": "https://github.com/rohkyoungmin/rohkyoungmin/blob/main/README.md"
+    },
+    {
+      "date": "Aug 2025",
+      "title": "WDSC Best Paper Award",
+      "organization": "KIISE",
+      "description": "API co-occurrence graphs and Louvain communities for malware detection.",
+      "source": "https://github.com/rohkyoungmin/rohkyoungmin/blob/main/README.md"
+    },
+    {
+      "date": "Dec 2024",
+      "title": "Army Commendation Medal",
+      "organization": "U.S. Department of the Army",
+      "description": "Meritorious military service.",
+      "source": "https://github.com/rohkyoungmin/rohkyoungmin/blob/main/README.md"
+    },
+    {
+      "date": "Oct 2024",
+      "title": "Best KATUSA Award",
+      "organization": "Eighth U.S. Army ROK Army Support Group",
+      "description": "Duty performance and rifle marksmanship.",
+      "source": "https://github.com/rohkyoungmin/rohkyoungmin/blob/main/README.md"
+    }
+  ],
+  "projects": [
+    {
+      "id": "aisecapp",
+      "title": "AISECApp",
+      "category": "AI security",
+      "description": "C/C++ vulnerability analysis agents combining NVD CVE mapping, LLM finding proposals, and deterministic evidence verification.",
+      "role": null,
+      "tags": [
+        "FastAPI",
+        "LLM agents",
+        "Evidence verification"
+      ],
+      "links": [
+        {
+          "label": "Repository",
+          "url": "https://github.com/rohkyoungmin/AISECApp"
+        }
+      ],
+      "source": "https://github.com/rohkyoungmin/rohkyoungmin/blob/main/README.md"
+    },
+    {
+      "id": "lv0",
+      "title": "LV.0 — LLM Vulnerability Zero",
+      "category": "AI security",
+      "description": "Source-code security review using Semgrep, Claude-assisted explanations, and PDF reports, with a React, TypeScript, and Electron interface.",
+      "role": "Team lead · AI/security",
+      "tags": [
+        "Semgrep",
+        "Flask",
+        "React",
+        "Electron"
+      ],
+      "links": [
+        {
+          "label": "Application",
+          "url": "https://github.com/Gaurdians-of-the-Open-Source/final-result"
+        },
+        {
+          "label": "Analysis services",
+          "url": "https://github.com/Gaurdians-of-the-Open-Source/Security"
+        }
+      ],
+      "source": "https://github.com/rohkyoungmin/rohkyoungmin/blob/main/README.md"
+    },
+    {
+      "id": "qrust",
+      "title": "QRust",
+      "category": "Applied machine learning",
+      "description": "QR phishing detection and secure QR-code generation with a Flutter client, Random Forest URL classifier, Flask inference API, and Spring Boot backend.",
+      "role": "Frontend · AI",
+      "tags": [
+        "Flutter",
+        "Random Forest",
+        "Flask"
+      ],
+      "links": [
+        {
+          "label": "Overview",
+          "url": "https://github.com/dku-capstone"
+        },
+        {
+          "label": "AI",
+          "url": "https://github.com/dku-capstone/QRust-AI"
+        },
+        {
+          "label": "Frontend",
+          "url": "https://github.com/dku-capstone/QRust-FE"
+        },
+        {
+          "label": "Backend",
+          "url": "https://github.com/dku-capstone/QRust-BE"
+        }
+      ],
+      "source": "https://github.com/rohkyoungmin/rohkyoungmin/blob/main/README.md"
+    },
+    {
+      "id": "summarizer",
+      "title": "Document Summarizer",
+      "category": "AI applications",
+      "description": "Claude-assisted PDF, TXT, and DOCX summarization with project management, JWT authentication, and Kubernetes deployment manifests.",
+      "role": null,
+      "tags": [
+        "FastAPI",
+        "React",
+        "Claude",
+        "Kubernetes"
+      ],
+      "links": [
+        {
+          "label": "Backend",
+          "url": "https://github.com/DKU-OSS-development/Backend-API"
+        },
+        {
+          "label": "Frontend",
+          "url": "https://github.com/DKU-OSS-development/Frontend"
+        },
+        {
+          "label": "Infrastructure",
+          "url": "https://github.com/DKU-OSS-development/Infrastructure"
+        }
+      ],
+      "source": "https://github.com/rohkyoungmin/rohkyoungmin/blob/main/README.md"
+    },
+    {
+      "id": "ros2",
+      "title": "ROS 2 LiDAR Robot Car",
+      "category": "Robotics",
+      "description": "A robot-car project with web control, live LiDAR scans, and obstacle detection.",
+      "role": null,
+      "tags": [
+        "ROS 2",
+        "LiDAR",
+        "Arduino"
+      ],
+      "links": [
+        {
+          "label": "Repository",
+          "url": "https://github.com/rohkyoungmin/lidar_car_project"
+        }
+      ],
+      "source": "https://github.com/rohkyoungmin/rohkyoungmin/blob/main/README.md"
+    },
+    {
+      "id": "asx",
+      "title": "Android API Sequence Extractor",
+      "category": "Research tooling",
+      "description": "Method-level Android API sequence extraction with a Python pipeline and Electron GUI.",
+      "role": null,
+      "tags": [
+        "Python",
+        "Android",
+        "Electron"
+      ],
+      "links": [
+        {
+          "label": "Repository",
+          "url": "https://github.com/rohkyoungmin/api-sequence-extractor-gui"
+        }
+      ],
+      "source": "https://github.com/rohkyoungmin/rohkyoungmin/blob/main/README.md"
+    },
+    {
+      "id": "ddobak",
+      "title": "DDobak",
+      "category": "Accessibility",
+      "description": "An AI-assisted pronunciation-training and visual-feedback prototype developed for the Dankook Startup Hackathon.",
+      "role": null,
+      "tags": [
+        "Accessibility",
+        "AI",
+        "Prototype"
+      ],
+      "links": [
+        {
+          "label": "Repository",
+          "url": "https://github.com/rohkyoungmin/dku_startup_hackathon"
+        }
+      ],
+      "source": "https://github.com/rohkyoungmin/rohkyoungmin/blob/main/README.md"
+    }
+  ],
+  "caseStudies": [
+    {
+      "id": "cca",
+      "title": "Confidential vECUs with Arm CCA",
+      "subtitle": "Bringing automotive workloads into a confidential-computing research platform.",
+      "category": "Systems security",
+      "status": "Ongoing research",
+      "year": "2026 – Present",
+      "role": "Research Intern · Seoul National University",
+      "problem": "Automotive virtual ECU research requires integrating operating systems and isolation mechanisms that were not designed as a single stack. Zephyr OS and Arm CCA presented compatibility gaps.",
+      "approach": "Use a custom shim layer to bridge integration incompatibilities in an automotive vECU research platform for mixed-criticality workloads.",
+      "contribution": "Developed the vECU research platform and addressed Zephyr OS–Arm CCA integration through a custom shim layer.",
+      "outcome": "An automotive vECU research platform supporting the ongoing systems-security investigation.",
+      "limits": "Ongoing research; detailed security and performance evaluation is outside this public overview.",
+      "links": [
+        {
+          "label": "Lab",
+          "url": "https://sor.snu.ac.kr/"
+        }
+      ],
+      "source": "https://github.com/rohkyoungmin/rohkyoungmin/blob/main/README.md"
+    },
+    {
+      "id": "mlkem",
+      "title": "Split ML-KEM in TrustZone",
+      "subtitle": "Keep secret-dependent computation inside the TEE and move public work outside.",
+      "category": "Post-quantum cryptography",
+      "status": "KCC 2026 · Outstanding Paper Award",
+      "year": "2025–2026",
+      "role": "Co-first author · Research implementation",
+      "problem": "Placing a full post-quantum cryptographic implementation inside an embedded TEE can enlarge the trusted code base and increase execution cost.",
+      "approach": "Partition ML-KEM by secret dependency: isolate secret-dependent operations in OP-TEE’s Secure World and offload public computation to the Normal World.",
+      "contribution": "Implemented split ML-KEM in OP-TEE on Arm TrustZone-A and evaluated the partitioned architecture. Co-first author of the KCC 2026 paper.",
+      "outcome": "The reported evaluation reduced trusted code size by 90.8% and mean latency by 25.5% relative to the study’s baseline architecture. The research received the KCC 2026 Outstanding Paper Award.",
+      "limits": "These are baseline-relative results from the study’s evaluated platform and configuration, not general guarantees for every device or implementation. Public repositories include related research prototypes and scaffolding.",
+      "links": [
+        {
+          "label": "Paper",
+          "url": "https://www.dbpia.co.kr/journal/articleDetail?nodeId=NODE12929715"
+        },
+        {
+          "label": "ML KEM prototype",
+          "url": "https://github.com/rohkyoungmin/MLKEM-Split"
+        },
+        {
+          "label": "Kyber OP TEE",
+          "url": "https://github.com/Cyber-Security-Contest/Kyber-Split"
+        }
+      ],
+      "source": "https://github.com/rohkyoungmin/rohkyoungmin/blob/main/README.md"
+    },
+    {
+      "id": "scan",
+      "title": "SCAN",
+      "subtitle": "Structural clustering and adaptive thresholds for Android malware under concept drift.",
+      "category": "Machine learning for security",
+      "status": "CMES · Published",
+      "year": "2026",
+      "role": "First author",
+      "problem": "Android malware classifiers must contend with evolving feature distributions and class imbalance over time. A decision rule fitted to one period may become less reliable in later data.",
+      "approach": "Use Gaussian mixture clustering to model structure and adaptive thresholds to support malware classification under concept drift and class imbalance.",
+      "contribution": "Designed SCAN and published the framework as first author in Computer Modeling in Engineering & Sciences.",
+      "outcome": "The reported evaluation achieved average accuracy and F1 scores above 91% across six years.",
+      "limits": "The reported averages describe the study’s datasets and evaluation protocol; they do not guarantee performance on every future malware distribution.",
+      "links": [
+        {
+          "label": "Paper",
+          "url": "https://www.sciencedirect.com/org/science/article/pii/S1526149226001244"
+        },
+        {
+          "label": "Code",
+          "url": "https://github.com/rohkyoungmin/SCAN"
+        }
+      ],
+      "source": "https://github.com/rohkyoungmin/rohkyoungmin/blob/main/README.md"
+    },
+    {
+      "id": "alarm",
+      "title": "ALARM",
+      "subtitle": "Community structure meets mixture-of-experts classification.",
+      "category": "Machine learning for security",
+      "status": "ACM SAC · Published",
+      "year": "2026",
+      "role": "First author",
+      "problem": "Changing Android malware distributions can weaken the assumptions of a single classifier. The research investigates whether API relationships and community structure can support more adaptive detection.",
+      "approach": "Combine Leiden-based community clustering with mixture-of-experts classification in an Android malware detection framework. This differs from SCAN’s Gaussian mixture clustering and adaptive-threshold approach.",
+      "contribution": "Extended API co-occurrence graph and community-based detection with a mixture-of-experts model, and published ALARM as first author at ACM SAC 2026.",
+      "outcome": "Published in the Proceedings of the 41st ACM/SIGAPP Symposium on Applied Computing, Thessaloniki, Greece.",
+      "limits": "Robustness depends on the datasets, drift conditions, and evaluation protocol. The paper provides the full experimental setup.",
+      "links": [
+        {
+          "label": "Paper",
+          "url": "https://dl.acm.org/doi/10.1145/3748522.3779797"
+        },
+        {
+          "label": "Code",
+          "url": "https://github.com/rohkyoungmin/ALARM"
+        }
+      ],
+      "source": "https://github.com/rohkyoungmin/rohkyoungmin/blob/main/README.md"
+    }
+  ],
+  "patents": [
+    {
+      "year": 2026,
+      "title": "Method and Apparatus for Robust Malicious Application Detection against Concept Drift",
+      "reference": "P2026289",
+      "status": "In preparation",
+      "source": "https://github.com/rohkyoungmin/rohkyoungmin/blob/main/README.md"
+    },
+    {
+      "year": 2026,
+      "title": "Android Malware Detection System and Method Performing Cost/Stability-Aware Selective Model Update and Security-Based Output Calibration in Concept Drift Environments",
+      "reference": "P2026290",
+      "status": "In preparation",
+      "source": "https://github.com/rohkyoungmin/rohkyoungmin/blob/main/README.md"
+    },
+    {
+      "year": 2025,
+      "title": "A Malware Detection Method Combining Clustering and Supervised Learning Models",
+      "reference": "Korean Patent Application No. 10-2025-0098855",
+      "status": "Filed",
+      "source": "https://github.com/rohkyoungmin/rohkyoungmin/blob/main/README.md"
+    }
+  ]
+}
