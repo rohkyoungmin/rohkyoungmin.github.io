@@ -968,5 +968,23 @@
       "description": "Tuition waiver scholarship",
       "source": "https://github.com/rohkyoungmin/rohkyoungmin/blob/main/README.md"
     }
+  ],
+  "gallery": [
+    {
+      "src": "assets/dankook-campus.png",
+      "width": 1024,
+      "height": 768,
+      "alt": "DKU monument and buildings on the Dankook University campus",
+      "title": "Dankook University",
+      "caption": "Campus photograph"
+    },
+    {
+      "src": "elements/Roh.jpg",
+      "width": 1151,
+      "height": 1440,
+      "alt": "Portrait of Kyoungmin Roh",
+      "title": "Kyoungmin Roh",
+      "caption": "Portrait"
+    }
   ]
 }

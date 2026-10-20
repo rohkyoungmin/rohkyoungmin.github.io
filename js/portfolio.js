@@ -1,5 +1,23 @@
 (() => {
   'use strict';
+  // Preserve bookmarks from the former single-page portfolio.
+  const legacyRoutes = {
+    experience: 'experience.html',
+    education: 'education.html',
+    publications: 'publications.html',
+    projects: 'projects.html',
+    recognition: 'awards.html',
+    scholarships: 'awards.html',
+    gallery: 'gallery.html'
+  };
+  const hash = location.hash.slice(1);
+  if (location.pathname.endsWith('/') || location.pathname.endsWith('/index.html')) {
+    const route = hash.startsWith('project-') ? 'projects.html' : legacyRoutes[hash];
+    if (route) {
+      location.replace(route + location.search + location.hash);
+      return;
+    }
+  }
   const menu = document.querySelector('.menu-button');
   const links = document.querySelector('.nav-links');
   if (menu && links) {
