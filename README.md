@@ -18,9 +18,11 @@ Projects, awards, and scholarships render in full, in content order. Projects ar
 
 Experience separates Research Experience from Military Service using each entry's `type`. The homepage's current affiliation comes from `currentAffiliation`, independently of historical appointments. Contact links and the Person metadata use the single `email` field.
 
-The navigation opens independent pages: About (`index.html`), Experience, Education, Publications, Projects, Awards, Participation, and Certificate. Awards also contains scholarships and the filed patent application. Contact information remains at the bottom of every page. Old homepage section bookmarks redirect to their corresponding pages. The former `gallery.html` is a redirect to Participation.
+The navigation opens independent pages: About (`index.html`), Education, Experience, Publications, Patents, Projects, Awards, and Gallery (the existing `participation.html` route). Awards also contains scholarships. Certificate remains available from the About page directory. The header follows that order, then Contact and CV; Gallery alone uses a blue accent. Contact information remains at the bottom of every page. Old homepage section bookmarks redirect to their corresponding pages. The `gallery.html` alias redirects to the same Gallery album at `participation.html`.
 
 Styling lives in `css/portfolio.css`; mobile navigation, legacy bookmark redirects, publication filters, and the photo viewer live in `js/portfolio.js`. Research artwork and the favicon are in `assets/`. The current profile photograph is stored at `assets/profile-kyoungmin-roh.jpg` and displayed in a consistent 4:5 frame; the former portrait file has been removed. The supplied campus photograph is retained in full at `assets/dankook-campus.png`, displayed to the right of the education details on desktop and below them on mobile.
+
+The Patents page renders every record in the `patents` list, including the two patents in preparation and the filed application. Titles and inventors are reconciled with the Notion Full CV. Preparation references remain distinct from the filed application number. SCAN and ALARM carry their journal/conference classification badges in Publications and Projects; these badges are separate from paper awards.
 
 Conference albums are configured in the `participation` list in `content/site-content.json`. Each event includes its name, period, location, description, paper link, and ordered photographs with captions, alt text, and image dimensions. The ACM SAC 2026 album contains all 16 supplied photographs, with presentation and conference photos first, followed by travel photos. WebP copies under `assets/participation/acm-sac-2026/` use a maximum size of 1440 × 1800 pixels. The album thumbnails use uniform 3:4 frames; the photo viewer displays each complete image in its original proportions. To add an event, add its photo assets and append a new event object, then rebuild. Photographs open in a keyboard-accessible dialog (←/→ to navigate, Escape to close); without JavaScript, the links open the image directly.
 
@@ -28,7 +30,7 @@ CV links point to `assets/Kyoungmin_Roh_CV.pdf`, the replacement PDF supplied in
 
 ## Pages deployment
 
-The existing repository's GitHub Pages publishing source is retained. Root-level HTML files and `.nojekyll` support static branch publishing. The four research case studies are separate pages under `research/` and work without JavaScript. All eight portfolio pages and four research pages are included in `sitemap.xml`. Existing legacy assets remain available for older links.
+The existing repository's GitHub Pages publishing source is retained. Root-level HTML files and `.nojekyll` support static branch publishing. The four research case studies are separate pages under `research/` and work without JavaScript. All nine portfolio pages and four research pages are included in `sitemap.xml`. Existing legacy assets remain available for older links.
 
 ## Accessibility
 

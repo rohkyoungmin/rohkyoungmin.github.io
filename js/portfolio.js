@@ -5,6 +5,7 @@
     experience: 'experience.html',
     education: 'education.html',
     publications: 'publications.html',
+    patents: 'patents.html',
     projects: 'projects.html',
     recognition: 'awards.html',
     scholarships: 'awards.html',
