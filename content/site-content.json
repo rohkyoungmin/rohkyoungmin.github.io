@@ -1120,67 +1120,11 @@
       "paperUrl": "https://dl.acm.org/doi/10.1145/3748522.3779797",
       "photos": [
         {
-          "src": "assets/participation/acm-sac-2026/sac-2026-16.webp",
-          "width": 1241,
-          "height": 1800,
-          "caption": "ALARM presentation",
-          "alt": "Presenter at a lectern beside the ALARM title slide at ACM SAC 2026."
-        },
-        {
-          "src": "assets/participation/acm-sac-2026/sac-2026-14.webp",
+          "src": "assets/participation/acm-sac-2026/sac-2026-05.webp",
           "width": 1350,
           "height": 1800,
-          "caption": "Welcome to ACM SAC 2026",
-          "alt": "ACM SAC 2026 welcome banner on the exterior of the conference venue."
-        },
-        {
-          "src": "assets/participation/acm-sac-2026/sac-2026-15.webp",
-          "width": 1350,
-          "height": 1800,
-          "caption": "Conference badge and materials",
-          "alt": "SAC 2026 conference badge, blue ACM bag, and lanyard on a table."
-        },
-        {
-          "src": "assets/participation/acm-sac-2026/sac-2026-11.webp",
-          "width": 1013,
-          "height": 1800,
-          "caption": "Greek flag under cloudy skies",
-          "alt": "Greek flag flying beneath a cloudy sky."
-        },
-        {
-          "src": "assets/participation/acm-sac-2026/sac-2026-12.webp",
-          "width": 1350,
-          "height": 1800,
-          "caption": "Classical architecture",
-          "alt": "Stone temple porch with sculpted figures supporting its roof."
-        },
-        {
-          "src": "assets/participation/acm-sac-2026/sac-2026-13.webp",
-          "width": 1013,
-          "height": 1800,
-          "caption": "Columns and skylights",
-          "alt": "View upward between stone columns beneath a roof with skylights."
-        },
-        {
-          "src": "assets/participation/acm-sac-2026/sac-2026-07.webp",
-          "width": 1013,
-          "height": 1800,
-          "caption": "Courtyard architecture",
-          "alt": "Yellow-and-white arched building with a blue dome, Greek flag, and patterned courtyard."
-        },
-        {
-          "src": "assets/participation/acm-sac-2026/sac-2026-10.webp",
-          "width": 1013,
-          "height": 1800,
-          "caption": "Blue dome by the sea",
-          "alt": "Blue-domed white building overlooking the sea at sunset."
-        },
-        {
-          "src": "assets/participation/acm-sac-2026/sac-2026-09.webp",
-          "width": 1013,
-          "height": 1800,
-          "caption": "Evening over the village",
-          "alt": "White buildings and a small blue dome beneath an evening sky."
+          "caption": "A cat in Oia, Santorini",
+          "alt": "Black cat sitting on a white chair with the sea in the background."
         },
         {
           "src": "assets/participation/acm-sac-2026/sac-2026-04.webp",
@@ -1204,11 +1148,11 @@
           "alt": "Sunlight entering a white interior through an open dark-blue door."
         },
         {
-          "src": "assets/participation/acm-sac-2026/sac-2026-05.webp",
-          "width": 1350,
+          "src": "assets/participation/acm-sac-2026/sac-2026-07.webp",
+          "width": 1013,
           "height": 1800,
-          "caption": "A seaside visitor",
-          "alt": "Black cat sitting on a white chair with the sea in the background."
+          "caption": "Courtyard architecture",
+          "alt": "Yellow-and-white arched building with a blue dome, Greek flag, and patterned courtyard."
         },
         {
           "src": "assets/participation/acm-sac-2026/sac-2026-00.webp",
@@ -1230,6 +1174,104 @@
           "height": 1800,
           "caption": "A small trip detail",
           "alt": "Pink restaurant receipt beside a dessert bowl on a white tablecloth."
+        },
+        {
+          "src": "assets/participation/acm-sac-2026/sac-2026-09.webp",
+          "width": 1013,
+          "height": 1800,
+          "caption": "Evening over the village",
+          "alt": "White buildings and a small blue dome beneath an evening sky."
+        },
+        {
+          "src": "assets/participation/acm-sac-2026/sac-2026-10.webp",
+          "width": 1013,
+          "height": 1800,
+          "caption": "Blue dome by the sea",
+          "alt": "Blue-domed white building overlooking the sea at sunset."
+        },
+        {
+          "src": "assets/participation/acm-sac-2026/sac-2026-11.webp",
+          "width": 1013,
+          "height": 1800,
+          "caption": "Greek flag under cloudy skies",
+          "alt": "Greek flag flying beneath a cloudy sky."
+        },
+        {
+          "src": "assets/participation/acm-sac-2026/sac-2026-12.webp",
+          "width": 1350,
+          "height": 1800,
+          "caption": "Classical architecture",
+          "alt": "Stone temple porch with sculpted figures supporting its roof."
+        },
+        {
+          "src": "assets/participation/acm-sac-2026/sac-2026-13.webp",
+          "width": 1013,
+          "height": 1800,
+          "caption": "Columns and skylights",
+          "alt": "View upward between stone columns beneath a roof with skylights."
+        },
+        {
+          "src": "assets/participation/acm-sac-2026/sac-2026-17.webp",
+          "width": 1012,
+          "height": 1800,
+          "caption": "Church and bell tower",
+          "alt": "Red-brick church and bell tower above a staircase beneath a clear blue sky."
+        },
+        {
+          "src": "assets/participation/acm-sac-2026/sac-2026-21.webp",
+          "width": 1012,
+          "height": 1800,
+          "caption": "A taverna doorway",
+          "alt": "Yellow-framed taverna entrance with wooden tables and chairs outside."
+        },
+        {
+          "src": "assets/participation/acm-sac-2026/sac-2026-19.webp",
+          "width": 1350,
+          "height": 1800,
+          "caption": "A quiet street companion",
+          "alt": "Brown dog resting on a sunlit paved walkway beside a bench."
+        },
+        {
+          "src": "assets/participation/acm-sac-2026/sac-2026-20.webp",
+          "width": 1012,
+          "height": 1800,
+          "caption": "Sunlight on the waterfront",
+          "alt": "Two people silhouetted on a waterfront bench beneath the bright afternoon sun."
+        },
+        {
+          "src": "assets/participation/acm-sac-2026/sac-2026-22.webp",
+          "width": 1350,
+          "height": 1800,
+          "caption": "A moment by the tower",
+          "alt": "Traveler standing in front of a round stone tower beneath a cloudy sky."
+        },
+        {
+          "src": "assets/participation/acm-sac-2026/sac-2026-14.webp",
+          "width": 1350,
+          "height": 1800,
+          "caption": "Welcome to ACM SAC 2026",
+          "alt": "ACM SAC 2026 welcome banner on the exterior of the conference venue."
+        },
+        {
+          "src": "assets/participation/acm-sac-2026/sac-2026-15.webp",
+          "width": 1350,
+          "height": 1800,
+          "caption": "Conference badge and materials",
+          "alt": "SAC 2026 conference badge, blue ACM bag, and lanyard on a table."
+        },
+        {
+          "src": "assets/participation/acm-sac-2026/sac-2026-16.webp",
+          "width": 1241,
+          "height": 1800,
+          "caption": "ALARM presentation",
+          "alt": "Presenter at a lectern beside the ALARM title slide at ACM SAC 2026."
+        },
+        {
+          "src": "assets/participation/acm-sac-2026/sac-2026-23.webp",
+          "width": 1012,
+          "height": 1800,
+          "caption": "Above the clouds",
+          "alt": "Airplane wing above a sea of clouds glowing orange at sunset."
         }
       ]
     }
