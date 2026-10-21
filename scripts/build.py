@@ -12,11 +12,19 @@ CV = 'https://github.com/rohkyoungmin/CV/raw/main/Kyoungmin_Roh___CV.pdf'
 PAGES = [
     ('index.html', 'About', 'Background and research interests.'),
     ('experience.html', 'Experience', 'Research appointments and military service.'),
-    ('education.html', 'Education', 'Dankook University.'),
+    ('education.html', 'Education', 'Education history.'),
     ('publications.html', 'Publications', 'Published papers and manuscripts.'),
     ('projects.html', 'Projects', 'Security tools, AI applications, and research software.'),
     ('awards.html', 'Awards', 'Awards, scholarships, and patent application.'),
     ('participation.html', 'Participation', 'Conferences, presentations, and moments from the journey.'),
+]
+PROJECT_TYPES = [
+    ('coursework', 'Coursework Project', 'Course assignments, team projects, and capstone work.'),
+    ('research', 'Research Project', 'Research prototypes, published methods, and experimental software.'),
+    ('funded', 'Funded Research Project', 'Contributions to commissioned and funded research programs.'),
+    ('competition', 'Competition Project', 'Projects developed for competitions and hackathons.'),
+    ('personal', 'Personal Project', 'Independent applications and applied experiments.'),
+    ('toy', 'Toy Project', 'Small utilities and focused programming experiments.'),
 ]
 
 def e(value):
@@ -107,6 +115,8 @@ def publication_row(pub):
 
 def project_row(project, number):
     role = f'<p class="project-role">Role: {e(project["role"])}</p>' if project.get('role') else ''
+    context = f'<p class="project-context">{e(project["context"])}</p>' if project.get('context') else ''
+    funding = f'<p class="project-context">Commissioned by: {e(project["commissionedBy"])}</p>' if project.get('commissionedBy') else ''
     links=[]
     for link in project['links']:
         label=e(link['label'])
@@ -117,7 +127,7 @@ def project_row(project, number):
     case_slug={'scan':'scan','alarm':'alarm','mlkem-split':'mlkem'}.get(project['id'])
     if case_slug:
         links.append(f'<a href="research/{case_slug}.html">Research details →</a>')
-    return f'''<article id="project-{e(project['id'])}" class="project-row"><span class="mono number">{number:02d}</span><div><h3>{e(project['title'])}</h3><div class="tag">{e(' / '.join(project['tags']))}</div></div><div class="project-description"><p>{e(project['description'])}</p>{role}<div class="project-resource-links">{''.join(links)}</div></div></article>'''
+    return f'''<article id="project-{e(project['id'])}" class="project-row" data-project-type="{e(project['projectType'])}"><span class="mono number">{number:02d}</span><div><h3>{e(project['title'])}</h3><div class="tag">{e(' / '.join(project['tags']))}</div>{context}</div><div class="project-description"><p>{e(project['description'])}</p>{funding}{role}<div class="project-resource-links">{''.join(links)}</div></div></article>'''
 
 def award_row(award):
     return f'''<article class="award-row"><span class="mono muted">{e(award['date'])}</span><div><h3>{e(award['title'])}</h3><p>{e(award['organization'])} · {e(award['description'])}</p></div></article>'''
@@ -142,7 +152,7 @@ def build_home():
       <div class="professional-summary">
         <p class="summary-label">Summary</p>
         <p class="about-summary">{e(DATA['professionalSummary'])}</p>
-        <p class="about-affiliation">Research Intern · Seoul National University<br>Undergraduate · Dankook University</p>
+        <p class="about-affiliation">{e(DATA['currentAffiliation'])}</p>
         <div class="about-links">{external(CV,'Curriculum vitae <span aria-hidden="true">↗</span>','pill-link')}{external('https://scholar.google.com/citations?user=6O2OMlwAAAAJ','Google Scholar <span aria-hidden="true">↗</span>','pill-link')}</div>
       </div>
     </div>
@@ -161,18 +171,19 @@ def write_page(route, title, description, body):
 
 
 def build_sections():
-    experience=''.join(experience_row(item) for item in DATA['experience'])
+    research_experience=''.join(experience_row(item) for item in DATA['experience'] if item['type']=='Research')
+    military_service=''.join(experience_row(item) for item in DATA['experience'] if item['type']=='Military')
     published=[pub for pub in DATA['publications'] if publication_status(pub)=='published']
     unpublished=[pub for pub in DATA['publications'] if publication_status(pub)=='unpublished']
     ordered_publications=published+unpublished
     publications=''.join(publication_row(pub) for pub in ordered_publications)
-    projects=''.join(project_row(project,i+1) for i,project in enumerate(DATA['projects']))
     awards=''.join(award_row(award) for award in DATA['awards'])
     scholarships=''.join(scholarship_row(item) for item in DATA['scholarships'])
     patent=next(p for p in DATA['patents'] if p['status']=='Filed')
     write_page('experience.html','Experience','Research appointments and military service of Kyoungmin Roh.',f'''  <section id="experience" class="section experience-section" aria-labelledby="experience-title">
     <div class="section-heading"><div><p class="eyebrow section-kicker">02 / EXPERIENCE</p><h1 id="experience-title" class="section-title">Experience</h1></div><p>Research and military service.</p></div>
-    <div class="timeline">{experience}</div>
+    <section id="research-experience" class="experience-group" aria-labelledby="research-experience-title"><h2 id="research-experience-title" class="experience-group-title">Research Experience</h2><div class="timeline">{research_experience}</div></section>
+    <section id="military-service" class="experience-group" aria-labelledby="military-service-title"><h2 id="military-service-title" class="experience-group-title">Military Service</h2><div class="timeline">{military_service}</div></section>
   </section>
 ''')
     write_page('education.html','Education','Kyoungmin Roh’s education at Dankook University.',f'''  <section id="education" class="section education-section" aria-labelledby="education-title">
@@ -189,11 +200,24 @@ def build_sections():
     <div class="publication-list">{publications}</div><p class="pub-status-note">Authors are listed in contribution order. † Co-first authors.</p>
   </section>
 ''')
-    write_page('projects.html','Projects','Security tools, AI applications, and research software by Kyoungmin Roh.',f'''  <section id="projects" class="section" aria-labelledby="projects-title"><div class="section-heading"><div><p class="eyebrow section-kicker">05 / PROJECTS &amp; TOOLS</p><h1 id="projects-title" class="section-title">Projects<sup>{len(DATA['projects']):02d}</sup></h1></div><p>Security tools, AI applications, and research software.</p></div><div>{projects}</div><div class="project-links">{external('https://github.com/rohkyoungmin?tab=repositories','GitHub repositories <span aria-hidden="true">↗</span>','text-link')}</div></section>
-''')
     write_page('awards.html','Awards & Scholarships','Research awards, scholarships, military honors, and patent application of Kyoungmin Roh.',f'''  <section id="recognition" class="section" aria-labelledby="recognition-title"><div class="recognition-grid"><div><p class="eyebrow section-kicker">06 / RECOGNITION</p><h1 id="recognition-title" class="section-title">Awards<sup>{len(DATA['awards']):02d}</sup></h1><p class="about-note">Research, competitions, and military service.</p><div class="recognition-links"><a class="text-link" href="#scholarships">Scholarships ↓</a></div><div class="patent-block"><span class="eyebrow">PATENT APPLICATION / {patent['year']}</span><p>{e(patent['title'])}</p><p class="mono">{e(patent['reference'])}<br>{e(patent['status'])}</p></div></div><div>{awards}</div></div></section>
   <section id="scholarships" class="section" aria-labelledby="scholarships-title"><div class="recognition-grid"><div><p class="eyebrow section-kicker">07 / SCHOLARSHIPS</p><h2 id="scholarships-title" class="section-title">Scholarships<sup>{len(DATA['scholarships']):02d}</sup></h2><p class="about-note">Academic merit, research, and project scholarships.</p></div><div>{scholarships}</div></div></section>
 ''')
+
+
+def build_projects():
+    known_types={key for key,_,_ in PROJECT_TYPES}
+    assert all(project['projectType'] in known_types for project in DATA['projects']), 'Every project needs a valid projectType.'
+    navigation=[]
+    groups=[]
+    for key,label,description in PROJECT_TYPES:
+        projects=[project for project in DATA['projects'] if project['projectType']==key]
+        slug=key+'-project' if key!='funded' else 'funded-research-project'
+        navigation.append(f'<a class="project-category-link" href="#{slug}"><span>{e(label)}</span><span class="project-category-count">{len(projects):02d}</span></a>')
+        rows=''.join(project_row(project,number) for number,project in enumerate(projects,1))
+        groups.append(f'<section id="{slug}" class="project-group" aria-labelledby="{slug}-title"><div class="project-group-heading"><h2 id="{slug}-title" class="project-group-title">{e(label)}<sup>{len(projects):02d}</sup></h2><p>{e(description)}</p></div><div>{rows}</div></section>')
+    body=f'''<section id="projects" class="section" aria-labelledby="projects-title"><div class="section-heading"><div><p class="eyebrow section-kicker">05 / PROJECTS &amp; TOOLS</p><h1 id="projects-title" class="section-title">Projects<sup>{len(DATA['projects']):02d}</sup></h1></div><p>Coursework, research, funded programs, competitions, and independent projects.</p></div><nav class="project-category-nav" aria-label="Project categories">{''.join(navigation)}</nav>{''.join(groups)}<div class="project-links">{external('https://github.com/rohkyoungmin?tab=repositories','GitHub repositories <span aria-hidden="true">↗</span>','text-link')}</div></section>'''
+    write_page('projects.html','Projects','Coursework, research, funded research, competition, personal, and toy projects by Kyoungmin Roh.',body)
 
 
 def build_participation():
@@ -242,6 +266,7 @@ def build_support():
 if __name__=='__main__':
     build_home()
     build_sections()
+    build_projects()
     build_participation()
     build_cases()
     build_support()

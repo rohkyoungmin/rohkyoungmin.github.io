@@ -14,7 +14,9 @@ All publications appear in one list: published work first, followed by unpublish
 
 The About introduction in `professionalSummary` is copied verbatim from the Notion Full CV’s Professional Summary. Preserve its wording when adjusting layout.
 
-Projects, awards, and scholarships render in full, in content order. A project's application, frontend, backend, and related prototype repositories are shown as links under one entry. Scholarships include their recorded dates, organizations, descriptions, and KRW amounts.
+Projects, awards, and scholarships render in full, in content order. Projects are grouped by `projectType` into Coursework Project, Research Project, Funded Research Project, Competition Project, Personal Project, and Toy Project. Each project appears once; related application, frontend, backend, and prototype repositories remain links under the same entry. Course and funding context is reconciled with the current Notion Full CV. Personal/Toy and research-tool classifications use the project's purpose and scope where Notion does not supply a literal category; `classificationBasis` and `classificationSource` record that distinction. LV.0 and TTobak are competition projects, as requested. Scholarships include their recorded dates, organizations, descriptions, and KRW amounts.
+
+Experience separates Research Experience from Military Service using each entry's `type`. The homepage's current affiliation comes from `currentAffiliation`, independently of historical appointments. Contact links and the Person metadata use the single `email` field.
 
 The navigation opens independent pages: About (`index.html`), Experience, Education, Publications, Projects, Awards, and Participation. Awards also contains scholarships and the filed patent application. Contact information remains at the bottom of every page. Old homepage section bookmarks redirect to their corresponding pages. The former `gallery.html` is a redirect to Participation.
 

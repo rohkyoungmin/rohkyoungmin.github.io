@@ -1,7 +1,7 @@
 {
   "source": "https://github.com/rohkyoungmin/rohkyoungmin/blob/main/README.md",
   "name": "Kyoungmin Roh",
-  "email": "imsie1@dankook.ac.kr",
+  "email": "kyoungminroh01@gmail.com",
   "summary": "I study machine learning for cybersecurity, post-quantum cryptography in trusted execution environments, and confidential computing for automotive systems.",
   "education": {
     "organization": "Dankook University",
@@ -264,12 +264,12 @@
       "organization": "Seoul National University",
       "lab": "Security Optimization Research Lab",
       "role": "Research Intern",
-      "period": "Jun 2026 – Present",
+      "period": "Jun 2026 – Oct 2027",
       "location": "Seoul, Republic of Korea",
       "supervisor": "Prof. Yunheung Paek",
       "mentor": "Martin Kayondo",
       "url": "https://sor.snu.ac.kr/",
-      "description": "Developing an automotive vECU research platform with Zephyr OS and Arm CCA. Reviewing robot foundation models, vision-language-action systems, and GPU virtualization security.",
+      "description": "Developed an automotive vECU research platform with Zephyr OS and Arm CCA. Reviewed robot foundation models, vision-language-action systems, and GPU virtualization security.",
       "source": "https://github.com/rohkyoungmin/rohkyoungmin/blob/main/README.md"
     },
     {
@@ -389,135 +389,6 @@
   ],
   "projects": [
     {
-      "id": "scan",
-      "title": "SCAN",
-      "category": "Malware detection",
-      "description": "Android malware detection using structural clustering and adaptive thresholds (CMES 2026).",
-      "role": null,
-      "tags": [
-        "Python",
-        "Machine Learning"
-      ],
-      "links": [
-        {
-          "label": "Repository",
-          "url": "https://github.com/rohkyoungmin/SCAN"
-        }
-      ],
-      "source": "https://github.com/rohkyoungmin/rohkyoungmin/blob/main/README.md"
-    },
-    {
-      "id": "alarm",
-      "title": "ALARM",
-      "category": "Malware detection",
-      "description": "Android malware detection using Leiden communities and mixture of experts (ACM SAC 2026).",
-      "role": null,
-      "tags": [
-        "Python",
-        "Mixture of Experts"
-      ],
-      "links": [
-        {
-          "label": "Repository",
-          "url": "https://github.com/rohkyoungmin/ALARM"
-        }
-      ],
-      "source": "https://github.com/rohkyoungmin/rohkyoungmin/blob/main/README.md"
-    },
-    {
-      "id": "mlkem-split",
-      "title": "ML-KEM / Kyber Split",
-      "category": "Post-quantum cryptography",
-      "description": "Related TrustZone-A research prototypes: information-flow-based ML-KEM partitioning and secret-isolation interfaces, plus Kyber split-design documentation and an OP-TEE client/TA scaffold.",
-      "role": null,
-      "tags": [
-        "C",
-        "OP-TEE"
-      ],
-      "links": [
-        {
-          "label": "ML-KEM prototype",
-          "url": "https://github.com/rohkyoungmin/MLKEM-Split"
-        },
-        {
-          "label": "Kyber / OP-TEE",
-          "url": "https://github.com/Cyber-Security-Contest/Kyber-Split"
-        }
-      ],
-      "source": "https://github.com/rohkyoungmin/rohkyoungmin/blob/main/README.md"
-    },
-    {
-      "id": "cca-vecu",
-      "title": "Confidential vECUs with Arm CCA",
-      "category": "Systems security",
-      "description": "Ongoing automotive virtual ECU research integrating Zephyr OS and Arm CCA through a custom shim layer.",
-      "role": "Research Intern · Seoul National University",
-      "tags": [
-        "Arm CCA",
-        "Zephyr OS",
-        "vECU"
-      ],
-      "links": [
-        {
-          "label": "Project details",
-          "url": "research/cca.html"
-        },
-        {
-          "label": "Security Optimization Research Lab",
-          "url": "https://sor.snu.ac.kr/"
-        }
-      ],
-      "source": "https://github.com/rohkyoungmin/rohkyoungmin/blob/main/README.md"
-    },
-    {
-      "id": "aisecapp",
-      "title": "AISECApp",
-      "category": "AI security",
-      "description": "C/C++ source-code vulnerability analysis agents combining NVD CVE mapping, LLM finding proposals, and deterministic evidence verification, with JSON/Markdown/PDF reporting.",
-      "role": null,
-      "tags": [
-        "FastAPI",
-        "LLM Agents",
-        "Evidence verification"
-      ],
-      "links": [
-        {
-          "label": "Repository",
-          "url": "https://github.com/rohkyoungmin/AISECApp"
-        }
-      ],
-      "source": "https://github.com/rohkyoungmin/rohkyoungmin/blob/main/README.md"
-    },
-    {
-      "id": "lv0",
-      "title": "LV.0 — LLM Vulnerability Zero",
-      "category": "AI security",
-      "description": "Source-code security review platform combining Semgrep static analysis, Claude-assisted vulnerability explanations, and PDF reporting through Flask services, with a React/TypeScript/Electron interface.",
-      "role": "Team lead · AI/security",
-      "tags": [
-        "Python",
-        "Semgrep",
-        "Flask",
-        "React",
-        "Electron"
-      ],
-      "links": [
-        {
-          "label": "Overview",
-          "url": "https://github.com/Gaurdians-of-the-Open-Source"
-        },
-        {
-          "label": "Application",
-          "url": "https://github.com/Gaurdians-of-the-Open-Source/final-result"
-        },
-        {
-          "label": "Analysis services",
-          "url": "https://github.com/Gaurdians-of-the-Open-Source/Security"
-        }
-      ],
-      "source": "https://github.com/rohkyoungmin/rohkyoungmin/blob/main/README.md"
-    },
-    {
       "id": "ros2",
       "title": "ROS 2 LiDAR Robot Car",
       "category": "Robotics",
@@ -534,58 +405,11 @@
           "url": "https://github.com/rohkyoungmin/lidar_car_project"
         }
       ],
-      "source": "https://github.com/rohkyoungmin/rohkyoungmin/blob/main/README.md"
-    },
-    {
-      "id": "qrust",
-      "title": "QRust",
-      "category": "Applied machine learning",
-      "description": "QR phishing detection and QR-code generation service with a Flutter client, Random Forest URL classification, a Flask inference API, and a Spring Boot backend.",
-      "role": "Frontend · AI",
-      "tags": [
-        "Flutter",
-        "Random Forest",
-        "Flask",
-        "Spring Boot"
-      ],
-      "links": [
-        {
-          "label": "Overview",
-          "url": "https://github.com/dku-capstone"
-        },
-        {
-          "label": "AI",
-          "url": "https://github.com/dku-capstone/QRust-AI"
-        },
-        {
-          "label": "Frontend",
-          "url": "https://github.com/dku-capstone/QRust-FE"
-        },
-        {
-          "label": "Backend",
-          "url": "https://github.com/dku-capstone/QRust-BE"
-        }
-      ],
-      "source": "https://github.com/rohkyoungmin/rohkyoungmin/blob/main/README.md"
-    },
-    {
-      "id": "vehicle-forensics",
-      "title": "Vehicle Forensics Suite",
-      "category": "Digital forensics",
-      "description": "React/TypeScript frontend prototype for vehicle-forensics case and evidence management, with a sample event timeline, date/category/tag filters, and event annotations.",
-      "role": null,
-      "tags": [
-        "React",
-        "TypeScript",
-        "Vite"
-      ],
-      "links": [
-        {
-          "label": "Frontend prototype",
-          "url": "https://github.com/rohkyoungmin/forensic_tool"
-        }
-      ],
-      "source": "https://github.com/rohkyoungmin/forensic_tool/blob/main/src/pages/Timeline.tsx"
+      "source": "https://github.com/rohkyoungmin/rohkyoungmin/blob/main/README.md",
+      "projectType": "coursework",
+      "classificationBasis": "Full CV Coursework Projects: LiDAR Automotive Vehicle Project; Embedded System, Spring 2026.",
+      "classificationSource": "https://app.notion.com/p/3f5addb0d1a780dfad0fd5c00f22471a",
+      "context": "Embedded System · Spring 2026"
     },
     {
       "id": "summarizer",
@@ -617,7 +441,163 @@
           "url": "https://github.com/DKU-OSS-development/Documentary"
         }
       ],
-      "source": "https://github.com/rohkyoungmin/rohkyoungmin/blob/main/README.md"
+      "source": "https://github.com/rohkyoungmin/rohkyoungmin/blob/main/README.md",
+      "projectType": "coursework",
+      "classificationBasis": "Full CV Coursework Projects: LLM Document Summarization Service; Opensource Software Development, Spring 2026.",
+      "classificationSource": "https://app.notion.com/p/3f5addb0d1a780dfad0fd5c00f22471a",
+      "context": "Opensource Software Development · Spring 2026"
+    },
+    {
+      "id": "aisecapp",
+      "title": "AISECApp",
+      "category": "AI security",
+      "description": "C/C++ source-code vulnerability analysis agents combining NVD CVE mapping, LLM finding proposals, and deterministic evidence verification, with JSON/Markdown/PDF reporting.",
+      "role": null,
+      "tags": [
+        "FastAPI",
+        "LLM Agents",
+        "Evidence verification"
+      ],
+      "links": [
+        {
+          "label": "Repository",
+          "url": "https://github.com/rohkyoungmin/AISECApp"
+        }
+      ],
+      "source": "https://github.com/rohkyoungmin/rohkyoungmin/blob/main/README.md",
+      "projectType": "coursework",
+      "classificationBasis": "Full CV Coursework Projects: Multi-Agent C/C++ Vulnerability Analysis and Verification; Artificial Intelligence and Information Security Application, Spring 2026.",
+      "classificationSource": "https://app.notion.com/p/3f5addb0d1a780dfad0fd5c00f22471a",
+      "context": "Artificial Intelligence and Information Security Application · Spring 2026"
+    },
+    {
+      "id": "qrust",
+      "title": "QRust",
+      "category": "Applied machine learning",
+      "description": "QR phishing detection and QR-code generation service with a Flutter client, Random Forest URL classification, a Flask inference API, and a Spring Boot backend.",
+      "role": "Frontend · AI",
+      "tags": [
+        "Flutter",
+        "Random Forest",
+        "Flask",
+        "Spring Boot"
+      ],
+      "links": [
+        {
+          "label": "Overview",
+          "url": "https://github.com/dku-capstone"
+        },
+        {
+          "label": "AI",
+          "url": "https://github.com/dku-capstone/QRust-AI"
+        },
+        {
+          "label": "Frontend",
+          "url": "https://github.com/dku-capstone/QRust-FE"
+        },
+        {
+          "label": "Backend",
+          "url": "https://github.com/dku-capstone/QRust-BE"
+        }
+      ],
+      "source": "https://github.com/rohkyoungmin/rohkyoungmin/blob/main/README.md",
+      "projectType": "coursework",
+      "classificationBasis": "Full CV Coursework Projects: Qrust AI Phishing Detection and Trusted QR Application; Industrial Cooperative Project 1, Spring/Fall 2025. Capstone award does not change its primary course context.",
+      "classificationSource": "https://app.notion.com/p/3f5addb0d1a780dfad0fd5c00f22471a",
+      "context": "Industrial Cooperative Project 1 · Spring / Fall 2025"
+    },
+    {
+      "id": "scan",
+      "title": "SCAN",
+      "category": "Malware detection",
+      "description": "Android malware detection using structural clustering and adaptive thresholds (CMES 2026).",
+      "role": null,
+      "tags": [
+        "Python",
+        "Machine Learning"
+      ],
+      "links": [
+        {
+          "label": "Repository",
+          "url": "https://github.com/rohkyoungmin/SCAN"
+        }
+      ],
+      "source": "https://github.com/rohkyoungmin/rohkyoungmin/blob/main/README.md",
+      "projectType": "research",
+      "classificationBasis": "Full CV research experience and CMES publication identify SCAN as Android-malware concept-drift research.",
+      "classificationSource": "https://app.notion.com/p/3f5addb0d1a780dfad0fd5c00f22471a"
+    },
+    {
+      "id": "alarm",
+      "title": "ALARM",
+      "category": "Malware detection",
+      "description": "Android malware detection using Leiden communities and mixture of experts (ACM SAC 2026).",
+      "role": null,
+      "tags": [
+        "Python",
+        "Mixture of Experts"
+      ],
+      "links": [
+        {
+          "label": "Repository",
+          "url": "https://github.com/rohkyoungmin/ALARM"
+        }
+      ],
+      "source": "https://github.com/rohkyoungmin/rohkyoungmin/blob/main/README.md",
+      "projectType": "research",
+      "classificationBasis": "Full CV research experience and SAC publication identify ALARM as a peer-reviewed research output.",
+      "classificationSource": "https://app.notion.com/p/3f5addb0d1a780dfad0fd5c00f22471a"
+    },
+    {
+      "id": "mlkem-split",
+      "title": "ML-KEM / Kyber Split",
+      "category": "Post-quantum cryptography",
+      "description": "Related TrustZone-A research prototypes: information-flow-based ML-KEM partitioning and secret-isolation interfaces, plus Kyber split-design documentation and an OP-TEE client/TA scaffold.",
+      "role": null,
+      "tags": [
+        "C",
+        "OP-TEE"
+      ],
+      "links": [
+        {
+          "label": "ML-KEM prototype",
+          "url": "https://github.com/rohkyoungmin/MLKEM-Split"
+        },
+        {
+          "label": "Kyber / OP-TEE",
+          "url": "https://github.com/Cyber-Security-Contest/Kyber-Split"
+        }
+      ],
+      "source": "https://github.com/rohkyoungmin/rohkyoungmin/blob/main/README.md",
+      "projectType": "research",
+      "classificationBasis": "Split ML-KEM has research internship/laboratory, KCC publication and contest evidence. Use research as the primary category while retaining contest recognition; do not duplicate the same project as a competition entry.",
+      "classificationSource": "https://app.notion.com/p/3f5addb0d1a780dfad0fd5c00f22471a"
+    },
+    {
+      "id": "cca-vecu",
+      "title": "Confidential vECUs with Arm CCA",
+      "category": "Systems security",
+      "description": "Integrated Zephyr OS and Arm CCA through a custom shim layer to build an automotive virtual ECU research platform.",
+      "role": "Research Intern · Seoul National University",
+      "tags": [
+        "Arm CCA",
+        "Zephyr OS",
+        "vECU"
+      ],
+      "links": [
+        {
+          "label": "Project details",
+          "url": "research/cca.html"
+        },
+        {
+          "label": "Security Optimization Research Lab",
+          "url": "https://sor.snu.ac.kr/"
+        }
+      ],
+      "source": "https://github.com/rohkyoungmin/rohkyoungmin/blob/main/README.md",
+      "projectType": "research",
+      "classificationBasis": "Full CV SNU research experience describes Arm CCA and Zephyr vECU integration.",
+      "classificationSource": "https://app.notion.com/p/3f5addb0d1a780dfad0fd5c00f22471a"
     },
     {
       "id": "acsac-artifact",
@@ -635,25 +615,10 @@
           "url": "https://github.com/rohkyoungmin/ACSAC_ARTIFACT"
         }
       ],
-      "source": "https://github.com/rohkyoungmin/rohkyoungmin/blob/main/README.md"
-    },
-    {
-      "id": "post-quantum-signature",
-      "title": "Post-Quantum-Signature-System",
-      "category": "Post-quantum cryptography",
-      "description": "Python prototype combining Lamport one-time signatures and Merkle trees.",
-      "role": null,
-      "tags": [
-        "Python",
-        "Post-Quantum Cryptography"
-      ],
-      "links": [
-        {
-          "label": "Repository",
-          "url": "https://github.com/rohkyoungmin/Post-Quantum-Signature-System"
-        }
-      ],
-      "source": "https://github.com/rohkyoungmin/rohkyoungmin/blob/main/README.md"
+      "source": "https://github.com/rohkyoungmin/rohkyoungmin/blob/main/README.md",
+      "projectType": "research",
+      "classificationBasis": "Existing project is explicitly experiment code/results for semantic cluster-guided malware drift detection; corresponds to the research manuscript/artifact workstream.",
+      "classificationSource": "content/site-content.json existing description and repository link"
     },
     {
       "id": "asx",
@@ -672,13 +637,109 @@
           "url": "https://github.com/rohkyoungmin/api-sequence-extractor-gui"
         }
       ],
-      "source": "https://github.com/rohkyoungmin/rohkyoungmin/blob/main/README.md"
+      "source": "https://github.com/rohkyoungmin/rohkyoungmin/blob/main/README.md",
+      "projectType": "research",
+      "classificationBasis": "Existing project is categorized Research tooling and extracts method-level Android API sequences for analysis. Primary research-tool classification is an inference from the established project scope, not a literal Notion type.",
+      "classificationSource": "content/site-content.json existing category Research tooling"
+    },
+    {
+      "id": "vehicle-forensics",
+      "title": "Vehicle Forensics Suite",
+      "category": "Digital forensics",
+      "description": "Developed frontend and backend components of an automotive digital forensics tool to visualize vehicle events and support digital-evidence analysis. The linked repository contains the React/TypeScript frontend prototype for case and evidence management.",
+      "role": null,
+      "tags": [
+        "React",
+        "TypeScript",
+        "Vite"
+      ],
+      "links": [
+        {
+          "label": "Frontend prototype",
+          "url": "https://github.com/rohkyoungmin/forensic_tool"
+        }
+      ],
+      "source": "https://app.notion.com/p/3f5addb0d1a780dfad0fd5c00f22471a",
+      "projectType": "funded",
+      "classificationBasis": "Full CV Funded Research Projects: Future Policing Challenge Technology Development, commissioned by KNPA and MSIT, Apr-Jul 2026. Existing Vehicle Forensics Suite is its implementation, so keep one entry.",
+      "classificationSource": "https://app.notion.com/p/3f5addb0d1a780dfad0fd5c00f22471a",
+      "context": "Future Policing Challenge Technology Development · Apr 2026 – Jul 2026",
+      "commissionedBy": "Korean National Police Agency and Ministry of Science and ICT",
+      "programTitle": "Development of a Reconfigurable Vehicle Living Lab and Digital Forensic Tools for Advanced Mobility"
+    },
+    {
+      "id": "building-energy-management",
+      "title": "Intelligent Autonomous Building Energy and Environmental Management System",
+      "category": "Funded research",
+      "projectType": "funded",
+      "description": "Conducted mobile-platform AI security experiments and contributed to peer-reviewed manuscript preparation within the laboratory’s concept-drift workstream as part of a funded intelligent-building program.",
+      "role": null,
+      "context": "Oct 2025 – Jul 2026",
+      "commissionedBy": "Korea Energy Technology Evaluation and Planning (KETEP)",
+      "tags": [
+        "Mobile-platform AI security",
+        "Concept drift"
+      ],
+      "links": [],
+      "source": "https://app.notion.com/p/3f5addb0d1a780dfad0fd5c00f22471a",
+      "classificationSource": "https://app.notion.com/p/3f5addb0d1a780dfad0fd5c00f22471a",
+      "classificationBasis": "Listed under Funded Research Projects in the current Notion Full CV."
+    },
+    {
+      "id": "mobile-platform-vehicle-forensics",
+      "title": "Effective and Intelligent Framework for Mobile Platform-Based Vehicle Forensics",
+      "category": "Funded research",
+      "projectType": "funded",
+      "description": "Contributed literature analysis, experimental work, and peer-reviewed writing on mobile-platform AI security in support of the laboratory’s data-driven vehicle-forensics research and publication pipeline.",
+      "role": null,
+      "context": "Oct 2025 – Jul 2026",
+      "commissionedBy": "National Research Foundation of Korea and Ministry of Science and ICT",
+      "tags": [
+        "Vehicle forensics",
+        "Mobile-platform AI security"
+      ],
+      "links": [],
+      "source": "https://app.notion.com/p/3f5addb0d1a780dfad0fd5c00f22471a",
+      "classificationSource": "https://app.notion.com/p/3f5addb0d1a780dfad0fd5c00f22471a",
+      "classificationBasis": "Listed under Funded Research Projects in the current Notion Full CV."
+    },
+    {
+      "id": "lv0",
+      "title": "LV.0 — LLM Vulnerability Zero",
+      "category": "AI security",
+      "description": "Source-code security review platform combining Semgrep static analysis, Claude-assisted vulnerability explanations, and PDF reporting through Flask services, with a React/TypeScript/Electron interface.",
+      "role": "Team lead · AI/security",
+      "tags": [
+        "Python",
+        "Semgrep",
+        "Flask",
+        "React",
+        "Electron"
+      ],
+      "links": [
+        {
+          "label": "Overview",
+          "url": "https://github.com/Gaurdians-of-the-Open-Source"
+        },
+        {
+          "label": "Application",
+          "url": "https://github.com/Gaurdians-of-the-Open-Source/final-result"
+        },
+        {
+          "label": "Analysis services",
+          "url": "https://github.com/Gaurdians-of-the-Open-Source/Security"
+        }
+      ],
+      "source": "https://github.com/rohkyoungmin/rohkyoungmin/blob/main/README.md",
+      "projectType": "competition",
+      "classificationBasis": "Explicit current user instruction classifies LV.0 as a competition project. Distinct from AISECApp.",
+      "classificationSource": "current user instruction"
     },
     {
       "id": "ddobak",
-      "title": "DDobak",
+      "title": "TTobak",
       "category": "Accessibility",
-      "description": "Ttobak Ttobak: AI-assisted pronunciation training and visual feedback prototype.",
+      "description": "AI-assisted pronunciation training and visual feedback prototype developed for the Dankook Startup Hackathon.",
       "role": null,
       "tags": [
         "Accessibility",
@@ -691,7 +752,33 @@
           "url": "https://github.com/rohkyoungmin/dku_startup_hackathon"
         }
       ],
-      "source": "https://github.com/rohkyoungmin/rohkyoungmin/blob/main/README.md"
+      "source": "https://github.com/rohkyoungmin/rohkyoungmin/blob/main/README.md",
+      "projectType": "competition",
+      "classificationBasis": "Explicit current user instruction says TTobak is Competition. Full CV award and Master Timeline June-December 2025 DDobak Startup Project confirm startup hackathon context.",
+      "classificationSource": "https://app.notion.com/p/3f9addb0d1a78011b551e03d0fe9ee7d",
+      "context": "Dankook Startup Hackathon · 2025"
+    },
+    {
+      "id": "post-quantum-signature",
+      "title": "Post-Quantum-Signature-System",
+      "category": "Post-quantum cryptography",
+      "description": "Python prototype combining Lamport one-time signatures and Merkle trees.",
+      "role": null,
+      "tags": [
+        "Python",
+        "Post-Quantum Cryptography"
+      ],
+      "links": [
+        {
+          "label": "Repository",
+          "url": "https://github.com/rohkyoungmin/Post-Quantum-Signature-System"
+        }
+      ],
+      "source": "https://github.com/rohkyoungmin/rohkyoungmin/blob/main/README.md",
+      "projectType": "competition",
+      "classificationBasis": "Master Timeline September 2023 Cipher Application Competition explicitly describes the Lamport one-time signature plus Merkle-tree prototype and first place.",
+      "classificationSource": "https://app.notion.com/p/3f9addb0d1a78011b551e03d0fe9ee7d",
+      "context": "Cipher Application Competition · 2023"
     },
     {
       "id": "greenhouse-disease-detector",
@@ -709,7 +796,10 @@
           "url": "https://github.com/rohkyoungmin/smart-greenhouse-disease-detector"
         }
       ],
-      "source": "https://github.com/rohkyoungmin/rohkyoungmin/blob/main/README.md"
+      "source": "https://github.com/rohkyoungmin/rohkyoungmin/blob/main/README.md",
+      "projectType": "personal",
+      "classificationBasis": "No course, sponsor or competition attribution found in fetched Notion sources. Personal ML application is an inferred classification from the crop-disease implementation scope.",
+      "classificationSource": "content/site-content.json existing description; no institutional attribution found"
     },
     {
       "id": "web-crawling",
@@ -727,7 +817,10 @@
           "url": "https://github.com/rohkyoungmin/web_crawling"
         }
       ],
-      "source": "https://github.com/rohkyoungmin/rohkyoungmin/blob/main/README.md"
+      "source": "https://github.com/rohkyoungmin/rohkyoungmin/blob/main/README.md",
+      "projectType": "personal",
+      "classificationBasis": "No course, sponsor or competition attribution found in fetched Notion sources. Personal utility/data-collection project is inferred from Selenium review crawling and sentiment keyword classification.",
+      "classificationSource": "content/site-content.json existing description; no institutional attribution found"
     },
     {
       "id": "image-expander",
@@ -746,7 +839,10 @@
           "url": "https://github.com/rohkyoungmin/image-expander"
         }
       ],
-      "source": "https://github.com/rohkyoungmin/rohkyoungmin/blob/main/README.md"
+      "source": "https://github.com/rohkyoungmin/rohkyoungmin/blob/main/README.md",
+      "projectType": "toy",
+      "classificationBasis": "Small Tkinter/Pillow PNG-padding utility. Toy versus Personal is a scope-based editorial classification, not a literal Notion label.",
+      "classificationSource": "content/site-content.json existing description"
     },
     {
       "id": "ico-converter",
@@ -764,7 +860,10 @@
           "url": "https://github.com/rohkyoungmin/ico_converter"
         }
       ],
-      "source": "https://github.com/rohkyoungmin/rohkyoungmin/blob/main/README.md"
+      "source": "https://github.com/rohkyoungmin/rohkyoungmin/blob/main/README.md",
+      "projectType": "toy",
+      "classificationBasis": "Small PNG/SVG-to-ICO conversion utility. Toy versus Personal is a scope-based editorial classification, not a literal Notion label.",
+      "classificationSource": "content/site-content.json existing description"
     }
   ],
   "caseStudies": [
@@ -1094,5 +1193,6 @@
         }
       ]
     }
-  ]
+  ],
+  "currentAffiliation": "Undergraduate · Dankook University"
 }
