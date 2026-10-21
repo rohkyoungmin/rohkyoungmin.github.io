@@ -78,7 +78,8 @@ section { scroll-margin-top: 32px; }
 .nav-links a[aria-current='page'] { color: var(--ink); }
 .nav-links a[aria-current='page']::after { transform: scaleX(1); }
 .nav-links a.nav-gallery, .nav-links a.nav-gallery:hover, .nav-links a.nav-gallery[aria-current='page'] { color: #1d4ed8; }
-.nav-links a.nav-gallery::after { background: #1d4ed8; transform: scaleX(1); }
+.nav-links a.nav-gallery::after, .nav-links a.nav-gallery[aria-current='page']::after { background: #1d4ed8; transform: scaleX(0); }
+.nav-links a.nav-gallery:hover::after, .nav-links a.nav-gallery:focus-visible::after { transform: scaleX(1); }
 .menu-button { display: none; min-height: 40px; padding: 7px 13px; border: 1px solid var(--line); border-radius: 0; background: var(--card); font-size: 12px; }
 
 /* Section rhythm */
@@ -300,11 +301,14 @@ section { scroll-margin-top: 32px; }
   .project-category-nav { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 
-@media (max-width: 1120px) {
+@media (max-width: 1200px) {
   .nav { flex-wrap: wrap; gap: 0 24px; }
   .menu-button { display: block; border-color: var(--ink); background: transparent; font-family: var(--mono); }
   .nav-links { display: none; position: absolute; left: var(--gutter); right: var(--gutter); top: 87px; padding: 17px 20px; border: 1px solid var(--line); background: var(--card); flex-wrap: wrap; gap: 10px 24px; }
   .nav-links.is-open { display: flex; }
+}
+
+@media (max-width: 1120px) {
   .education-layout { gap: 32px; }
   .participation-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 34px 26px; }
 }

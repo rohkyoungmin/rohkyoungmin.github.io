@@ -17,8 +17,8 @@ PAGES = [
     ('patents.html', 'Patents', 'Filed patent applications and patents in preparation.'),
     ('projects.html', 'Projects', 'Security tools, AI applications, and research software.'),
     ('awards.html', 'Awards', 'Awards and scholarships.'),
-    ('participation.html', 'Gallery', 'Conferences, presentations, and moments from the journey.'),
     ('certificate.html', 'Certificate', 'Language proficiency and certificates.'),
+    ('participation.html', 'Gallery', 'Conferences, presentations, and moments from the journey.'),
 ]
 PROJECT_TYPES = [
     ('coursework', 'Coursework Project', 'Course assignments, team projects, and capstone work.'),
@@ -40,7 +40,7 @@ def head(title, description, path='', prefix='', active=''):
     script_version=sha256((ROOT/'js/portfolio.js').read_bytes()).hexdigest()[:12]
     navigation=''.join(
         f'<a href="{prefix}{route}"'+(' class="nav-gallery"' if route=='participation.html' else '')+(' aria-current="page"' if route==active else '')+f'>{label}</a>'
-        for route,label,_ in PAGES if route!='certificate.html'
+        for route,label,_ in PAGES
     )
     return f'''<!doctype html>
 <html lang="en">
@@ -152,7 +152,7 @@ def build_home():
         <h3 class="profile-name">Kyoungmin Roh</h3>
         <p class="profile-role">{e(DATA['profileRole'])}</p>
         <p class="profile-location">South Korea</p>
-        <div class="profile-links">{external('https://scholar.google.com/citations?user=6O2OMlwAAAAJ','Google Scholar ↗')}{external('https://github.com/rohkyoungmin','GitHub ↗')}{external('https://www.linkedin.com/in/kyoungmin-roh-88bb09343/','LinkedIn ↗')}</div>
+        <div class="profile-links">{external('https://scholar.google.com/citations?user=6O2OMlwAAAAJ','Google Scholar ↗')}{external('https://github.com/rohkyoungmin','GitHub ↗')}{external('https://www.linkedin.com/in/kyoungmin-roh-88bb09343/','LinkedIn ↗')}{external('https://medium.com/@kyoungminroh01','Blog ↗')}</div>
       </aside>
       <div class="professional-summary">
         <p class="summary-label">Summary</p>
@@ -244,7 +244,7 @@ def build_participation():
             photo_index+=1
         paper_link=external(event['paperUrl'],'ALARM paper ↗','text-link')
         albums.append(f'''<article id="{e(event['id'])}" class="conference-album" aria-labelledby="{e(event['id'])}-title"><div class="conference-heading"><div class="conference-meta"><p class="eyebrow">CONFERENCE / {event['year']}</p><h2 id="{e(event['id'])}-title">{e(event['title'])}</h2><p class="conference-name">{e(event['name'])}</p><p class="mono">{e(event['period'])}<br>{e(event['location'])}</p>{paper_link}</div><div class="conference-summary"><p>{e(event['description'])}</p><p class="mono muted">{len(event['photos']):02d} PHOTOGRAPHS · SELECT TO ENLARGE</p></div></div><div class="participation-grid">{''.join(photos)}</div></article>''')
-    body=f'''<section id="participation" class="section" aria-labelledby="participation-title"><div class="section-heading"><div><p class="eyebrow section-kicker">09 / GALLERY</p><h1 id="participation-title" class="section-title">Gallery</h1></div><p>Conferences, presentations, and moments from the journey.</p></div>{''.join(albums)}</section>
+    body=f'''<section id="participation" class="section" aria-labelledby="participation-title"><div class="section-heading"><div><p class="eyebrow section-kicker">10 / GALLERY</p><h1 id="participation-title" class="section-title">Gallery</h1></div><p>Conferences, presentations, and moments from the journey.</p></div>{''.join(albums)}</section>
 <dialog id="photo-viewer" class="photo-dialog" aria-labelledby="photo-viewer-title" aria-describedby="photo-viewer-caption"><div class="photo-viewer-header"><h2 id="photo-viewer-title">Conference photographs</h2><button type="button" class="photo-close" aria-label="Close photograph" autofocus>Close ×</button></div><div class="photo-viewer-body"><button type="button" class="photo-prev" aria-label="Previous photograph">←</button><img class="photo-viewer-image" alt=""><button type="button" class="photo-next" aria-label="Next photograph">→</button></div><p id="photo-viewer-caption" class="photo-viewer-caption"></p><p class="photo-position" role="status" aria-live="polite"></p></dialog>'''
     write_page('participation.html','Gallery','Conference participation, ALARM presentation, and photographs from ACM SAC 2026 by Kyoungmin Roh.',body)
     # Keep old bookmarks working without retaining the former gallery content.
@@ -255,7 +255,7 @@ def build_certificates():
     cards=[]
     for certificate in DATA['certificates']:
         cards.append(f'''<article class="certificate-card" aria-labelledby="{e(certificate['id'])}-title"><div class="certificate-copy"><p class="eyebrow">LANGUAGE PROFICIENCY</p><h2 id="{e(certificate['id'])}-title">{e(certificate['title'])}</h2><p class="mono muted">Test date: <time datetime="{e(certificate['date'])}">{e(certificate['dateLabel'])}</time></p><p class="certificate-score">{e(certificate['summary'])}</p><p>{e(certificate['details'])}</p></div><a class="certificate-image-link" href="{e(certificate['image'])}" target="_blank" rel="noopener noreferrer" aria-label="View full-size {e(certificate['title'])} score report"><img class="certificate-image" src="{e(certificate['image'])}" width="{certificate['width']}" height="{certificate['height']}" alt="{e(certificate['alt'])}" decoding="async"><span class="text-link">View full-size score report ↗</span></a></article>''')
-    body=f'''<section id="certificate" class="section" aria-labelledby="certificate-title"><div class="section-heading"><div><p class="eyebrow section-kicker">10 / CERTIFICATE</p><h1 id="certificate-title" class="section-title">Certificate</h1></div><p>Language proficiency and certificates.</p></div><div class="certificate-list">{''.join(cards)}</div></section>'''
+    body=f'''<section id="certificate" class="section" aria-labelledby="certificate-title"><div class="section-heading"><div><p class="eyebrow section-kicker">09 / CERTIFICATE</p><h1 id="certificate-title" class="section-title">Certificate</h1></div><p>Language proficiency and certificates.</p></div><div class="certificate-list">{''.join(cards)}</div></section>'''
     write_page('certificate.html','Certificate','Language proficiency and certificates of Kyoungmin Roh.',body)
 
 
