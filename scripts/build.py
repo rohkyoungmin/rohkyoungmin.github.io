@@ -16,7 +16,7 @@ PAGES = [
     ('publications.html', 'Publications', 'Published papers and manuscripts.'),
     ('projects.html', 'Projects', 'Security tools, AI applications, and research software.'),
     ('awards.html', 'Awards', 'Awards, scholarships, and patent application.'),
-    ('gallery.html', 'Gallery', 'A visual record of people and places.'),
+    ('participation.html', 'Participation', 'Conferences, presentations, and moments from the journey.'),
 ]
 
 def e(value):
@@ -196,13 +196,22 @@ def build_sections():
 ''')
 
 
-def build_gallery():
-    items=''.join(
-        f'<figure class="gallery-item"><a href="{e(item["src"])}" aria-label="View full image: {e(item["title"])}"><img src="{e(item["src"])}" width="{item["width"]}" height="{item["height"]}" alt="{e(item["alt"])}" loading="lazy" decoding="async"></a><figcaption><h2>{e(item["title"])}</h2><p>{e(item["caption"])}</p></figcaption></figure>'
-        for item in DATA['gallery']
-    )
-    body=f'''<section id="gallery" class="section" aria-labelledby="gallery-title"><div class="section-heading"><div><p class="eyebrow section-kicker">08 / GALLERY</p><h1 id="gallery-title" class="section-title">Gallery</h1></div><p>People and places. Select a photograph to view the full image.</p></div><div class="gallery-grid">{items}</div></section>'''
-    write_page('gallery.html','Gallery','Photographs from Kyoungmin Roh’s portfolio.',body)
+def build_participation():
+    albums=[]
+    photo_index=0
+    for event in DATA['participation']:
+        photos=[]
+        for number,photo in enumerate(event['photos'],1):
+            loading='eager' if photo_index==0 else 'lazy'
+            photos.append(f'''<figure class="participation-photo"><a class="photo-open" href="{e(photo['src'])}" data-photo-index="{photo_index}" data-photo-caption="{e(photo['caption'])}" data-photo-album="{e(event['title'])}" aria-label="Open photograph {number}: {e(photo['caption'])}"><img src="{e(photo['src'])}" width="{photo['width']}" height="{photo['height']}" alt="{e(photo['alt'])}" loading="{loading}" decoding="async"></a><figcaption><span class="mono">{number:02d}</span><span>{e(photo['caption'])}</span></figcaption></figure>''')
+            photo_index+=1
+        paper_link=external(event['paperUrl'],'ALARM paper ↗','text-link')
+        albums.append(f'''<article id="{e(event['id'])}" class="conference-album" aria-labelledby="{e(event['id'])}-title"><div class="conference-heading"><div class="conference-meta"><p class="eyebrow">CONFERENCE / {event['year']}</p><h2 id="{e(event['id'])}-title">{e(event['title'])}</h2><p class="conference-name">{e(event['name'])}</p><p class="mono">{e(event['period'])}<br>{e(event['location'])}</p>{paper_link}</div><div class="conference-summary"><p>{e(event['description'])}</p><p class="mono muted">{len(event['photos']):02d} PHOTOGRAPHS · SELECT TO ENLARGE</p></div></div><div class="participation-grid">{''.join(photos)}</div></article>''')
+    body=f'''<section id="participation" class="section" aria-labelledby="participation-title"><div class="section-heading"><div><p class="eyebrow section-kicker">08 / PARTICIPATION</p><h1 id="participation-title" class="section-title">Participation</h1></div><p>Conferences, presentations, and moments from the journey.</p></div>{''.join(albums)}</section>
+<dialog id="photo-viewer" class="photo-dialog" aria-labelledby="photo-viewer-title" aria-describedby="photo-viewer-caption"><div class="photo-viewer-header"><h2 id="photo-viewer-title">Conference photographs</h2><button type="button" class="photo-close" aria-label="Close photograph" autofocus>Close ×</button></div><div class="photo-viewer-body"><button type="button" class="photo-prev" aria-label="Previous photograph">←</button><img class="photo-viewer-image" alt=""><button type="button" class="photo-next" aria-label="Next photograph">→</button></div><p id="photo-viewer-caption" class="photo-viewer-caption"></p><p class="photo-position" role="status" aria-live="polite"></p></dialog>'''
+    write_page('participation.html','Participation','Conference participation, ALARM presentation, and photographs from ACM SAC 2026 by Kyoungmin Roh.',body)
+    # Keep old bookmarks working without retaining the former gallery content.
+    (ROOT/'gallery.html').write_text(f'''<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Participation — Kyoungmin Roh</title><meta http-equiv="refresh" content="0;url=participation.html"><link rel="canonical" href="{BASE}/participation.html"><meta name="robots" content="noindex"></head><body><h1>Participation</h1><p><a href="participation.html">View conference participation →</a></p></body></html>''')
 
 
 def build_cases():
@@ -233,7 +242,7 @@ def build_support():
 if __name__=='__main__':
     build_home()
     build_sections()
-    build_gallery()
+    build_participation()
     build_cases()
     build_support()
     print('Built seven portfolio pages, four research pages, 404, sitemap, and robots.txt.')

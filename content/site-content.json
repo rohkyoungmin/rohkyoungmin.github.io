@@ -969,22 +969,130 @@
       "source": "https://github.com/rohkyoungmin/rohkyoungmin/blob/main/README.md"
     }
   ],
-  "gallery": [
+  "participation": [
     {
-      "src": "assets/dankook-campus.png",
-      "width": 1024,
-      "height": 768,
-      "alt": "DKU monument and buildings on the Dankook University campus",
-      "title": "Dankook University",
-      "caption": "Campus photograph"
-    },
-    {
-      "src": "elements/Roh.jpg",
-      "width": 1151,
-      "height": 1440,
-      "alt": "Portrait of Kyoungmin Roh",
-      "title": "Kyoungmin Roh",
-      "caption": "Portrait"
+      "id": "acm-sac-2026",
+      "title": "ACM SAC 2026",
+      "name": "ACM/SIGAPP Symposium on Applied Computing",
+      "location": "Thessaloniki, Greece",
+      "period": "23–27 March 2026",
+      "year": 2026,
+      "description": "Presented ALARM, an adaptive Android malware detection framework combining Leiden-based clustering and mixture-of-experts classification. Conference moments and photographs from the trip.",
+      "paperUrl": "https://dl.acm.org/doi/10.1145/3748522.3779797",
+      "photos": [
+        {
+          "src": "assets/participation/acm-sac-2026/sac-2026-16.webp",
+          "width": 1241,
+          "height": 1800,
+          "caption": "ALARM presentation",
+          "alt": "Presenter at a lectern beside the ALARM title slide at ACM SAC 2026."
+        },
+        {
+          "src": "assets/participation/acm-sac-2026/sac-2026-14.webp",
+          "width": 1350,
+          "height": 1800,
+          "caption": "Welcome to ACM SAC 2026",
+          "alt": "ACM SAC 2026 welcome banner on the exterior of the conference venue."
+        },
+        {
+          "src": "assets/participation/acm-sac-2026/sac-2026-15.webp",
+          "width": 1350,
+          "height": 1800,
+          "caption": "Conference badge and materials",
+          "alt": "SAC 2026 conference badge, blue ACM bag, and lanyard on a table."
+        },
+        {
+          "src": "assets/participation/acm-sac-2026/sac-2026-11.webp",
+          "width": 1013,
+          "height": 1800,
+          "caption": "Greek flag under cloudy skies",
+          "alt": "Greek flag flying beneath a cloudy sky."
+        },
+        {
+          "src": "assets/participation/acm-sac-2026/sac-2026-12.webp",
+          "width": 1350,
+          "height": 1800,
+          "caption": "Classical architecture",
+          "alt": "Stone temple porch with sculpted figures supporting its roof."
+        },
+        {
+          "src": "assets/participation/acm-sac-2026/sac-2026-13.webp",
+          "width": 1013,
+          "height": 1800,
+          "caption": "Columns and skylights",
+          "alt": "View upward between stone columns beneath a roof with skylights."
+        },
+        {
+          "src": "assets/participation/acm-sac-2026/sac-2026-07.webp",
+          "width": 1013,
+          "height": 1800,
+          "caption": "Courtyard architecture",
+          "alt": "Yellow-and-white arched building with a blue dome, Greek flag, and patterned courtyard."
+        },
+        {
+          "src": "assets/participation/acm-sac-2026/sac-2026-10.webp",
+          "width": 1013,
+          "height": 1800,
+          "caption": "Blue dome by the sea",
+          "alt": "Blue-domed white building overlooking the sea at sunset."
+        },
+        {
+          "src": "assets/participation/acm-sac-2026/sac-2026-09.webp",
+          "width": 1013,
+          "height": 1800,
+          "caption": "Evening over the village",
+          "alt": "White buildings and a small blue dome beneath an evening sky."
+        },
+        {
+          "src": "assets/participation/acm-sac-2026/sac-2026-04.webp",
+          "width": 1350,
+          "height": 1800,
+          "caption": "Sea view",
+          "alt": "White terrace overlooking the sea beneath dramatic clouds."
+        },
+        {
+          "src": "assets/participation/acm-sac-2026/sac-2026-06.webp",
+          "width": 1350,
+          "height": 1800,
+          "caption": "White courtyard",
+          "alt": "Whitewashed courtyard with a blue door, terracotta pot, and dark clouds overhead."
+        },
+        {
+          "src": "assets/participation/acm-sac-2026/sac-2026-03.webp",
+          "width": 1350,
+          "height": 1800,
+          "caption": "An open doorway",
+          "alt": "Sunlight entering a white interior through an open dark-blue door."
+        },
+        {
+          "src": "assets/participation/acm-sac-2026/sac-2026-05.webp",
+          "width": 1350,
+          "height": 1800,
+          "caption": "A seaside visitor",
+          "alt": "Black cat sitting on a white chair with the sea in the background."
+        },
+        {
+          "src": "assets/participation/acm-sac-2026/sac-2026-00.webp",
+          "width": 1350,
+          "height": 1800,
+          "caption": "A meal during the trip",
+          "alt": "Grilled whole fish with lemon and vegetables on a restaurant table."
+        },
+        {
+          "src": "assets/participation/acm-sac-2026/sac-2026-01.webp",
+          "width": 1350,
+          "height": 1800,
+          "caption": "Dessert",
+          "alt": "A bowl of white dessert topped with dark syrup on a restaurant table."
+        },
+        {
+          "src": "assets/participation/acm-sac-2026/sac-2026-02.webp",
+          "width": 1350,
+          "height": 1800,
+          "caption": "A small trip detail",
+          "alt": "Pink restaurant receipt beside a dessert bowl on a white tablecloth."
+        }
+      ]
     }
   ]
 }

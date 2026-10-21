@@ -140,15 +140,37 @@ section { scroll-margin-top: 32px; }
 .education-photo img { width: 100%; height: auto; object-fit: contain; }
 .education-photo figcaption { margin-top: 11px; color: var(--muted); font: 10px/1.7 var(--mono); }
 
-/* Photographs remain uncropped, with their original proportions visible. */
-.gallery-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 42px 32px; }
-.gallery-item { min-width: 0; }
-.gallery-item > a { display: grid; place-items: center; aspect-ratio: 4 / 3; background: var(--surface); }
-.gallery-item > a > img { width: 100%; height: 100%; object-fit: contain; }
-.gallery-item > img { width: 100%; height: auto; object-fit: contain; }
-.gallery-item figcaption { padding-top: 17px; border-top: 1px solid var(--ink); margin-top: 15px; }
-.gallery-item figcaption h2, .gallery-item figcaption h3 { font-size: 19px; font-weight: 500; line-height: 1.4; letter-spacing: -.025em; }
-.gallery-item figcaption p { margin-top: 7px; color: var(--muted); font: 11px/1.8 var(--mono); }
+/* Conference participation: a numbered album with uncropped photographs. */
+.conference-album { padding-top: 30px; border-top: 1px solid var(--ink); }
+.conference-heading { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: end; gap: 48px; margin-bottom: 38px; }
+.conference-meta h2 { margin-top: 12px; font-size: clamp(27px, 3.4vw, 43px); font-weight: 500; line-height: 1.15; letter-spacing: -.045em; }
+.conference-name { max-width: 48ch; margin-top: 16px; color: var(--muted); font-size: 14px; line-height: 1.8; }
+.conference-meta > .mono { margin-top: 14px; color: var(--muted); }
+.conference-meta > .text-link { margin-top: 19px; border-bottom: 1px solid var(--line); padding-bottom: 3px; }
+.conference-meta > .text-link:hover { border-color: var(--ink); }
+.conference-summary { max-width: 46ch; justify-self: end; color: var(--muted); font-size: 14px; line-height: 1.85; }
+.conference-summary > .mono { margin-top: 20px; }
+.participation-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 34px 22px; align-items: start; }
+.participation-photo { min-width: 0; }
+.photo-open { display: block; width: 100%; padding: 0; border: 0; background: var(--surface); cursor: zoom-in; }
+.photo-open img { width: 100%; height: auto; object-fit: contain; transition: opacity .18s; }
+.photo-open:hover img { opacity: .88; }
+.participation-photo figcaption { display: grid; grid-template-columns: 23px minmax(0, 1fr); gap: 10px; margin-top: 13px; padding-top: 10px; border-top: 1px solid var(--line); color: var(--muted); font: 11px/1.7 var(--mono); }
+.participation-photo figcaption > .mono { color: var(--ink); }
+
+/* Native dialog keeps keyboard focus inside the full-size photo viewer. */
+.photo-dialog { width: min(1280px, calc(100vw - 32px)); max-width: none; height: min(1000px, calc(100dvh - 32px)); max-height: calc(100dvh - 32px); padding: 18px 22px; border: 1px solid #444; background: #151515; color: #fff; overflow: hidden; }
+.photo-dialog[open] { display: flex; flex-direction: column; gap: 14px; }
+.photo-dialog::backdrop { background: rgba(0, 0, 0, .88); }
+.photo-viewer-header { display: flex; flex-shrink: 0; align-items: center; justify-content: space-between; gap: 20px; }
+.photo-viewer-header h2 { font: 12px/1.6 var(--mono); letter-spacing: .01em; }
+.photo-close, .photo-prev, .photo-next { display: inline-flex; align-items: center; justify-content: center; min-width: 44px; min-height: 44px; padding: 8px 12px; border: 1px solid #555; background: transparent; color: #fff; font: 12px/1.5 var(--mono); transition: background .18s, border-color .18s; }
+.photo-close:hover, .photo-prev:hover, .photo-next:hover { border-color: #fff; background: #292929; }
+.photo-dialog button:focus-visible { outline-color: #fff; }
+.photo-viewer-body { flex: 1; min-height: 0; display: grid; grid-template-columns: 44px minmax(0, 1fr) 44px; gap: 16px; align-items: center; }
+.photo-viewer-image { width: 100%; height: 100%; min-width: 0; min-height: 0; object-fit: contain; }
+.photo-viewer-caption { flex-shrink: 0; max-height: 64px; overflow: auto; color: #ddd; text-align: center; font: 11px/1.7 var(--mono); }
+.photo-position { flex-shrink: 0; color: #aaa; text-align: center; font: 10px/1.5 var(--mono); }
 
 /* Publications and work in progress */
 .publication-tools { display: flex; align-items: center; justify-content: space-between; gap: 20px; padding-bottom: 18px; border-bottom: 1px solid var(--ink); }
@@ -237,12 +259,13 @@ section { scroll-margin-top: 32px; }
   .recognition-grid { gap: 34px; }
 }
 
-@media (max-width: 1050px) {
+@media (max-width: 1120px) {
   .nav { flex-wrap: wrap; gap: 0 24px; }
   .menu-button { display: block; border-color: var(--ink); background: transparent; font-family: var(--mono); }
   .nav-links { display: none; position: absolute; left: var(--gutter); right: var(--gutter); top: 87px; padding: 17px 20px; border: 1px solid var(--line); background: var(--card); flex-wrap: wrap; gap: 10px 24px; }
   .nav-links.is-open { display: flex; }
   .education-layout { gap: 32px; }
+  .participation-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 34px 26px; }
 }
 
 @media (max-width: 760px) {
@@ -251,7 +274,8 @@ section { scroll-margin-top: 32px; }
   .education-details h3 { font-size: 27px; }
   .page-directory { gap: 0 28px; }
   .page-link { align-items: flex-start; }
-  .gallery-grid { gap: 32px 24px; }
+  .conference-heading { gap: 28px; }
+  .participation-grid { gap: 28px 20px; }
   .section { padding-block: 48px; }
   .about-first { padding-top: 34px; }
   .section-heading { grid-template-columns: minmax(0, 1fr); gap: 17px; margin-bottom: 27px; }
@@ -293,12 +317,21 @@ section { scroll-margin-top: 32px; }
   .menu-button { display: block; border-color: var(--ink); background: transparent; font-family: var(--mono); }
   .nav-links { display: none; position: absolute; left: var(--gutter); right: var(--gutter); top: 75px; padding: 17px 20px; border: 1px solid var(--line); border-radius: 0; background: var(--card); box-shadow: none; flex-wrap: wrap; gap: 10px 22px; }
   .nav-links.is-open { display: flex; }
-  .page-directory, .gallery-grid { grid-template-columns: minmax(0, 1fr); }
+  .page-directory { grid-template-columns: minmax(0, 1fr); }
   .page-directory { margin-top: 28px; }
   .page-link { padding-block: 20px; }
   .education-layout { padding-top: 22px; }
   .education-details h3 { font-size: 25px; }
-  .gallery-item figcaption { padding-top: 14px; margin-top: 12px; }
+  .conference-album { padding-top: 24px; }
+  .conference-heading { grid-template-columns: minmax(0, 1fr); gap: 22px; margin-bottom: 28px; }
+  .conference-summary { justify-self: start; font-size: 13px; }
+  .conference-name { font-size: 13px; margin-top: 13px; }
+  .photo-dialog { width: calc(100vw - 16px); height: calc(100dvh - 16px); max-height: calc(100dvh - 16px); padding: 12px; }
+  .photo-dialog[open] { gap: 10px; }
+  .photo-viewer-header h2 { font-size: 11px; }
+  .photo-viewer-body { grid-template-columns: 38px minmax(0, 1fr) 38px; gap: 6px; }
+  .photo-prev, .photo-next { min-width: 38px; padding-inline: 6px; }
+  .photo-viewer-caption { font-size: 10px; }
   .section-title { font-size: 30px; }
   .section-kicker { margin-bottom: 8px; }
   .profile-card { grid-template-columns: 100px minmax(0, 1fr); gap: 0 17px; padding: 0 0 24px; }
@@ -347,6 +380,11 @@ section { scroll-margin-top: 32px; }
   .next-case .arrow { font-size: 27px; }
 }
 
+@media (max-width: 480px) {
+  .participation-grid { grid-template-columns: minmax(0, 1fr); gap: 30px; }
+  .participation-photo figcaption { margin-top: 12px; }
+}
+
 @media (max-width: 360px) {
   .brand-description { display: none; }
   .profile-card { display: block; padding: 0 0 24px; }
@@ -376,6 +414,7 @@ section { scroll-margin-top: 32px; }
   .publication, .project-row, .award-row { break-inside: avoid; }
   .case-art img { max-height: 240px; border: 0; object-fit: contain; }
   .education-layout { grid-template-columns: 1fr 1fr; gap: 24px; }
-  .education-photo, .gallery-item { break-inside: avoid; }
+  .education-photo, .participation-photo { break-inside: avoid; }
+  .photo-dialog { display: none !important; }
   .case-section { grid-template-columns: 140px minmax(0, 1fr); gap: 25px; }
 }
