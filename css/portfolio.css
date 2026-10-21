@@ -106,9 +106,9 @@ section { scroll-margin-top: 32px; }
 
 /* About and original Summary */
 .about-first { padding-top: 48px; }
-.about-layout { display: grid; grid-template-columns: 260px minmax(0, 1fr); gap: 54px; align-items: stretch; }
+.about-layout { display: grid; grid-template-columns: 280px minmax(0, 1fr); gap: 44px; align-items: stretch; }
 .profile-card { padding: 0 32px 0 0; border: 0; border-right: 1px solid var(--ink); border-radius: 0; background: transparent; min-width: 0; }
-.portrait { width: 180px; height: 225px; aspect-ratio: 4 / 5; object-fit: cover; object-position: center 40%; border-radius: 0; background: #efefef; }
+.portrait { width: 200px; height: 250px; aspect-ratio: 4 / 5; object-fit: cover; object-position: center 40%; border-radius: 0; background: #efefef; }
 .profile-name { margin-top: 22px; font-size: 26px; font-weight: 600; line-height: 1.2; letter-spacing: -.05em; }
 .profile-role { margin-top: 10px; font: 11px/1.65 var(--mono); color: var(--ink); }
 .profile-location { margin-top: 13px; font: 11px/1.65 var(--mono); color: var(--muted); }
@@ -332,7 +332,7 @@ section { scroll-margin-top: 32px; }
   .section-heading > p { justify-self: start; }
   .about-layout { grid-template-columns: minmax(0, 1fr); gap: 18px; }
   .profile-card { display: grid; grid-template-columns: 128px minmax(0, 1fr); gap: 0 22px; align-content: center; padding: 0 0 24px; border-right: 0; border-bottom: 1px solid var(--ink); }
-  .profile-card .portrait { grid-column: 1; grid-row: 1 / 6; width: 128px; height: 160px; }
+  .profile-card .portrait { grid-column: 1; grid-row: 1 / 6; width: 144px; height: 180px; }
   .profile-name { grid-column: 2; margin-top: 0; font-size: 23px; }
   .profile-role, .profile-location, .profile-links { grid-column: 2; }
   .profile-role { margin-top: 6px; font-size: 12px; }
@@ -394,8 +394,8 @@ section { scroll-margin-top: 32px; }
   .photo-viewer-caption { font-size: 10px; }
   .section-title { font-size: 30px; }
   .section-kicker { margin-bottom: 8px; }
-  .profile-card { grid-template-columns: 112px minmax(0, 1fr); gap: 0 17px; padding: 0 0 24px; }
-  .profile-card .portrait { width: 112px; height: 140px; border-radius: 0; }
+  .profile-card { grid-template-columns: 120px minmax(0, 1fr); gap: 0 17px; padding: 0 0 24px; }
+  .profile-card .portrait { width: 120px; height: 150px; border-radius: 0; }
   .profile-name { font-size: 21px; }
   .profile-role { font-size: 11px; }
   .profile-location { font-size: 11px; }
