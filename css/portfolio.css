@@ -67,10 +67,9 @@ section { scroll-margin-top: 32px; }
 /* Navigation */
 .header { position: relative; z-index: 20; }
 .nav { display: flex; align-items: center; justify-content: space-between; gap: 28px; min-height: 88px; border-bottom: 1px solid var(--ink); }
-.brand { display: flex; align-items: center; gap: 13px; flex-shrink: 0; }
-.brand-mark { display: block; width: auto; height: auto; border-radius: 0; background: transparent; color: var(--ink); font-size: 25px; font-weight: 700; letter-spacing: -1.8px; line-height: 1; }
-.brand-description { font: 400 9px/1.65 var(--mono); letter-spacing: .05em; }
-.nav-links { display: flex; align-items: center; gap: 20px; font: 11px/1.5 var(--mono); }
+.brand { display: flex; align-items: center; min-height: 44px; flex-shrink: 0; }
+.brand-name { font-size: 22px; font-weight: 600; line-height: 1.2; letter-spacing: -.045em; white-space: nowrap; }
+.nav-links { display: flex; align-items: center; gap: clamp(14px, 1.5vw, 20px); font: 11px/1.5 var(--mono); }
 .nav-links a { position: relative; padding-block: 9px; color: var(--muted); transition: color .18s; }
 .nav-links a { white-space: nowrap; }
 .nav-links a::after { content: ''; position: absolute; bottom: 4px; left: 0; right: 0; height: 1px; background: var(--accent); transform: scaleX(0); transform-origin: left; transition: transform .18s; }
@@ -104,7 +103,7 @@ section { scroll-margin-top: 32px; }
 .about-first { padding-top: 48px; }
 .about-layout { display: grid; grid-template-columns: 260px minmax(0, 1fr); gap: 54px; align-items: stretch; }
 .profile-card { padding: 0 32px 0 0; border: 0; border-right: 1px solid var(--ink); border-radius: 0; background: transparent; min-width: 0; }
-.portrait { width: 160px; height: 200px; aspect-ratio: 4 / 5; object-fit: cover; object-position: center 40%; border-radius: 0; background: #efefef; }
+.portrait { width: 180px; height: 225px; aspect-ratio: 4 / 5; object-fit: cover; object-position: center 40%; border-radius: 0; background: #efefef; }
 .profile-name { margin-top: 22px; font-size: 26px; font-weight: 600; line-height: 1.2; letter-spacing: -.05em; }
 .profile-role { margin-top: 10px; font: 11px/1.65 var(--mono); color: var(--ink); }
 .profile-location { margin-top: 13px; font: 11px/1.65 var(--mono); color: var(--muted); }
@@ -142,6 +141,20 @@ section { scroll-margin-top: 32px; }
 .education-photo { min-width: 0; }
 .education-photo img { width: 100%; height: auto; object-fit: contain; }
 .education-photo figcaption { margin-top: 11px; color: var(--muted); font: 10px/1.7 var(--mono); }
+
+/* Certificates and score reports retain the complete original image. */
+.certificate-list { display: grid; gap: 48px; }
+.certificate-card { display: grid; grid-template-columns: minmax(0, 1fr); gap: 25px; padding-top: 28px; border-top: 1px solid var(--ink); }
+.certificate-copy { min-width: 0; }
+.certificate-copy h2 { font-size: 24px; font-weight: 500; line-height: 1.35; letter-spacing: -.035em; }
+.certificate-copy p { max-width: 75ch; margin-top: 11px; color: var(--muted); font-size: 14px; line-height: 1.8; }
+.certificate-copy .mono, .certificate-copy .eyebrow { font: 10px/1.8 var(--mono); letter-spacing: .04em; }
+.certificate-copy > .eyebrow:first-child { margin-top: 0; margin-bottom: 12px; }
+.certificate-copy .certificate-score { color: var(--ink); font-size: 18px; font-weight: 500; }
+.certificate-image-link { display: block; width: 100%; min-width: 0; }
+.certificate-image-link .text-link { margin-top: 12px; padding-bottom: 3px; border-bottom: 1px solid var(--line); }
+.certificate-image-link:hover .text-link { border-color: var(--ink); }
+.certificate-image { display: block; width: 100%; height: auto; object-fit: contain; border: 1px solid var(--line); }
 
 /* Conference participation: a numbered album with uncropped photographs. */
 .conference-album { padding-top: 30px; border-top: 1px solid var(--ink); }
@@ -267,7 +280,6 @@ section { scroll-margin-top: 32px; }
 .not-found a { margin-top: 25px; }
 
 @media (max-width: 1000px) {
-  .brand-description { display: none; }
   .nav-links { gap: 22px; }
   .recognition-grid { gap: 34px; }
   .project-category-nav { grid-template-columns: repeat(2, minmax(0, 1fr)); }
@@ -295,8 +307,8 @@ section { scroll-margin-top: 32px; }
   .section-heading { grid-template-columns: minmax(0, 1fr); gap: 17px; margin-bottom: 27px; }
   .section-heading > p { justify-self: start; }
   .about-layout { grid-template-columns: minmax(0, 1fr); gap: 18px; }
-  .profile-card { display: grid; grid-template-columns: 116px minmax(0, 1fr); gap: 0 22px; align-content: center; padding: 0 0 24px; border-right: 0; border-bottom: 1px solid var(--ink); }
-  .profile-card .portrait { grid-column: 1; grid-row: 1 / 6; width: 116px; height: 145px; }
+  .profile-card { display: grid; grid-template-columns: 128px minmax(0, 1fr); gap: 0 22px; align-content: center; padding: 0 0 24px; border-right: 0; border-bottom: 1px solid var(--ink); }
+  .profile-card .portrait { grid-column: 1; grid-row: 1 / 6; width: 128px; height: 160px; }
   .profile-name { grid-column: 2; margin-top: 0; font-size: 23px; }
   .profile-role, .profile-location, .profile-links { grid-column: 2; }
   .profile-role { margin-top: 6px; font-size: 12px; }
@@ -328,8 +340,7 @@ section { scroll-margin-top: 32px; }
   .education-details { grid-template-columns: minmax(0, 1fr); gap: 14px; }
   html { scroll-padding-top: 22px; }
   .nav { min-height: 76px; }
-  .brand-mark { width: 38px; height: 38px; font-size: 21px; border-radius: 0; }
-  .brand-description { display: block; font-size: 8px; }
+  .brand-name { font-size: 20px; }
   .menu-button { display: block; border-color: var(--ink); background: transparent; font-family: var(--mono); }
   .nav-links { display: none; position: absolute; left: var(--gutter); right: var(--gutter); top: 75px; padding: 17px 20px; border: 1px solid var(--line); border-radius: 0; background: var(--card); box-shadow: none; flex-wrap: wrap; gap: 10px 22px; }
   .nav-links.is-open { display: flex; }
@@ -338,6 +349,11 @@ section { scroll-margin-top: 32px; }
   .page-link { padding-block: 20px; }
   .education-layout { padding-top: 22px; }
   .education-details h3 { font-size: 25px; }
+  .certificate-list { gap: 36px; }
+  .certificate-card { padding-top: 22px; gap: 20px; }
+  .certificate-copy h2 { font-size: 22px; }
+  .certificate-copy p { font-size: 13px; }
+  .certificate-copy .mono, .certificate-copy .eyebrow { font-size: 10px; }
   .conference-album { padding-top: 24px; }
   .conference-heading { grid-template-columns: minmax(0, 1fr); gap: 22px; margin-bottom: 28px; }
   .conference-summary { justify-self: start; font-size: 13px; }
@@ -350,8 +366,8 @@ section { scroll-margin-top: 32px; }
   .photo-viewer-caption { font-size: 10px; }
   .section-title { font-size: 30px; }
   .section-kicker { margin-bottom: 8px; }
-  .profile-card { grid-template-columns: 100px minmax(0, 1fr); gap: 0 17px; padding: 0 0 24px; }
-  .profile-card .portrait { width: 100px; height: 125px; border-radius: 0; }
+  .profile-card { grid-template-columns: 112px minmax(0, 1fr); gap: 0 17px; padding: 0 0 24px; }
+  .profile-card .portrait { width: 112px; height: 140px; border-radius: 0; }
   .profile-name { font-size: 21px; }
   .profile-role { font-size: 11px; }
   .profile-location { font-size: 11px; }
@@ -409,9 +425,8 @@ section { scroll-margin-top: 32px; }
 }
 
 @media (max-width: 360px) {
-  .brand-description { display: none; }
   .profile-card { display: block; padding: 0 0 24px; }
-  .profile-card .portrait { width: 116px; height: 145px; }
+  .profile-card .portrait { width: 128px; height: 160px; }
   .profile-name { margin-top: 17px; }
   .profile-links { margin-top: 14px; }
   .professional-summary { padding: 0; }
@@ -441,6 +456,7 @@ section { scroll-margin-top: 32px; }
   .case-art img { max-height: 240px; border: 0; object-fit: contain; }
   .education-layout { grid-template-columns: 1fr 1fr; gap: 24px; }
   .education-photo, .participation-photo { break-inside: avoid; }
+  .certificate-card { break-inside: avoid; }
   .photo-dialog { display: none !important; }
   .case-section { grid-template-columns: 140px minmax(0, 1fr); gap: 25px; }
 }

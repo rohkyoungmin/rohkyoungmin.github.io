@@ -8,7 +8,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 DATA = json.loads((ROOT / 'content/site-content.json').read_text())
 BASE = 'https://rohkyoungmin.github.io'
-CV = 'https://github.com/rohkyoungmin/CV/raw/main/Kyoungmin_Roh___CV.pdf'
+CV = BASE + '/assets/Kyoungmin_Roh_CV.pdf'
 PAGES = [
     ('index.html', 'About', 'Background and research interests.'),
     ('experience.html', 'Experience', 'Research appointments and military service.'),
@@ -17,6 +17,7 @@ PAGES = [
     ('projects.html', 'Projects', 'Security tools, AI applications, and research software.'),
     ('awards.html', 'Awards', 'Awards, scholarships, and patent application.'),
     ('participation.html', 'Participation', 'Conferences, presentations, and moments from the journey.'),
+    ('certificate.html', 'Certificate', 'Language proficiency and certificates.'),
 ]
 PROJECT_TYPES = [
     ('coursework', 'Coursework Project', 'Course assignments, team projects, and capstone work.'),
@@ -66,7 +67,7 @@ def head(title, description, path='', prefix='', active=''):
 <a class="skip-link" href="#main">Skip to content</a>
 <header id="top" class="header wrap">
   <nav class="nav" aria-label="Main navigation">
-    <a href="{prefix}index.html" class="brand" aria-label="Kyoungmin Roh, home"><span class="brand-mark">KR.</span><span class="brand-description">KYOUNGMIN ROH<br>RESEARCH &amp; SELECTED WORK</span></a>
+    <a href="{prefix}index.html" class="brand" aria-label="Kyoungmin Roh, home"><span class="brand-name">Kyoungmin Roh</span></a>
     <button class="menu-button" aria-controls="main-navigation" aria-expanded="false" type="button">Menu +</button>
     <div id="main-navigation" class="nav-links">
       {navigation}<a href="#contact">Contact</a>
@@ -147,13 +148,13 @@ def build_home():
         <h3 class="profile-name">Kyoungmin Roh</h3>
         <p class="profile-role">{e(DATA['profileRole'])}</p>
         <p class="profile-location">South Korea</p>
-        <div class="profile-links">{external('https://github.com/rohkyoungmin','GitHub ↗')}{external('https://www.linkedin.com/in/kyoungmin-roh-88bb09343/','LinkedIn ↗')}</div>
+        <div class="profile-links">{external('https://scholar.google.com/citations?user=6O2OMlwAAAAJ','Google Scholar ↗')}{external('https://github.com/rohkyoungmin','GitHub ↗')}{external('https://www.linkedin.com/in/kyoungmin-roh-88bb09343/','LinkedIn ↗')}</div>
       </aside>
       <div class="professional-summary">
         <p class="summary-label">Summary</p>
         <p class="about-summary">{e(DATA['professionalSummary'])}</p>
         <p class="about-affiliation">{e(DATA['currentAffiliation'])}</p>
-        <div class="about-links">{external(CV,'Curriculum vitae <span aria-hidden="true">↗</span>','pill-link')}{external('https://scholar.google.com/citations?user=6O2OMlwAAAAJ','Google Scholar <span aria-hidden="true">↗</span>','pill-link')}</div>
+        <div class="about-links">{external(CV,'Curriculum vitae <span aria-hidden="true">↗</span>','pill-link')}</div>
       </div>
     </div>
   </section>
@@ -238,6 +239,14 @@ def build_participation():
     (ROOT/'gallery.html').write_text(f'''<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Participation — Kyoungmin Roh</title><meta http-equiv="refresh" content="0;url=participation.html"><link rel="canonical" href="{BASE}/participation.html"><meta name="robots" content="noindex"></head><body><h1>Participation</h1><p><a href="participation.html">View conference participation →</a></p></body></html>''')
 
 
+def build_certificates():
+    cards=[]
+    for certificate in DATA['certificates']:
+        cards.append(f'''<article class="certificate-card" aria-labelledby="{e(certificate['id'])}-title"><div class="certificate-copy"><p class="eyebrow">LANGUAGE PROFICIENCY</p><h2 id="{e(certificate['id'])}-title">{e(certificate['title'])}</h2><p class="mono muted">Test date: <time datetime="{e(certificate['date'])}">{e(certificate['dateLabel'])}</time></p><p class="certificate-score">{e(certificate['summary'])}</p><p>{e(certificate['details'])}</p></div><a class="certificate-image-link" href="{e(certificate['image'])}" target="_blank" rel="noopener noreferrer" aria-label="View full-size {e(certificate['title'])} score report"><img class="certificate-image" src="{e(certificate['image'])}" width="{certificate['width']}" height="{certificate['height']}" alt="{e(certificate['alt'])}" decoding="async"><span class="text-link">View full-size score report ↗</span></a></article>''')
+    body=f'''<section id="certificate" class="section" aria-labelledby="certificate-title"><div class="section-heading"><div><p class="eyebrow section-kicker">09 / CERTIFICATE</p><h1 id="certificate-title" class="section-title">Certificate</h1></div><p>Language proficiency and certificates.</p></div><div class="certificate-list">{''.join(cards)}</div></section>'''
+    write_page('certificate.html','Certificate','Language proficiency and certificates of Kyoungmin Roh.',body)
+
+
 def build_cases():
     folder=ROOT/'research'
     folder.mkdir(exist_ok=True)
@@ -268,6 +277,7 @@ if __name__=='__main__':
     build_sections()
     build_projects()
     build_participation()
+    build_certificates()
     build_cases()
     build_support()
-    print('Built seven portfolio pages, four research pages, 404, sitemap, and robots.txt.')
+    print('Built eight portfolio pages, four research pages, 404, sitemap, and robots.txt.')
