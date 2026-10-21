@@ -45,7 +45,7 @@ def head(title, description, path='', prefix='', active=''):
   <meta property="og:title" content="{e(title)}">
   <meta property="og:description" content="{e(description)}">
   <meta property="og:url" content="{BASE}/{e(path)}">
-  <meta property="og:image" content="{BASE}/elements/Roh.jpg">
+  <meta property="og:image" content="{BASE}/assets/profile-kyoungmin-roh.jpg">
   <meta name="twitter:card" content="summary">
   <link rel="icon" href="{prefix}assets/favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -133,7 +133,7 @@ def build_home():
     <div class="section-heading"><div><p class="eyebrow section-kicker">01 / ABOUT</p><h1 id="about-title" class="section-title">About</h1></div></div>
     <div class="about-layout">
       <aside class="profile-card" aria-label="Profile">
-        <img class="portrait" src="elements/Roh.jpg" width="160" height="192" alt="Portrait of Kyoungmin Roh" decoding="async">
+        <img class="portrait" src="assets/profile-kyoungmin-roh.jpg" width="1179" height="1462" alt="Portrait of Kyoungmin Roh" decoding="async">
         <h3 class="profile-name">Kyoungmin Roh</h3>
         <p class="profile-role">{e(DATA['profileRole'])}</p>
         <p class="profile-location">South Korea</p>

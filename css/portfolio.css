@@ -104,7 +104,7 @@ section { scroll-margin-top: 32px; }
 .about-first { padding-top: 48px; }
 .about-layout { display: grid; grid-template-columns: 260px minmax(0, 1fr); gap: 54px; align-items: stretch; }
 .profile-card { padding: 0 32px 0 0; border: 0; border-right: 1px solid var(--ink); border-radius: 0; background: transparent; min-width: 0; }
-.portrait { width: 160px; height: 192px; object-fit: cover; object-position: center 20%; border-radius: 0; filter: grayscale(1); background: #efefef; }
+.portrait { width: 160px; height: 200px; aspect-ratio: 4 / 5; object-fit: cover; object-position: center 40%; border-radius: 0; background: #efefef; }
 .profile-name { margin-top: 22px; font-size: 26px; font-weight: 600; line-height: 1.2; letter-spacing: -.05em; }
 .profile-role { margin-top: 10px; font: 11px/1.65 var(--mono); color: var(--ink); }
 .profile-location { margin-top: 13px; font: 11px/1.65 var(--mono); color: var(--muted); }
@@ -152,8 +152,8 @@ section { scroll-margin-top: 32px; }
 .conference-summary > .mono { margin-top: 20px; }
 .participation-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 34px 22px; align-items: start; }
 .participation-photo { min-width: 0; }
-.photo-open { display: block; width: 100%; padding: 0; border: 0; background: var(--surface); cursor: zoom-in; }
-.photo-open img { width: 100%; height: auto; object-fit: contain; transition: opacity .18s; }
+.photo-open { display: block; width: 100%; aspect-ratio: 3 / 4; overflow: hidden; padding: 0; border: 0; background: var(--surface); cursor: zoom-in; }
+.photo-open img { width: 100%; height: 100%; object-fit: cover; object-position: center; transition: opacity .18s; }
 .photo-open:hover img { opacity: .88; }
 .participation-photo figcaption { display: grid; grid-template-columns: 23px minmax(0, 1fr); gap: 10px; margin-top: 13px; padding-top: 10px; border-top: 1px solid var(--line); color: var(--muted); font: 11px/1.7 var(--mono); }
 .participation-photo figcaption > .mono { color: var(--ink); }
@@ -282,7 +282,7 @@ section { scroll-margin-top: 32px; }
   .section-heading > p { justify-self: start; }
   .about-layout { grid-template-columns: minmax(0, 1fr); gap: 18px; }
   .profile-card { display: grid; grid-template-columns: 116px minmax(0, 1fr); gap: 0 22px; align-content: center; padding: 0 0 24px; border-right: 0; border-bottom: 1px solid var(--ink); }
-  .profile-card .portrait { grid-column: 1; grid-row: 1 / 6; width: 116px; height: 150px; }
+  .profile-card .portrait { grid-column: 1; grid-row: 1 / 6; width: 116px; height: 145px; }
   .profile-name { grid-column: 2; margin-top: 0; font-size: 23px; }
   .profile-role, .profile-location, .profile-links { grid-column: 2; }
   .profile-role { margin-top: 6px; font-size: 12px; }
@@ -335,7 +335,7 @@ section { scroll-margin-top: 32px; }
   .section-title { font-size: 30px; }
   .section-kicker { margin-bottom: 8px; }
   .profile-card { grid-template-columns: 100px minmax(0, 1fr); gap: 0 17px; padding: 0 0 24px; }
-  .profile-card .portrait { width: 100px; height: 132px; border-radius: 0; }
+  .profile-card .portrait { width: 100px; height: 125px; border-radius: 0; }
   .profile-name { font-size: 21px; }
   .profile-role { font-size: 11px; }
   .profile-location { font-size: 11px; }
@@ -388,7 +388,7 @@ section { scroll-margin-top: 32px; }
 @media (max-width: 360px) {
   .brand-description { display: none; }
   .profile-card { display: block; padding: 0 0 24px; }
-  .profile-card .portrait { width: 116px; height: 146px; }
+  .profile-card .portrait { width: 116px; height: 145px; }
   .profile-name { margin-top: 17px; }
   .profile-links { margin-top: 14px; }
   .professional-summary { padding: 0; }
@@ -408,7 +408,7 @@ section { scroll-margin-top: 32px; }
   .about-layout, .recognition-grid { display: block; }
   .profile-card, .professional-summary { border: 0; padding: 0; background: none; box-shadow: none; }
   .profile-card { margin-bottom: 20px; }
-  .profile-card .portrait { width: 90px; height: 110px; }
+  .profile-card .portrait { width: 90px; height: 112.5px; }
   .timeline { display: block; }
   .timeline-item { margin-block: 12px; break-inside: avoid; }
   .publication, .project-row, .award-row { break-inside: avoid; }
