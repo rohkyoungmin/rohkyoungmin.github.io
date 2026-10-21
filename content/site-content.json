@@ -1121,19 +1121,32 @@
       "paperLabel": "ML-KEM paper",
       "photos": [
         {
-          "src": "assets/participation/kcc-2026/kcc-2026-13.webp",
-          "width": 1440,
-          "height": 1080,
-          "caption": "ML-KEM presentation · KCC 2026",
-          "alt": "Presenter at a lectern beside the title slide for a lightweight ML-KEM architecture for embedded TrustZone-A.",
-          "objectPosition": "15% center"
-        },
-        {
-          "src": "assets/participation/kcc-2026/kcc-2026-04.webp",
+          "src": "assets/participation/kcc-2026/kcc-2026-02.webp",
           "width": 1350,
           "height": 1800,
-          "caption": "Outstanding Paper Award · KCC 2026",
-          "alt": "Outstanding Paper Award certificate for the ML-KEM TrustZone-A paper at KCC 2026, dated June 25, 2026."
+          "caption": "Sunset by the sea",
+          "alt": "Pavilion roof framing an orange sunset over the sea."
+        },
+        {
+          "src": "assets/participation/kcc-2026/kcc-2026-03.webp",
+          "width": 1012,
+          "height": 1800,
+          "caption": "Last light over the water",
+          "alt": "Vivid orange sunset above the sea beneath dark red clouds."
+        },
+        {
+          "src": "assets/participation/kcc-2026/kcc-2026-01.webp",
+          "width": 1350,
+          "height": 1800,
+          "caption": "Harbor at dusk",
+          "alt": "Small fishing boats moored in a harbor beneath a twilight sky, with lights along the waterfront."
+        },
+        {
+          "src": "assets/participation/kcc-2026/kcc-2026-00.webp",
+          "width": 1350,
+          "height": 1800,
+          "caption": "A roadside reflection",
+          "alt": "Traveler taking a phone photograph in a round roadside mirror at dusk."
         },
         {
           "src": "assets/participation/kcc-2026/kcc-2026-09.webp",
@@ -1192,32 +1205,19 @@
           "alt": "Cup of yellow-orange frozen dessert topped with a dried citrus slice."
         },
         {
-          "src": "assets/participation/kcc-2026/kcc-2026-00.webp",
-          "width": 1350,
-          "height": 1800,
-          "caption": "A roadside reflection",
-          "alt": "Traveler taking a phone photograph in a round roadside mirror at dusk."
+          "src": "assets/participation/kcc-2026/kcc-2026-13.webp",
+          "width": 1440,
+          "height": 1080,
+          "caption": "ML-KEM presentation · KCC 2026",
+          "alt": "Presenter at a lectern beside the title slide for a lightweight ML-KEM architecture for embedded TrustZone-A.",
+          "objectPosition": "15% center"
         },
         {
-          "src": "assets/participation/kcc-2026/kcc-2026-01.webp",
+          "src": "assets/participation/kcc-2026/kcc-2026-04.webp",
           "width": 1350,
           "height": 1800,
-          "caption": "Harbor at dusk",
-          "alt": "Small fishing boats moored in a harbor beneath a twilight sky, with lights along the waterfront."
-        },
-        {
-          "src": "assets/participation/kcc-2026/kcc-2026-02.webp",
-          "width": 1350,
-          "height": 1800,
-          "caption": "Sunset by the sea",
-          "alt": "Pavilion roof framing an orange sunset over the sea."
-        },
-        {
-          "src": "assets/participation/kcc-2026/kcc-2026-03.webp",
-          "width": 1012,
-          "height": 1800,
-          "caption": "Last light over the water",
-          "alt": "Vivid orange sunset above the sea beneath dark red clouds."
+          "caption": "Outstanding Paper Award · KCC 2026",
+          "alt": "Outstanding Paper Award certificate for the ML-KEM TrustZone-A paper at KCC 2026, dated June 25, 2026."
         }
       ]
     },
