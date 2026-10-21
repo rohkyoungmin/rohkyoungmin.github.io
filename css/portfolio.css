@@ -103,6 +103,14 @@ section { scroll-margin-top: 32px; }
 .page-link:hover { border-color: var(--ink); }
 .page-link-gallery h2, .page-link-gallery h3, .page-link-gallery strong, .page-link-gallery > .arrow { color: #1d4ed8; }
 .page-link-gallery:hover { border-color: #1d4ed8; }
+.page-link-gallery-wide { grid-column: 1 / -1; }
+
+/* Extracurricular activities */
+.activity-row { display: grid; grid-template-columns: 150px minmax(0, .9fr) minmax(0, 1.1fr); gap: 28px; align-items: start; padding: 26px 0; border-top: 1px solid var(--ink); }
+.activity-period { padding-top: 3px; color: var(--muted); font-size: 10px; }
+.activity-heading h2 { font-size: 19px; font-weight: 500; line-height: 1.35; letter-spacing: -.035em; }
+.activity-role, .activity-organization { margin-top: 8px; color: var(--muted); font: 11px/1.7 var(--mono); }
+.activity-description { font-size: 14px; line-height: 1.75; }
 
 /* About and original Summary */
 .about-first { padding-top: 48px; }
@@ -343,6 +351,8 @@ section { scroll-margin-top: 32px; }
   .about-affiliation { margin-top: 22px; padding-top: 20px; border-top: 1px solid var(--line); }
   .timeline { grid-template-columns: minmax(0, 1fr); }
   .timeline-item { grid-template-columns: 90px minmax(0, 1fr); gap: 18px; }
+  .activity-row { grid-template-columns: 120px minmax(0, 1fr); gap: 18px; }
+  .activity-description { grid-column: 2; }
   .timeline-item .description { grid-column: 2; }
   .publication { grid-template-columns: 42px minmax(0, 1fr); gap: 15px; padding-block: 23px; }
   .pub-links { grid-column: 2; flex-direction: row; flex-wrap: wrap; align-items: center; justify-content: flex-start; padding-top: 0; }
@@ -407,6 +417,8 @@ section { scroll-margin-top: 32px; }
   .about-links { gap: 9px; margin-top: 23px; }
     .about-affiliation { font-size: 11px; }
   .timeline-item { grid-template-columns: minmax(0, 1fr); gap: 8px; padding: 22px 0; }
+  .activity-row { grid-template-columns: minmax(0, 1fr); gap: 8px; padding: 22px 0; }
+  .activity-description { grid-column: auto; }
   .timeline-item h3 { font-size: 17px; }
   .timeline-item .description { grid-column: auto; font-size: 13px; }
   .experience-group { margin-top: 30px; }

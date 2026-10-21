@@ -18,7 +18,8 @@ PAGES = [
     ('projects.html', 'Projects', 'Security tools, AI applications, and research software.'),
     ('awards.html', 'Awards', 'Awards and scholarships.'),
     ('certificate.html', 'Certificate', 'Language proficiency and certificates.'),
-    ('participation.html', 'Gallery', 'Conferences, presentations, and moments from the journey.'),
+    ('extracurricular.html', 'Extracurricular', 'Clubs, writing, CTF teams, and campus activities.'),
+    ('participation.html', 'Gallery', 'Conference presentations and photographs.'),
 ]
 PROJECT_TYPES = [
     ('coursework', 'Coursework Project', 'Course assignments, team projects, and capstone work.'),
@@ -162,7 +163,7 @@ def build_home():
       </div>
     </div>
   </section>
-  <nav class="page-directory" aria-label="Explore portfolio">{''.join(f'<a class="page-link{' page-link-gallery' if route=='participation.html' else ''}" href="{route}"><span><strong>{label}</strong><small>{description}</small></span><span aria-hidden="true">↗</span></a>' for route,label,description in PAGES[1:])}</nav>
+  <nav class="page-directory" aria-label="Explore portfolio">{''.join(f'<a class="page-link{' page-link-gallery page-link-gallery-wide' if route=='participation.html' else ''}" href="{route}"><span><strong>{label}</strong><small>{description}</small></span><span aria-hidden="true">↗</span></a>' for route,label,description in PAGES[1:])}</nav>
 </main>'''
     text+=footer()
     schema={'@context':'https://schema.org','@type':'Person','name':DATA['name'],'url':BASE,'email':DATA['email'],'description':DATA['summary'],'sameAs':[p['url'] for p in DATA['profiles']]}
@@ -205,7 +206,7 @@ def build_sections():
   </section>
 ''')
     write_page('awards.html','Awards & Scholarships','Research awards, scholarships, and military honors of Kyoungmin Roh.',f'''  <section id="recognition" class="section" aria-labelledby="recognition-title"><div class="recognition-grid"><div><p class="eyebrow section-kicker">07 / RECOGNITION</p><h1 id="recognition-title" class="section-title">Awards<sup>{len(DATA['awards']):02d}</sup></h1><p class="about-note">Research, competitions, and military service.</p><div class="recognition-links"><a class="text-link" href="#scholarships">Scholarships ↓</a></div></div><div>{awards}</div></div></section>
-  <section id="scholarships" class="section" aria-labelledby="scholarships-title"><div class="recognition-grid"><div><p class="eyebrow section-kicker">08 / SCHOLARSHIPS</p><h2 id="scholarships-title" class="section-title">Scholarships<sup>{len(DATA['scholarships']):02d}</sup></h2><p class="about-note">Academic merit, research, and project scholarships.</p></div><div>{scholarships}</div></div></section>
+  <section id="scholarships" class="section" aria-labelledby="scholarships-title"><div class="recognition-grid"><div><p class="eyebrow section-kicker">07 / SCHOLARSHIPS</p><h2 id="scholarships-title" class="section-title">Scholarships<sup>{len(DATA['scholarships']):02d}</sup></h2><p class="about-note">Academic merit, research, and project scholarships.</p></div><div>{scholarships}</div></div></section>
 ''')
 
 
@@ -257,8 +258,19 @@ def build_certificates():
     cards=[]
     for certificate in DATA['certificates']:
         cards.append(f'''<article class="certificate-card" aria-labelledby="{e(certificate['id'])}-title"><div class="certificate-copy"><p class="eyebrow">LANGUAGE PROFICIENCY</p><h2 id="{e(certificate['id'])}-title">{e(certificate['title'])}</h2><p class="mono muted">Test date: <time datetime="{e(certificate['date'])}">{e(certificate['dateLabel'])}</time></p><p class="certificate-score">{e(certificate['summary'])}</p><p>{e(certificate['details'])}</p></div><a class="certificate-image-link" href="{e(certificate['image'])}" target="_blank" rel="noopener noreferrer" aria-label="View full-size {e(certificate['title'])} score report"><img class="certificate-image" src="{e(certificate['image'])}" width="{certificate['width']}" height="{certificate['height']}" alt="{e(certificate['alt'])}" decoding="async"><span class="text-link">View full-size score report ↗</span></a></article>''')
-    body=f'''<section id="certificate" class="section" aria-labelledby="certificate-title"><div class="section-heading"><div><p class="eyebrow section-kicker">09 / CERTIFICATE</p><h1 id="certificate-title" class="section-title">Certificate</h1></div><p>Language proficiency and certificates.</p></div><div class="certificate-list">{''.join(cards)}</div></section>'''
+    body=f'''<section id="certificate" class="section" aria-labelledby="certificate-title"><div class="section-heading"><div><p class="eyebrow section-kicker">08 / CERTIFICATE</p><h1 id="certificate-title" class="section-title">Certificate</h1></div><p>Language proficiency and certificates.</p></div><div class="certificate-list">{''.join(cards)}</div></section>'''
     write_page('certificate.html','Certificate','Language proficiency and certificates of Kyoungmin Roh.',body)
+
+
+def build_extracurricular():
+    rows=[]
+    for activity in DATA['extracurricular']:
+        organization=e(activity['organization'])
+        if activity.get('url'):
+            organization=external(activity['url'],organization+' ↗')
+        rows.append(f'''<article class="activity-row"><p class="mono activity-period">{e(activity['period'])}</p><div class="activity-heading"><h2>{e(activity['title'])}</h2><p class="activity-role">{e(activity['role'])}</p><p class="activity-organization">{organization}</p></div><p class="activity-description">{e(activity['description'])}</p></article>''')
+    body=f'''<section id="extracurricular" class="section" aria-labelledby="extracurricular-title"><div class="section-heading"><div><p class="eyebrow section-kicker">09 / EXTRACURRICULAR</p><h1 id="extracurricular-title" class="section-title">Extracurricular</h1></div><p>Clubs, cybersecurity activities, writing, and campus life.</p></div><div class="activity-list">{''.join(rows)}</div></section>'''
+    write_page('extracurricular.html','Extracurricular','Clubs, cybersecurity activities, writing, and campus life of Kyoungmin Roh.',body)
 
 
 def build_cases():
@@ -293,6 +305,7 @@ if __name__=='__main__':
     build_projects()
     build_participation()
     build_certificates()
+    build_extracurricular()
     build_cases()
     build_support()
-    print('Built nine portfolio pages, four research pages, 404, sitemap, and robots.txt.')
+    print(f'Built {len(PAGES)} portfolio pages, four research pages, 404, sitemap, and robots.txt.')

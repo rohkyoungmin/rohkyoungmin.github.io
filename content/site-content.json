@@ -1403,5 +1403,63 @@
       "height": 350,
       "alt": "TOEFL iBT score report for Kyoungmin Roh, September 16, 2026. Overall 5.0 out of 6, equivalent to 100 out of 120; CEFR C1. Reading 5.5, Listening 5.0, Writing 5.5, Speaking 4.0 out of 6."
     }
+  ],
+  "extracurricular": [
+    {
+      "period": "Mar 2026 – Present",
+      "title": "Buddhist Club",
+      "organization": "Dankook University",
+      "role": "Member",
+      "description": "Participate in prayer-bead making and temple-stay events.",
+      "source": "https://app.notion.com/p/3f5addb0d1a780dfad0fd5c00f22471a"
+    },
+    {
+      "period": "Mar 2021 – Present",
+      "title": "AEGIS Cybersecurity Club",
+      "organization": "Dankook University",
+      "role": "Member",
+      "description": "Build practical security skills through weekly CTF exercises and technical seminars in cryptography, reverse engineering, and systems security. Led the club hacking team to top-10% finishes in the CCE 2025 preliminary round and HackTheOn Sejong 2025.",
+      "source": "https://app.notion.com/p/3f5addb0d1a780dfad0fd5c00f22471a"
+    },
+    {
+      "period": "Mar 2025 – Present",
+      "title": "OSINT Team",
+      "organization": "Remote",
+      "role": "Contributing Writer",
+      "description": "Write cybersecurity-awareness and technical articles for a global OSINT education platform, translating technical topics into practical guidance for non-specialist readers.",
+      "source": "https://app.notion.com/p/3f5addb0d1a780dfad0fd5c00f22471a"
+    },
+    {
+      "period": "Mar 2022 – Feb 2026",
+      "title": "Modakbul Guitar Club",
+      "organization": "Dankook University",
+      "role": "Member",
+      "description": "Practiced acoustic guitar and performed on stage in fall 2022.",
+      "source": "https://app.notion.com/p/3f5addb0d1a780dfad0fd5c00f22471a"
+    },
+    {
+      "period": "Jul 2025 – Nov 2025",
+      "title": "RubiyaLab CTF Team",
+      "organization": "HSPACE",
+      "role": "Member",
+      "description": "Competed in international hacking competitions, focusing on cryptography and reverse engineering, as part of a team ranked No. 1 in South Korea and No. 23 worldwide on CTFtime in 2025.",
+      "source": "https://app.notion.com/p/3f5addb0d1a780dfad0fd5c00f22471a"
+    },
+    {
+      "period": "Mar 2022 – Dec 2022",
+      "title": "Kendo Club",
+      "organization": "Dankook University",
+      "role": "Assistant Instructor & Member",
+      "description": "Mentored international junior members in fundamental kendo techniques and etiquette, helping them integrate into the club.",
+      "source": "https://app.notion.com/p/3f5addb0d1a780dfad0fd5c00f22471a"
+    },
+    {
+      "period": "May 2022 – Dec 2022",
+      "title": "Turing Crypto Club",
+      "organization": "Dankook University · Department of Industrial Security",
+      "role": "Member",
+      "description": "Studied applied cryptography with peers and delivered seminar presentations on core cryptographic constructions.",
+      "source": "https://app.notion.com/p/3f5addb0d1a780dfad0fd5c00f22471a"
+    }
   ]
 }
