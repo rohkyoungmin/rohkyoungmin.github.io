@@ -1110,6 +1110,118 @@
   ],
   "participation": [
     {
+      "id": "kcc-2026",
+      "title": "KCC 2026",
+      "name": "Korea Computer Congress",
+      "location": "Jeju, Republic of Korea",
+      "period": "June 2026",
+      "year": 2026,
+      "description": "Presented the ML-KEM split-execution architecture for embedded TrustZone-A systems at Korea Computer Congress 2026. Presentation, Outstanding Paper Award, and photographs from the trip to Jeju.",
+      "paperUrl": "https://www.dbpia.co.kr/journal/articleDetail?nodeId=NODE12929715",
+      "paperLabel": "ML-KEM paper",
+      "photos": [
+        {
+          "src": "assets/participation/kcc-2026/kcc-2026-13.webp",
+          "width": 1440,
+          "height": 1080,
+          "caption": "ML-KEM presentation · KCC 2026",
+          "alt": "Presenter at a lectern beside the title slide for a lightweight ML-KEM architecture for embedded TrustZone-A.",
+          "objectPosition": "15% center"
+        },
+        {
+          "src": "assets/participation/kcc-2026/kcc-2026-04.webp",
+          "width": 1350,
+          "height": 1800,
+          "caption": "Outstanding Paper Award · KCC 2026",
+          "alt": "Outstanding Paper Award certificate for the ML-KEM TrustZone-A paper at KCC 2026, dated June 25, 2026."
+        },
+        {
+          "src": "assets/participation/kcc-2026/kcc-2026-09.webp",
+          "width": 1350,
+          "height": 1800,
+          "caption": "A view through the window",
+          "alt": "Green fields and stone walls seen through a tall narrow window."
+        },
+        {
+          "src": "assets/participation/kcc-2026/kcc-2026-07.webp",
+          "width": 1350,
+          "height": 1800,
+          "caption": "Quiet water",
+          "alt": "Reflective garden pond bordered by rocks and greenery beneath an overcast sky."
+        },
+        {
+          "src": "assets/participation/kcc-2026/kcc-2026-10.webp",
+          "width": 1350,
+          "height": 1800,
+          "caption": "Green hills under gray skies",
+          "alt": "Grassy hillside crossed by a narrow path beneath an overcast sky."
+        },
+        {
+          "src": "assets/participation/kcc-2026/kcc-2026-06.webp",
+          "width": 1012,
+          "height": 1800,
+          "caption": "A path through the trees",
+          "alt": "Narrow reddish path winding between tall trees and green ground cover."
+        },
+        {
+          "src": "assets/participation/kcc-2026/kcc-2026-08.webp",
+          "width": 1350,
+          "height": 1800,
+          "caption": "Forest light",
+          "alt": "Sunlight falling through tall tree trunks onto bright green vegetation."
+        },
+        {
+          "src": "assets/participation/kcc-2026/kcc-2026-12.webp",
+          "width": 1350,
+          "height": 1800,
+          "caption": "Steps into the forest",
+          "alt": "Wooden steps climbing between dense trees and vegetation."
+        },
+        {
+          "src": "assets/participation/kcc-2026/kcc-2026-05.webp",
+          "width": 1350,
+          "height": 1800,
+          "caption": "Yellow flowers and stone walls",
+          "alt": "Yellow flowers behind a dark-stone wall, with buildings in the background."
+        },
+        {
+          "src": "assets/participation/kcc-2026/kcc-2026-11.webp",
+          "width": 1350,
+          "height": 1800,
+          "caption": "A citrus break",
+          "alt": "Cup of yellow-orange frozen dessert topped with a dried citrus slice."
+        },
+        {
+          "src": "assets/participation/kcc-2026/kcc-2026-00.webp",
+          "width": 1350,
+          "height": 1800,
+          "caption": "A roadside reflection",
+          "alt": "Traveler taking a phone photograph in a round roadside mirror at dusk."
+        },
+        {
+          "src": "assets/participation/kcc-2026/kcc-2026-01.webp",
+          "width": 1350,
+          "height": 1800,
+          "caption": "Harbor at dusk",
+          "alt": "Small fishing boats moored in a harbor beneath a twilight sky, with lights along the waterfront."
+        },
+        {
+          "src": "assets/participation/kcc-2026/kcc-2026-02.webp",
+          "width": 1350,
+          "height": 1800,
+          "caption": "Sunset by the sea",
+          "alt": "Pavilion roof framing an orange sunset over the sea."
+        },
+        {
+          "src": "assets/participation/kcc-2026/kcc-2026-03.webp",
+          "width": 1012,
+          "height": 1800,
+          "caption": "Last light over the water",
+          "alt": "Vivid orange sunset above the sea beneath dark red clouds."
+        }
+      ]
+    },
+    {
       "id": "acm-sac-2026",
       "title": "ACM SAC 2026",
       "name": "ACM/SIGAPP Symposium on Applied Computing",
@@ -1273,7 +1385,8 @@
           "caption": "Above the clouds",
           "alt": "Airplane wing above a sea of clouds glowing orange at sunset."
         }
-      ]
+      ],
+      "paperLabel": "ALARM paper"
     }
   ],
   "currentAffiliation": "Undergraduate · Dankook University",

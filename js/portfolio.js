@@ -64,25 +64,28 @@
     const close = viewer.querySelector('.photo-close');
     const previous = viewer.querySelector('.photo-prev');
     const next = viewer.querySelector('.photo-next');
+    let activePhotos = [];
     let current = 0;
     let opener = null;
     let savedOverflow = '';
 
     const showPhoto = index => {
-      current = (index + photos.length) % photos.length;
-      const photo = photos[current];
+      if (!activePhotos.length) return;
+      current = (index + activePhotos.length) % activePhotos.length;
+      const photo = activePhotos[current];
       const image = photo.querySelector('img');
       viewerImage.src = photo.href;
       viewerImage.alt = image.alt;
       viewerTitle.textContent = photo.dataset.photoAlbum;
       caption.textContent = photo.dataset.photoCaption;
-      position.textContent = `${String(current + 1).padStart(2, '0')} / ${String(photos.length).padStart(2, '0')}`;
+      position.textContent = `${String(current + 1).padStart(2, '0')} / ${String(activePhotos.length).padStart(2, '0')}`;
     };
-    photos.forEach((photo, index) => photo.addEventListener('click', event => {
+    photos.forEach(photo => photo.addEventListener('click', event => {
       if (event.button !== 0 || event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) return;
       event.preventDefault();
       opener = photo;
-      showPhoto(index);
+      activePhotos = photos.filter(item => item.dataset.photoAlbum === photo.dataset.photoAlbum);
+      showPhoto(activePhotos.indexOf(photo));
       savedOverflow = document.body.style.overflow;
       viewer.showModal();
       document.body.style.overflow = 'hidden';
