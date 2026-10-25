@@ -78,6 +78,21 @@
     main.dataset.bookPrev = previous ? previous.href : '';
     main.dataset.bookNext = next ? next.href : '';
 
+    const loadVisiblePhotos = () => {
+      if (routeKey !== 'participation.html') return;
+      const bounds = main.getBoundingClientRect();
+      const left = bounds.left + main.clientLeft - 64;
+      const right = left + main.clientWidth + 128;
+      const top = bounds.top + main.clientTop - 48;
+      const bottom = top + main.clientHeight + 96;
+      main.querySelectorAll('.participation-photo img[loading="lazy"]').forEach(image => {
+        const photo = image.getBoundingClientRect();
+        if (photo.right <= left || photo.left >= right || photo.bottom <= top || photo.top >= bottom) return;
+        image.loading = 'eager';
+        image.fetchPriority = 'high';
+      });
+    };
+
     const navigation = document.createElement('div');
     navigation.className = 'book-navigation wrap';
     const folio = document.createElement('div');
@@ -243,6 +258,7 @@
       refreshFrame = window.requestAnimationFrame(() => {
         refreshFrame = 0;
         refreshBookNavigation();
+        loadVisiblePhotos();
       });
     };
     main.addEventListener('scroll', scheduleRefresh, {passive:true});
@@ -255,7 +271,10 @@
       event.preventDefault();
       turnPage(event.key === 'ArrowLeft' ? 'prev' : 'next');
     });
-    window.requestAnimationFrame(refreshBookNavigation);
+    window.requestAnimationFrame(() => {
+      refreshBookNavigation();
+      loadVisiblePhotos();
+    });
   }
 
   const filterButtons = [...document.querySelectorAll('[data-publication-filter]')];
