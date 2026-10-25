@@ -56,6 +56,23 @@
     const previous = bookRoutes[routeIndex - 1] || null;
     const next = bookRoutes[routeIndex + 1] || null;
     const isHome = routeKey === 'index.html';
+    const prefetchedRoutes = new Set();
+    const prefetchRoute = href => {
+      if (!href || prefetchedRoutes.has(href) || href === location.pathname) return;
+      prefetchedRoutes.add(href);
+      const prefetch = document.createElement('link');
+      prefetch.rel = 'prefetch';
+      prefetch.href = href;
+      document.head.append(prefetch);
+    };
+    [previous, next].forEach(route => route && prefetchRoute(route.href));
+    document.querySelectorAll('.nav-links a[href]').forEach(link => {
+      const target = new URL(link.href, location.href);
+      if (target.origin !== location.origin || target.pathname === location.pathname) return;
+      const preload = () => prefetchRoute(target.pathname + target.search);
+      link.addEventListener('pointerenter', preload, {once:true});
+      link.addEventListener('focus', preload, {once:true});
+    });
     main.classList.add('book-spread', 'book-spread--' + (isHome ? 'home' : routeKey.replace(/\.html$/, '')));
     if (routeKey.startsWith('research/')) main.classList.add('book-spread--case');
     main.dataset.bookPrev = previous ? previous.href : '';
@@ -151,6 +168,10 @@
 
     let isTurning = false;
     const turnTo = (destination, direction) => {
+      if (destination.href) {
+        window.location.assign(destination.href);
+        return;
+      }
       if (isTurning) return;
       isTurning = true;
       let leaf = null;
@@ -161,10 +182,6 @@
         if (leaf && leaf.parentNode) leaf.remove();
         main.classList.remove('book-is-turning-next', 'book-is-turning-prev');
         isTurning = false;
-        if (destination.href) {
-          window.location.assign(destination.href);
-          return;
-        }
         const state = getPageState();
         main.scrollLeft = Math.max(0, Math.min(state.total - 1, destination.spread)) * state.step;
         refreshBookNavigation();
@@ -195,35 +212,21 @@
       leaf.addEventListener('animationend', event => {
         if (event.target === leaf && event.animationName.indexOf('portfolio-leaf-') === 0) finish();
       }, {once:true});
-      window.setTimeout(finish, 540);
+      window.setTimeout(finish, 480);
     };
 
     const turnPage = direction => {
       const state = getPageState();
       if (direction === 'next') {
         if (state.current < state.total - 1) turnTo({spread:state.current + 1}, 'next');
-        else if (next) turnTo({href:next.href}, 'next');
+        else if (next) window.location.assign(next.href);
       } else {
         if (state.current > 0) turnTo({spread:state.current - 1}, 'prev');
-        else if (previous) turnTo({href:previous.href}, 'prev');
+        else if (previous) window.location.assign(previous.href);
       }
     };
     previousButton.addEventListener('click', () => turnPage('prev'));
     nextButton.addEventListener('click', () => turnPage('next'));
-
-    document.addEventListener('click', event => {
-      if (event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
-      const target = event.target instanceof Element ? event.target : event.target.parentElement;
-      const link = target && target.closest('a[href]');
-      if (!link || link.target === '_blank' || link.hasAttribute('download')) return;
-      const destination = new URL(link.href, location.href);
-      if (destination.origin !== location.origin || destination.pathname === location.pathname) return;
-      const key = destination.pathname.replace(/^\/+/, '') || 'index.html';
-      const index = bookRoutes.findIndex(route => route.href.replace(/^\/+/, '') === key);
-      if (index === -1 || index === routeIndex) return;
-      event.preventDefault();
-      turnTo({href:destination.href}, index > routeIndex ? 'next' : 'prev');
-    }, true);
 
     main.addEventListener('click', event => {
       if (event.button !== 0 || event.defaultPrevented || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
