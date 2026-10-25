@@ -36,64 +36,181 @@
     document.addEventListener('click', event => { if (!event.target.closest('.nav')) closeMenu(); });
   }
 
-  // Present every portfolio route as a two-page spread. Clicking either half
-  // turns to the adjacent spread; links and controls keep their own behavior.
+  // Book pages are fixed-height columns. Extra content continues across the next spread.
   const bookRoutes = [
-    {href: '/index.html', label: 'About'},
-    {href: '/education.html', label: 'Education'},
-    {href: '/experience.html', label: 'Experience'},
-    {href: '/publications.html', label: 'Publications'},
-    {href: '/patents.html', label: 'Patents'},
-    {href: '/projects.html', label: 'Projects'},
-    {href: '/research/cca.html', label: 'CCA'},
-    {href: '/research/mlkem.html', label: 'ML-KEM'},
-    {href: '/research/scan.html', label: 'SCAN'},
-    {href: '/research/alarm.html', label: 'ALARM'},
-    {href: '/awards.html', label: 'Awards'},
-    {href: '/certificate.html', label: 'Certificate'},
-    {href: '/extracurricular.html', label: 'Extracurricular'},
-    {href: '/participation.html', label: 'Gallery'}
+    {href:'/index.html',label:'About'},{href:'/education.html',label:'Education'},
+    {href:'/experience.html',label:'Experience'},{href:'/publications.html',label:'Publications'},
+    {href:'/patents.html',label:'Patents'},{href:'/projects.html',label:'Projects'},
+    {href:'/research/cca.html',label:'CCA'},{href:'/research/mlkem.html',label:'ML-KEM'},
+    {href:'/research/scan.html',label:'SCAN'},{href:'/research/alarm.html',label:'ALARM'},
+    {href:'/awards.html',label:'Awards'},{href:'/certificate.html',label:'Certificate'},
+    {href:'/extracurricular.html',label:'Extracurricular'},{href:'/participation.html',label:'Gallery'}
   ];
+  let bookMain = null;
+  let refreshBookNavigation = () => {};
   const main = document.querySelector('main.wrap');
   const routeKey = location.pathname.replace(/^\/+/, '') || 'index.html';
   const routeIndex = bookRoutes.findIndex(route => route.href.replace(/^\/+/, '') === routeKey);
   if (main && routeIndex !== -1 && !main.classList.contains('not-found')) {
+    bookMain = main;
+    const previous = bookRoutes[routeIndex - 1] || null;
+    const next = bookRoutes[routeIndex + 1] || null;
+    const isHome = routeKey === 'index.html';
+    main.classList.add('book-spread', 'book-spread--' + (isHome ? 'home' : routeKey.replace(/\.html$/, '')));
+    if (routeKey.startsWith('research/')) main.classList.add('book-spread--case');
+    main.dataset.bookPrev = previous ? previous.href : '';
+    main.dataset.bookNext = next ? next.href : '';
+
+    const navigation = document.createElement('div');
+    navigation.className = 'book-navigation wrap';
+    const folio = document.createElement('div');
+    folio.className = 'book-folio';
+    folio.setAttribute('aria-hidden', 'true');
+    const leftNumber = document.createElement('span');
+    const rightNumber = document.createElement('span');
+    folio.append(leftNumber, rightNumber);
+    const controls = document.createElement('nav');
+    controls.className = 'book-turn-controls';
+    controls.setAttribute('aria-label', 'Turn book pages');
+    const status = document.createElement('p');
+    status.className = 'book-page-status';
+    status.setAttribute('role', 'status');
+    status.setAttribute('aria-live', 'polite');
+
+    const makeTurn = side => {
+      const button = document.createElement('button');
+      button.type = 'button';
+      button.className = 'book-turn-link book-turn-' + side;
+      button.dataset.bookTurn = side;
+      const arrow = document.createElement('span');
+      arrow.className = 'book-turn-arrow';
+      arrow.setAttribute('aria-hidden', 'true');
+      arrow.textContent = side === 'prev' ? '←' : '→';
+      const label = document.createElement('span');
+      label.className = 'book-turn-label';
+      if (side === 'prev') button.append(arrow, label);
+      else button.append(label, arrow);
+      return button;
+    };
+    const previousButton = makeTurn('prev');
+    const nextButton = makeTurn('next');
+    controls.append(previousButton, status, nextButton);
+    navigation.append(folio, controls);
+    main.after(navigation);
+    main.setAttribute('aria-label', 'Two-page book spread. Click a page or use the arrows to turn.');
+
+    const getPageState = () => {
+      const style = getComputedStyle(main);
+      const padLeft = parseFloat(style.paddingLeft) || 0;
+      const padRight = parseFloat(style.paddingRight) || 0;
+      const width = Math.max(1, main.clientWidth - padLeft - padRight);
+      // Multicol layouts add one gutter between each facing spread as well as between pages.
+      const gap = parseFloat(style.columnGap) || 0;
+      const step = width + gap;
+      const totalWidth = Math.max(width, main.scrollWidth - padLeft - padRight);
+      const total = Math.max(1, Math.ceil((totalWidth + gap - 1) / step));
+      const current = Math.max(0, Math.min(total - 1, Math.round(main.scrollLeft / step)));
+      const perSpread = Math.max(1, parseInt(style.getPropertyValue('--book-visible-pages'), 10) || 2);
+      return {width, step, total, current, perSpread};
+    };
+    const pageRange = (spread, perSpread) => {
+      const first = spread * perSpread + 1;
+      return {first, last:first + perSpread - 1};
+    };
+    const displayRange = range => String(range.first).padStart(2, '0') + '–' + String(range.last).padStart(2, '0');
+
+    refreshBookNavigation = () => {
+      const state = getPageState();
+      const totalPages = state.total * state.perSpread;
+      const current = pageRange(state.current, state.perSpread);
+      leftNumber.textContent = String(current.first).padStart(2, '0');
+      rightNumber.textContent = String(current.last).padStart(2, '0');
+      status.textContent = state.perSpread === 1
+        ? 'PAGE ' + String(current.first).padStart(2, '0') + ' / ' + String(totalPages).padStart(2, '0')
+        : 'PAGES ' + displayRange(current) + ' / ' + String(totalPages).padStart(2, '0');
+      const prevInternal = state.current > 0;
+      const nextInternal = state.current < state.total - 1;
+      const prevText = prevInternal
+        ? 'PREVIOUS · ' + displayRange(pageRange(state.current - 1, state.perSpread))
+        : previous ? 'PREVIOUS · ' + previous.label : 'PREVIOUS';
+      const nextText = nextInternal
+        ? 'NEXT · ' + displayRange(pageRange(state.current + 1, state.perSpread))
+        : next ? 'NEXT · ' + next.label : 'NEXT';
+      previousButton.querySelector('.book-turn-label').textContent = prevText;
+      nextButton.querySelector('.book-turn-label').textContent = nextText;
+      previousButton.setAttribute('aria-label', prevText);
+      nextButton.setAttribute('aria-label', nextText);
+      previousButton.disabled = !prevInternal && !previous;
+      nextButton.disabled = !nextInternal && !next;
+      main.dataset.bookSpreadIndex = String(state.current);
+      main.dataset.bookSpreadCount = String(state.total);
+      main.style.setProperty('--spread-scroll-offset', Math.round(main.scrollLeft) + 'px');
+      main.setAttribute('aria-label', (state.perSpread === 1 ? 'One-page book view. ' : 'Two-page book spread. ')
+        + 'Showing ' + status.textContent.toLowerCase() + '. Click a page or use the arrows to turn.');
+    };
+
     let isTurning = false;
-    const turnTo = (href, direction) => {
+    const turnTo = (destination, direction) => {
       if (isTurning) return;
+      isTurning = true;
+      let leaf = null;
+      let finished = false;
+      const finish = () => {
+        if (finished) return;
+        finished = true;
+        if (leaf && leaf.parentNode) leaf.remove();
+        main.classList.remove('book-is-turning-next', 'book-is-turning-prev');
+        isTurning = false;
+        if (destination.href) {
+          window.location.assign(destination.href);
+          return;
+        }
+        const state = getPageState();
+        main.scrollLeft = Math.max(0, Math.min(state.total - 1, destination.spread)) * state.step;
+        refreshBookNavigation();
+      };
       if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-        window.location.assign(href);
+        finish();
         return;
       }
-      isTurning = true;
       const bounds = main.getBoundingClientRect();
-      const leaf = main.cloneNode(true);
+      leaf = main.cloneNode(true);
       leaf.removeAttribute('id');
       leaf.classList.add('book-flip-layer');
       leaf.dataset.turn = direction;
       leaf.setAttribute('aria-hidden', 'true');
       leaf.setAttribute('role', 'presentation');
       leaf.inert = true;
-      leaf.style.top = `${bounds.top}px`;
-      leaf.style.left = `${bounds.left}px`;
-      leaf.style.width = `${bounds.width}px`;
-      leaf.style.height = `${bounds.height}px`;
+      leaf.style.top = bounds.top + 'px';
+      leaf.style.left = bounds.left + 'px';
+      leaf.style.width = bounds.width + 'px';
+      leaf.style.height = bounds.height + 'px';
       leaf.style.zIndex = '25';
+      leaf.style.overflow = 'hidden';
+      leaf.scrollLeft = main.scrollLeft;
       leaf.querySelectorAll('[id]').forEach(element => element.removeAttribute('id'));
-      leaf.querySelectorAll('dialog, [role="dialog"], .book-turn-controls').forEach(element => element.remove());
-      main.classList.add(`book-is-turning-${direction}`);
+      leaf.querySelectorAll('dialog, [role="dialog"]').forEach(element => element.remove());
+      main.classList.add('book-is-turning-' + direction);
       document.body.append(leaf);
-      let finished = false;
-      const finish = () => {
-        if (finished) return;
-        finished = true;
-        window.location.assign(href);
-      };
       leaf.addEventListener('animationend', event => {
-        if (event.target === leaf && event.animationName.startsWith('portfolio-leaf-')) finish();
-      }, {once: true});
-      window.setTimeout(finish, 740);
+        if (event.target === leaf && event.animationName.indexOf('portfolio-leaf-') === 0) finish();
+      }, {once:true});
+      window.setTimeout(finish, 430);
     };
+
+    const turnPage = direction => {
+      const state = getPageState();
+      if (direction === 'next') {
+        if (state.current < state.total - 1) turnTo({spread:state.current + 1}, 'next');
+        else if (next) turnTo({href:next.href}, 'next');
+      } else {
+        if (state.current > 0) turnTo({spread:state.current - 1}, 'prev');
+        else if (previous) turnTo({href:previous.href}, 'prev');
+      }
+    };
+    previousButton.addEventListener('click', () => turnPage('prev'));
+    nextButton.addEventListener('click', () => turnPage('next'));
+
     document.addEventListener('click', event => {
       if (event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
       const target = event.target instanceof Element ? event.target : event.target.parentElement;
@@ -101,55 +218,12 @@
       if (!link || link.target === '_blank' || link.hasAttribute('download')) return;
       const destination = new URL(link.href, location.href);
       if (destination.origin !== location.origin || destination.pathname === location.pathname) return;
-      const destinationKey = destination.pathname.replace(/^\/+/, '') || 'index.html';
-      const destinationIndex = bookRoutes.findIndex(route => route.href.replace(/^\/+/, '') === destinationKey);
-      if (destinationIndex === -1 || destinationIndex === routeIndex) return;
+      const key = destination.pathname.replace(/^\/+/, '') || 'index.html';
+      const index = bookRoutes.findIndex(route => route.href.replace(/^\/+/, '') === key);
+      if (index === -1 || index === routeIndex) return;
       event.preventDefault();
-      turnTo(destination.href, destinationIndex > routeIndex ? 'next' : 'prev');
+      turnTo({href:destination.href}, index > routeIndex ? 'next' : 'prev');
     }, true);
-
-    const previous = bookRoutes[routeIndex - 1];
-    const next = bookRoutes[routeIndex + 1];
-    main.classList.add('book-spread');
-    if (routeKey.startsWith('research/')) main.classList.add('book-spread--case');
-    else main.classList.add(`book-spread--${routeKey.replace(/\.html$/, '')}`);
-    main.dataset.bookPrev = previous ? previous.href : '';
-    main.dataset.bookNext = next ? next.href : '';
-    main.setAttribute('aria-label', 'Two-page book spread. Click the left or right page to turn.');
-
-    const folio = document.createElement('div');
-    folio.className = 'book-folio';
-    folio.setAttribute('aria-hidden', 'true');
-    const leftNumber = String(routeIndex * 2 + 1).padStart(2, '0');
-    const rightNumber = String(routeIndex * 2 + 2).padStart(2, '0');
-    folio.innerHTML = `<span>${leftNumber}</span><span>${rightNumber}</span>`;
-
-    const turns = document.createElement('nav');
-    turns.className = 'book-turn-controls';
-    turns.setAttribute('aria-label', 'Turn book pages');
-    const makeTurn = (route, side, direction, ordinal) => {
-      const link = document.createElement(route ? 'a' : 'span');
-      link.className = `book-turn-link book-turn-${side}`;
-      if (route) {
-        link.href = route.href;
-        link.setAttribute('aria-label', `${direction} to ${route.label}`);
-      } else {
-        link.setAttribute('aria-disabled', 'true');
-      }
-      const arrow = document.createElement('span');
-      arrow.className = 'book-turn-arrow';
-      arrow.setAttribute('aria-hidden', 'true');
-      arrow.textContent = side === 'prev' ? '←' : '→';
-      const label = document.createElement('span');
-      label.className = 'book-turn-label';
-      label.textContent = route ? `${direction} · ${route.label}` : direction;
-      if (side === 'prev') link.append(arrow, label);
-      else link.append(label, arrow);
-      return link;
-    };
-    turns.append(makeTurn(previous, 'prev', 'PREVIOUS', leftNumber), makeTurn(next, 'next', 'NEXT', rightNumber));
-    if (!main.classList.contains('home-spread')) main.append(folio);
-    main.append(turns);
 
     main.addEventListener('click', event => {
       if (event.button !== 0 || event.defaultPrevented || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
@@ -157,23 +231,28 @@
       if (!target || target.closest('a,button,input,select,textarea,summary,dialog,[role="dialog"],[contenteditable="true"]')) return;
       if (window.getSelection && window.getSelection().toString()) return;
       const bounds = main.getBoundingClientRect();
-      const destinationIndex = event.clientX < bounds.left + bounds.width / 2 ? routeIndex - 1 : routeIndex + 1;
-      const destination = bookRoutes[destinationIndex];
-      if (destination) {
-        turnTo(destination.href, destinationIndex > routeIndex ? 'next' : 'prev');
-      }
+      turnPage(event.clientX < bounds.left + bounds.width / 2 ? 'prev' : 'next');
     });
 
+    let refreshFrame = 0;
+    const scheduleRefresh = () => {
+      if (refreshFrame) return;
+      refreshFrame = window.requestAnimationFrame(() => {
+        refreshFrame = 0;
+        refreshBookNavigation();
+      });
+    };
+    main.addEventListener('scroll', scheduleRefresh, {passive:true});
+    window.addEventListener('resize', scheduleRefresh);
     document.addEventListener('keydown', event => {
       if (event.defaultPrevented || (event.key !== 'ArrowLeft' && event.key !== 'ArrowRight')) return;
       if (document.querySelector('dialog[open]')) return;
       const target = event.target instanceof Element ? event.target : null;
       if (target && target.closest('input,textarea,select,[contenteditable="true"]')) return;
-      const destination = event.key === 'ArrowLeft' ? previous : next;
-      if (!destination) return;
       event.preventDefault();
-      turnTo(destination.href, event.key === 'ArrowLeft' ? 'prev' : 'next');
+      turnPage(event.key === 'ArrowLeft' ? 'prev' : 'next');
     });
+    window.requestAnimationFrame(refreshBookNavigation);
   }
 
   const filterButtons = [...document.querySelectorAll('[data-publication-filter]')];
@@ -192,6 +271,7 @@
       if (show) visible++;
     });
     if (count) count.textContent = `${String(visible).padStart(2, '0')} entries`;
+    if (bookMain) { bookMain.scrollLeft = 0; window.requestAnimationFrame(refreshBookNavigation); }
   }));
 
   // Photo links stay usable without JavaScript; enhance them with a modal viewer.
