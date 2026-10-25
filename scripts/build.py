@@ -144,8 +144,12 @@ def scholarship_row(item):
 
 def build_home():
     text=head('Kyoungmin Roh — Cybersecurity, Machine Learning & Systems',DATA['summary'],active='index.html')
-    text+=f'''<main id="main" class="wrap">
-  <section id="about" class="section about-first" aria-labelledby="about-title">
+    contents=''.join(
+        f'<a class="page-link'+(' page-link-gallery' if route=='participation.html' else '')+f'" href="{e(route)}" aria-label="{e(label)}: {e(description)}"><span><strong>{e(label)}</strong><small>{e(description)}</small></span><span class="contents-arrow" aria-hidden="true">↗</span></a>'
+        for route,label,description in PAGES[1:]
+    )
+    text+=f'''<main id="main" class="wrap home-spread">
+  <section id="about" class="section about-first book-page home-about" aria-labelledby="about-title">
     <div class="section-heading"><div><p class="eyebrow section-kicker">01 / ABOUT</p><h1 id="about-title" class="section-title">About</h1></div></div>
     <div class="about-layout">
       <aside class="profile-card" aria-label="Profile">
@@ -163,7 +167,11 @@ def build_home():
       </div>
     </div>
   </section>
-  <nav class="page-directory" aria-label="Explore portfolio">{''.join(f'<a class="page-link{' page-link-gallery page-link-gallery-wide' if route=='participation.html' else ''}" href="{route}"><span><strong>{label}</strong><small>{description}</small></span><span aria-hidden="true">↗</span></a>' for route,label,description in PAGES[1:])}</nav>
+  <section class="book-page contents-page" aria-labelledby="contents-title">
+    <div class="section-heading"><div><p class="eyebrow section-kicker">02 / CONTENTS</p><h2 id="contents-title" class="section-title contents-title">Contents</h2></div></div>
+    <nav class="page-directory home-contents" aria-label="Contents">{contents}</nav>
+    <p class="contents-footnote">SELECT A SECTION TO OPEN</p>
+  </section>
 </main>'''
     text+=footer()
     schema={'@context':'https://schema.org','@type':'Person','name':DATA['name'],'url':BASE,'email':DATA['email'],'description':DATA['summary'],'sameAs':[p['url'] for p in DATA['profiles']]}
