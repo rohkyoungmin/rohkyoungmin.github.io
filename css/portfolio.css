@@ -514,36 +514,7 @@ main.wrap {
 }
 .contact.wrap { background-image: linear-gradient(90deg, rgba(0,0,0,.018), transparent 16px); }
 
-@view-transition { navigation: auto; }
-::view-transition-group(root) {
-  animation-duration: 560ms;
-  animation-timing-function: cubic-bezier(.68, 0, .32, 1);
-}
-::view-transition-old(root) {
-  transform-origin: left center;
-  backface-visibility: hidden;
-  animation: portfolio-page-leave 560ms cubic-bezier(.68, 0, .32, 1) both;
-}
-::view-transition-new(root) {
-  transform-origin: right center;
-  backface-visibility: hidden;
-  animation: portfolio-page-arrive 560ms cubic-bezier(.68, 0, .32, 1) both;
-}
-@keyframes portfolio-page-leave {
-  0% { transform: perspective(1800px) rotateY(0); filter: brightness(1); }
-  55% { box-shadow: inset -20px 0 26px rgba(0,0,0,.08); }
-  100% { transform: perspective(1800px) rotateY(-82deg); filter: brightness(.86); }
-}
-@keyframes portfolio-page-arrive {
-  0% { transform: perspective(1800px) rotateY(82deg); filter: brightness(.86); }
-  45% { box-shadow: inset 20px 0 26px rgba(0,0,0,.065); }
-  100% { transform: perspective(1800px) rotateY(0); filter: brightness(1); }
-}
-@media (prefers-reduced-motion: reduce) {
-  @view-transition { navigation: none; }
-}
-
-/* Full-width white pages with readable bookmark tabs along the top edge. */
+/* Full-width white pages with a restrained navigation header. */
 :root { --gutter: clamp(24px, 5vw, 88px); }
 .wrap {
   max-width: none;
@@ -1074,39 +1045,99 @@ main.book-spread input,
 main.book-spread select,
 main.book-spread textarea { cursor: pointer; }
 
-@keyframes portfolio-page-leave-next {
-  0% { transform: perspective(1800px) rotateY(0); filter: brightness(1); }
-  55% { box-shadow: inset 20px 0 26px rgba(0,0,0,.08); }
-  100% { transform: perspective(1800px) rotateY(82deg); filter: brightness(.86); }
+@keyframes portfolio-leaf-next {
+  0% { transform: perspective(1800px) rotateY(0); filter: brightness(1) drop-shadow(0 0 0 rgba(0,0,0,0)); }
+  45% { transform: perspective(1800px) rotateY(-82deg); filter: brightness(.82) drop-shadow(-8px 10px 9px rgba(0,0,0,.16)); }
+  100% { transform: perspective(1800px) rotateY(-176deg); filter: brightness(.78) drop-shadow(0 0 0 rgba(0,0,0,0)); }
 }
-@keyframes portfolio-page-arrive-next {
-  0% { transform: perspective(1800px) rotateY(-82deg); filter: brightness(.86); }
-  45% { box-shadow: inset -20px 0 26px rgba(0,0,0,.065); }
-  100% { transform: perspective(1800px) rotateY(0); filter: brightness(1); }
+@keyframes portfolio-leaf-prev {
+  0% { transform: perspective(1800px) rotateY(0); filter: brightness(1) drop-shadow(0 0 0 rgba(0,0,0,0)); }
+  45% { transform: perspective(1800px) rotateY(82deg); filter: brightness(.82) drop-shadow(8px 10px 9px rgba(0,0,0,.16)); }
+  100% { transform: perspective(1800px) rotateY(176deg); filter: brightness(.78) drop-shadow(0 0 0 rgba(0,0,0,0)); }
 }
-@keyframes portfolio-page-leave-prev {
-  0% { transform: perspective(1800px) rotateY(0); filter: brightness(1); }
-  55% { box-shadow: inset -20px 0 26px rgba(0,0,0,.08); }
-  100% { transform: perspective(1800px) rotateY(-82deg); filter: brightness(.86); }
+.book-flip-layer {
+  position: fixed;
+  z-index: 25;
+  max-width: none;
+  margin: 0;
+  overflow: hidden;
+  pointer-events: none;
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
 }
-@keyframes portfolio-page-arrive-prev {
-  0% { transform: perspective(1800px) rotateY(82deg); filter: brightness(.86); }
-  45% { box-shadow: inset 20px 0 26px rgba(0,0,0,.065); }
-  100% { transform: perspective(1800px) rotateY(0); filter: brightness(1); }
+.book-flip-layer[data-turn='next'] {
+  clip-path: inset(0 0 0 50%);
+  transform-origin: 50% 50%;
+  animation: portfolio-leaf-next 620ms cubic-bezier(.68, 0, .32, 1) both;
 }
-html[data-book-turn='next']::view-transition-old(root) {
-  transform-origin: right center;
-  animation: portfolio-page-leave-next 560ms cubic-bezier(.68, 0, .32, 1) both;
+.book-flip-layer[data-turn='prev'] {
+  clip-path: inset(0 50% 0 0);
+  transform-origin: 50% 50%;
+  animation: portfolio-leaf-prev 620ms cubic-bezier(.68, 0, .32, 1) both;
 }
-html[data-book-turn='next']::view-transition-new(root) {
-  transform-origin: left center;
-  animation: portfolio-page-arrive-next 560ms cubic-bezier(.68, 0, .32, 1) both;
+main.book-is-turning-next::after,
+main.book-is-turning-prev::after {
+  content: '';
+  position: absolute;
+  z-index: 2;
+  top: 0;
+  bottom: 0;
+  pointer-events: none;
+  background: #fff;
 }
-html[data-book-turn='prev']::view-transition-old(root) {
-  transform-origin: left center;
-  animation: portfolio-page-leave-prev 560ms cubic-bezier(.68, 0, .32, 1) both;
+main.book-is-turning-next::after {
+  left: 50%;
+  right: 0;
+  background: linear-gradient(90deg, rgba(0,0,0,.025), #fff 22px);
 }
-html[data-book-turn='prev']::view-transition-new(root) {
-  transform-origin: right center;
-  animation: portfolio-page-arrive-prev 560ms cubic-bezier(.68, 0, .32, 1) both;
+main.book-is-turning-prev::after {
+  left: 0;
+  right: 50%;
+  background: linear-gradient(270deg, rgba(0,0,0,.025), #fff 22px);
 }
+main.book-is-turning-next > .book-turn-controls,
+main.book-is-turning-prev > .book-turn-controls { position: relative; z-index: 3; }
+@media (max-width: 1000px) {
+  .book-flip-layer[data-turn='next'] { clip-path: none; transform-origin: left center; }
+  .book-flip-layer[data-turn='prev'] { clip-path: none; transform-origin: right center; }
+  main.book-is-turning-next::after,
+  main.book-is-turning-prev::after { left: 0; right: 0; }
+}
+
+/* Keep the site header as navigation and the contact footer as a colophon. */
+.header.wrap {
+  padding-top: 0;
+  background: rgba(255,255,255,.97);
+  backdrop-filter: none;
+}
+@media (min-width: 1201px) {
+  .nav-links { gap: clamp(12px, 1.4vw, 20px); align-items: center; }
+  .nav-links a {
+    min-height: 36px;
+    padding: 8px 0;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
+    transform: none;
+  }
+  .nav-links a::after { display: block; bottom: 3px; }
+  .nav-links a:hover,
+  .nav-links a:focus-visible,
+  .nav-links a[aria-current='page'] {
+    border: 0;
+    background: transparent;
+    box-shadow: none;
+    transform: none;
+  }
+  .nav-links a[aria-current='page']::after { transform: scaleX(0); }
+  .nav-links a.nav-gallery::after,
+  .nav-links a.nav-gallery[aria-current='page']::after { transform: scaleX(0); }
+  .nav-links a.nav-gallery:hover::after,
+  .nav-links a.nav-gallery:focus-visible::after { transform: scaleX(1); }
+}
+.contact.wrap {
+  isolation: auto;
+  background-image: none;
+}
+.contact.wrap::before { content: none; }

@@ -58,27 +58,54 @@
   const routeKey = location.pathname.replace(/^\/+/, '') || 'index.html';
   const routeIndex = bookRoutes.findIndex(route => route.href.replace(/^\/+/, '') === routeKey);
   if (main && routeIndex !== -1 && !main.classList.contains('not-found')) {
-    try {
-      const savedDirection = sessionStorage.getItem('portfolio-book-turn');
-      if (savedDirection === 'next' || savedDirection === 'prev') {
-        document.documentElement.dataset.bookTurn = savedDirection;
-        sessionStorage.removeItem('portfolio-book-turn');
+    let isTurning = false;
+    const turnTo = (href, direction) => {
+      if (isTurning) return;
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        window.location.assign(href);
+        return;
       }
-    } catch (_) {}
-    const markTurn = destinationIndex => {
-      const direction = destinationIndex >= routeIndex ? 'next' : 'prev';
-      document.documentElement.dataset.bookTurn = direction;
-      try { sessionStorage.setItem('portfolio-book-turn', direction); } catch (_) {}
+      isTurning = true;
+      const bounds = main.getBoundingClientRect();
+      const leaf = main.cloneNode(true);
+      leaf.removeAttribute('id');
+      leaf.classList.add('book-flip-layer');
+      leaf.dataset.turn = direction;
+      leaf.setAttribute('aria-hidden', 'true');
+      leaf.setAttribute('role', 'presentation');
+      leaf.inert = true;
+      leaf.style.top = `${bounds.top}px`;
+      leaf.style.left = `${bounds.left}px`;
+      leaf.style.width = `${bounds.width}px`;
+      leaf.style.height = `${bounds.height}px`;
+      leaf.style.zIndex = '25';
+      leaf.querySelectorAll('[id]').forEach(element => element.removeAttribute('id'));
+      leaf.querySelectorAll('dialog, [role="dialog"], .book-turn-controls').forEach(element => element.remove());
+      main.classList.add(`book-is-turning-${direction}`);
+      document.body.append(leaf);
+      let finished = false;
+      const finish = () => {
+        if (finished) return;
+        finished = true;
+        window.location.assign(href);
+      };
+      leaf.addEventListener('animationend', event => {
+        if (event.target === leaf && event.animationName.startsWith('portfolio-leaf-')) finish();
+      }, {once: true});
+      window.setTimeout(finish, 740);
     };
     document.addEventListener('click', event => {
+      if (event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
       const target = event.target instanceof Element ? event.target : event.target.parentElement;
       const link = target && target.closest('a[href]');
-      if (!link || link.target === '_blank') return;
+      if (!link || link.target === '_blank' || link.hasAttribute('download')) return;
       const destination = new URL(link.href, location.href);
       if (destination.origin !== location.origin || destination.pathname === location.pathname) return;
       const destinationKey = destination.pathname.replace(/^\/+/, '') || 'index.html';
       const destinationIndex = bookRoutes.findIndex(route => route.href.replace(/^\/+/, '') === destinationKey);
-      if (destinationIndex !== -1) markTurn(destinationIndex);
+      if (destinationIndex === -1 || destinationIndex === routeIndex) return;
+      event.preventDefault();
+      turnTo(destination.href, destinationIndex > routeIndex ? 'next' : 'prev');
     }, true);
 
     const previous = bookRoutes[routeIndex - 1];
@@ -133,8 +160,7 @@
       const destinationIndex = event.clientX < bounds.left + bounds.width / 2 ? routeIndex - 1 : routeIndex + 1;
       const destination = bookRoutes[destinationIndex];
       if (destination) {
-        markTurn(destinationIndex);
-        window.location.assign(destination.href);
+        turnTo(destination.href, destinationIndex > routeIndex ? 'next' : 'prev');
       }
     });
 
@@ -146,8 +172,7 @@
       const destination = event.key === 'ArrowLeft' ? previous : next;
       if (!destination) return;
       event.preventDefault();
-      markTurn(event.key === 'ArrowLeft' ? routeIndex - 1 : routeIndex + 1);
-      window.location.assign(destination.href);
+      turnTo(destination.href, event.key === 'ArrowLeft' ? 'prev' : 'next');
     });
   }
 
