@@ -35,6 +35,122 @@
     document.addEventListener('keydown', event => { if (event.key === 'Escape' && menu.getAttribute('aria-expanded') === 'true') { closeMenu(); menu.focus(); } });
     document.addEventListener('click', event => { if (!event.target.closest('.nav')) closeMenu(); });
   }
+
+  // Present every portfolio route as a two-page spread. Clicking either half
+  // turns to the adjacent spread; links and controls keep their own behavior.
+  const bookRoutes = [
+    {href: '/index.html', label: 'About'},
+    {href: '/education.html', label: 'Education'},
+    {href: '/experience.html', label: 'Experience'},
+    {href: '/publications.html', label: 'Publications'},
+    {href: '/patents.html', label: 'Patents'},
+    {href: '/projects.html', label: 'Projects'},
+    {href: '/research/cca.html', label: 'CCA'},
+    {href: '/research/mlkem.html', label: 'ML-KEM'},
+    {href: '/research/scan.html', label: 'SCAN'},
+    {href: '/research/alarm.html', label: 'ALARM'},
+    {href: '/awards.html', label: 'Awards'},
+    {href: '/certificate.html', label: 'Certificate'},
+    {href: '/extracurricular.html', label: 'Extracurricular'},
+    {href: '/participation.html', label: 'Gallery'}
+  ];
+  const main = document.querySelector('main.wrap');
+  const routeKey = location.pathname.replace(/^\/+/, '') || 'index.html';
+  const routeIndex = bookRoutes.findIndex(route => route.href.replace(/^\/+/, '') === routeKey);
+  if (main && routeIndex !== -1 && !main.classList.contains('not-found')) {
+    try {
+      const savedDirection = sessionStorage.getItem('portfolio-book-turn');
+      if (savedDirection === 'next' || savedDirection === 'prev') {
+        document.documentElement.dataset.bookTurn = savedDirection;
+        sessionStorage.removeItem('portfolio-book-turn');
+      }
+    } catch (_) {}
+    const markTurn = destinationIndex => {
+      const direction = destinationIndex >= routeIndex ? 'next' : 'prev';
+      document.documentElement.dataset.bookTurn = direction;
+      try { sessionStorage.setItem('portfolio-book-turn', direction); } catch (_) {}
+    };
+    document.addEventListener('click', event => {
+      const target = event.target instanceof Element ? event.target : event.target.parentElement;
+      const link = target && target.closest('a[href]');
+      if (!link || link.target === '_blank') return;
+      const destination = new URL(link.href, location.href);
+      if (destination.origin !== location.origin || destination.pathname === location.pathname) return;
+      const destinationKey = destination.pathname.replace(/^\/+/, '') || 'index.html';
+      const destinationIndex = bookRoutes.findIndex(route => route.href.replace(/^\/+/, '') === destinationKey);
+      if (destinationIndex !== -1) markTurn(destinationIndex);
+    }, true);
+
+    const previous = bookRoutes[routeIndex - 1];
+    const next = bookRoutes[routeIndex + 1];
+    main.classList.add('book-spread');
+    if (routeKey.startsWith('research/')) main.classList.add('book-spread--case');
+    else main.classList.add(`book-spread--${routeKey.replace(/\.html$/, '')}`);
+    main.dataset.bookPrev = previous ? previous.href : '';
+    main.dataset.bookNext = next ? next.href : '';
+    main.setAttribute('aria-label', 'Two-page book spread. Click the left or right page to turn.');
+
+    const folio = document.createElement('div');
+    folio.className = 'book-folio';
+    folio.setAttribute('aria-hidden', 'true');
+    const leftNumber = String(routeIndex * 2 + 1).padStart(2, '0');
+    const rightNumber = String(routeIndex * 2 + 2).padStart(2, '0');
+    folio.innerHTML = `<span>${leftNumber}</span><span>${rightNumber}</span>`;
+
+    const turns = document.createElement('nav');
+    turns.className = 'book-turn-controls';
+    turns.setAttribute('aria-label', 'Turn book pages');
+    const makeTurn = (route, side, direction, ordinal) => {
+      const link = document.createElement(route ? 'a' : 'span');
+      link.className = `book-turn-link book-turn-${side}`;
+      if (route) {
+        link.href = route.href;
+        link.setAttribute('aria-label', `${direction} to ${route.label}`);
+      } else {
+        link.setAttribute('aria-disabled', 'true');
+      }
+      const arrow = document.createElement('span');
+      arrow.className = 'book-turn-arrow';
+      arrow.setAttribute('aria-hidden', 'true');
+      arrow.textContent = side === 'prev' ? '←' : '→';
+      const label = document.createElement('span');
+      label.className = 'book-turn-label';
+      label.textContent = route ? `${direction} · ${route.label}` : direction;
+      if (side === 'prev') link.append(arrow, label);
+      else link.append(label, arrow);
+      return link;
+    };
+    turns.append(makeTurn(previous, 'prev', 'PREVIOUS', leftNumber), makeTurn(next, 'next', 'NEXT', rightNumber));
+    if (!main.classList.contains('home-spread')) main.append(folio);
+    main.append(turns);
+
+    main.addEventListener('click', event => {
+      if (event.button !== 0 || event.defaultPrevented || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+      const target = event.target instanceof Element ? event.target : event.target.parentElement;
+      if (!target || target.closest('a,button,input,select,textarea,summary,dialog,[role="dialog"],[contenteditable="true"]')) return;
+      if (window.getSelection && window.getSelection().toString()) return;
+      const bounds = main.getBoundingClientRect();
+      const destinationIndex = event.clientX < bounds.left + bounds.width / 2 ? routeIndex - 1 : routeIndex + 1;
+      const destination = bookRoutes[destinationIndex];
+      if (destination) {
+        markTurn(destinationIndex);
+        window.location.assign(destination.href);
+      }
+    });
+
+    document.addEventListener('keydown', event => {
+      if (event.defaultPrevented || (event.key !== 'ArrowLeft' && event.key !== 'ArrowRight')) return;
+      if (document.querySelector('dialog[open]')) return;
+      const target = event.target instanceof Element ? event.target : null;
+      if (target && target.closest('input,textarea,select,[contenteditable="true"]')) return;
+      const destination = event.key === 'ArrowLeft' ? previous : next;
+      if (!destination) return;
+      event.preventDefault();
+      markTurn(event.key === 'ArrowLeft' ? routeIndex - 1 : routeIndex + 1);
+      window.location.assign(destination.href);
+    });
+  }
+
   const filterButtons = [...document.querySelectorAll('[data-publication-filter]')];
   const publications = [...document.querySelectorAll('.publication-list .publication')];
   const count = document.getElementById('publication-count');

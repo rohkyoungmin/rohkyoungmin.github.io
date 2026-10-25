@@ -794,3 +794,319 @@ main.wrap {
 @media (prefers-reduced-motion: reduce) {
   .home-contents .page-link { transition: none; }
 }
+
+/* Every portfolio route opens as a left/right book spread. */
+main.book-spread:not(.home-spread) {
+  position: relative;
+  isolation: isolate;
+  min-height: calc(100svh - 160px);
+  border-block: 1px solid #f0f0ed;
+  background-image: linear-gradient(90deg, rgba(0,0,0,.016), transparent 22px);
+}
+main.book-spread:not(.home-spread)::before {
+  content: '';
+  position: absolute;
+  z-index: 0;
+  inset: 0 auto 0 50%;
+  width: 42px;
+  transform: translateX(-50%);
+  background: linear-gradient(90deg, transparent, rgba(0,0,0,.018) 27%, rgba(0,0,0,.045) 48%, rgba(255,255,255,.92) 54%, rgba(0,0,0,.018) 72%, transparent);
+  pointer-events: none;
+}
+main.book-spread:not(.home-spread) > *:not(dialog) { position: relative; z-index: 1; }
+main.book-spread:not(.home-spread) > .section { border-bottom: 0; }
+.book-folio {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(48px, 8vw, 120px);
+  padding: 5px 0 9px;
+  color: #989890;
+  font: 9px/1.5 var(--mono);
+}
+.book-folio span:first-child { text-align: left; }
+.book-folio span:last-child { text-align: right; }
+.book-turn-controls {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(48px, 8vw, 120px);
+  padding: 15px 0 22px;
+  border-top: 1px solid #e8e8e3;
+}
+.book-turn-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 36px;
+  width: fit-content;
+  color: #62625c;
+  font: 10px/1.6 var(--mono);
+  transition: color .18s, transform .18s;
+}
+.book-turn-link[aria-disabled='true'] { color: #b7b7b0; }
+a.book-turn-link:hover { color: var(--ink); }
+a.book-turn-prev:hover { transform: translateX(-3px); }
+a.book-turn-next { justify-self: end; }
+a.book-turn-next:hover { transform: translateX(3px); }
+.book-turn-arrow { color: var(--ink); font-size: 19px; line-height: 1; }
+.book-turn-link[aria-disabled='true'] .book-turn-arrow { color: #b7b7b0; }
+main.home-spread > .book-turn-controls {
+  grid-column: 1 / -1;
+  margin-inline: clamp(22px, 3.2vw, 48px);
+}
+
+@media (min-width: 901px) {
+  .section-heading { gap: clamp(40px, 8vw, 120px); }
+  .education-layout { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(48px, 8vw, 120px); }
+
+  /* Experience puts its two subjects on facing pages. */
+  .experience-section {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    column-gap: clamp(48px, 8vw, 120px);
+  }
+  .experience-section > .section-heading { grid-column: 1 / -1; }
+  .experience-section > .experience-group { min-width: 0; margin-top: 24px; }
+  .experience-section > .experience-group + .experience-group { margin-top: 24px; }
+  .experience-section .timeline-item {
+    grid-template-columns: 1fr;
+    gap: 9px;
+    padding-block: 20px;
+  }
+
+  /* Long lists read down the left page, then continue on the right. */
+  #publications .publication-list,
+  #patents .patent-list,
+  #extracurricular .activity-list {
+    column-count: 2;
+    column-gap: clamp(48px, 8vw, 120px);
+    column-rule: 1px solid #ededeb;
+  }
+  #publications .publication,
+  #patents .patent-entry,
+  #extracurricular .activity-row { break-inside: avoid; }
+  #publications .publication {
+    grid-template-columns: 42px minmax(0, 1fr);
+    gap: 9px 13px;
+    padding-block: 19px;
+  }
+  #publications .pub-title { font-size: 16px; }
+  #publications .pub-links {
+    grid-column: 2;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    padding-top: 3px;
+  }
+  #publications .status { text-align: left; }
+  #patents .patent-list { border-top: 0; }
+  #patents .patent-entry {
+    grid-template-columns: 44px minmax(0, 1fr);
+    gap: 10px 13px;
+    padding: 19px 8px;
+  }
+  #patents .patent-details h2 { font-size: 18px; }
+  #patents .patent-details > p { font-size: 12px; }
+  #patents .patent-status { grid-column: 2; }
+  #extracurricular .activity-row {
+    display: block;
+    padding: 19px 8px;
+  }
+  #extracurricular .activity-heading { margin-top: 7px; }
+  #extracurricular .activity-description { margin-top: 11px; font-size: 13px; }
+
+  /* Six project categories fill the two pages as parallel columns. */
+  main.book-spread--projects > #projects {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    column-gap: clamp(48px, 8vw, 120px);
+    align-content: start;
+  }
+  #projects > .section-heading,
+  #projects > .project-category-nav,
+  #projects > .project-links { grid-column: 1 / -1; }
+  #projects > .project-category-nav { grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: clamp(48px, 8vw, 120px); }
+  #projects > .project-group { min-width: 0; margin-top: 36px; }
+  #projects .project-group-heading { display: block; }
+  #projects .project-group-heading > p { margin-top: 9px; }
+  #projects .project-row {
+    grid-template-columns: 24px minmax(0, 1fr);
+    gap: 8px 12px;
+    padding-block: 19px;
+  }
+  #projects .project-row h3 { font-size: 17px; }
+  #projects .project-row .project-description { grid-column: 2; }
+  #projects .project-links { margin-top: 40px; }
+
+  /* Awards and scholarships sit on facing pages. */
+  main.book-spread--awards {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    column-gap: clamp(48px, 8vw, 120px);
+    align-content: start;
+  }
+  main.book-spread--awards > #recognition,
+  main.book-spread--awards > #scholarships { min-width: 0; padding-block: 48px 30px; }
+  main.book-spread--awards > .book-folio,
+  main.book-spread--awards > .book-turn-controls,
+  main.book-spread--case > .book-folio,
+  main.book-spread--case > .book-turn-controls { grid-column: 1 / -1; }
+  main.book-spread--awards > #recognition .recognition-grid,
+  main.book-spread--awards > #scholarships .recognition-grid { grid-template-columns: minmax(0, 1fr); gap: 25px; }
+  main.book-spread--awards > #recognition .recognition-grid > div:first-child,
+  main.book-spread--awards > #scholarships .recognition-grid > div:first-child { padding-bottom: 20px; border-bottom: 1px solid var(--line); }
+
+  #certificate .certificate-card { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(36px, 8vw, 110px); }
+
+  /* Project case studies use the left page for the figure and the right for text. */
+  main.book-spread--case {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    column-gap: clamp(48px, 8vw, 120px);
+    align-content: start;
+  }
+  main.book-spread--case > .case-hero,
+  main.book-spread--case > .next-case { grid-column: 1 / -1; }
+  main.book-spread--case > .case-art { grid-column: 1; align-self: start; }
+  main.book-spread--case > .case-body { grid-column: 2; max-width: none; margin: 0; }
+  main.book-spread--case .case-section { grid-template-columns: 1fr; gap: 10px; padding-block: 20px; }
+}
+
+@media (max-width: 900px) {
+  main.book-spread:not(.home-spread) { min-height: 0; }
+  main.book-spread:not(.home-spread)::before { display: none; }
+  .experience-section { display: block; }
+  #publications .publication-list,
+  #patents .patent-list,
+  #extracurricular .activity-list { column-count: 1; column-rule: 0; }
+  #publications .publication { grid-template-columns: 42px minmax(0, 1fr) 90px; }
+  #publications .pub-links { grid-column: 3; flex-direction: column; align-items: flex-end; }
+  #patents .patent-entry { grid-template-columns: 80px minmax(0, 1fr) auto; }
+  #patents .patent-status { grid-column: auto; }
+  main.book-spread--projects > #projects,
+  main.book-spread--awards,
+  main.book-spread--case { display: block; }
+  #projects > .project-group { margin-top: 54px; }
+  #projects .project-group-heading { display: flex; }
+  #projects .project-row { grid-template-columns: 30px minmax(190px, .85fr) minmax(0, 1.25fr); gap: 22px; padding-block: 26px; }
+  #projects .project-row .project-description { grid-column: auto; }
+  main.book-spread--awards > #recognition,
+  main.book-spread--awards > #scholarships { padding-block: 72px; }
+  main.book-spread--awards > #recognition .recognition-grid,
+  main.book-spread--awards > #scholarships .recognition-grid { grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr); gap: 34px; }
+  #certificate .certificate-card { grid-template-columns: minmax(0, 1fr); }
+  main.book-spread--case > .case-art,
+  main.book-spread--case > .case-body { grid-column: auto; }
+  main.book-spread--case > .case-body { max-width: 940px; margin: 30px auto; }
+  main.book-spread--case .case-section { grid-template-columns: minmax(0, 1fr); gap: 14px; padding-block: 26px; }
+}
+
+@media (max-width: 600px) {
+  .book-folio { gap: 30px; }
+  .book-turn-controls { gap: 24px; }
+  .book-turn-label { font-size: 9px; }
+  #publications .publication { grid-template-columns: 35px minmax(0, 1fr); }
+  #publications .pub-links { grid-column: 2; flex-direction: row; align-items: center; justify-content: flex-start; }
+  #patents .patent-entry { grid-template-columns: 1fr; gap: 8px; }
+  #patents .patent-status { grid-column: auto; }
+  #projects .project-row { grid-template-columns: 24px minmax(0, 1fr); gap: 8px 12px; }
+  #projects .project-row .project-description { grid-column: 2; }
+}
+
+/* The contact colophon also closes as a two-page spread. */
+.contact.wrap {
+  position: relative;
+  isolation: isolate;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  column-gap: clamp(48px, 8vw, 120px);
+  align-content: start;
+  border-top: 1px solid #f0f0ed;
+}
+.contact.wrap::before {
+  content: '';
+  position: absolute;
+  z-index: 0;
+  inset: 0 auto 0 50%;
+  width: 42px;
+  transform: translateX(-50%);
+  background: linear-gradient(90deg, transparent, rgba(0,0,0,.018) 27%, rgba(0,0,0,.045) 48%, rgba(255,255,255,.92) 54%, rgba(0,0,0,.018) 72%, transparent);
+  pointer-events: none;
+}
+.contact.wrap > * { position: relative; z-index: 1; }
+.contact-heading { grid-column: 1; }
+.contact-email { grid-column: 1; }
+.contact-bottom {
+  grid-column: 2;
+  grid-row: 1 / 3;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 24px;
+  margin-top: 0;
+}
+.social-links { flex-direction: column; align-items: flex-start; gap: 10px; }
+.footer {
+  grid-column: 1 / -1;
+  margin-top: 28px;
+  padding-top: 15px;
+  border-top: 1px solid #e8e8e3;
+}
+
+@media (max-width: 900px) {
+  .contact.wrap { display: block; min-height: 150px; }
+  .contact.wrap::before { display: none; }
+  .contact-bottom {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    margin-top: 29px;
+  }
+  .social-links { flex-direction: row; align-items: center; gap: 24px; }
+  .footer { margin-top: 28px; }
+}
+
+main.book-spread { cursor: pointer; }
+main.book-spread a,
+main.book-spread button,
+main.book-spread input,
+main.book-spread select,
+main.book-spread textarea { cursor: pointer; }
+
+@keyframes portfolio-page-leave-next {
+  0% { transform: perspective(1800px) rotateY(0); filter: brightness(1); }
+  55% { box-shadow: inset 20px 0 26px rgba(0,0,0,.08); }
+  100% { transform: perspective(1800px) rotateY(82deg); filter: brightness(.86); }
+}
+@keyframes portfolio-page-arrive-next {
+  0% { transform: perspective(1800px) rotateY(-82deg); filter: brightness(.86); }
+  45% { box-shadow: inset -20px 0 26px rgba(0,0,0,.065); }
+  100% { transform: perspective(1800px) rotateY(0); filter: brightness(1); }
+}
+@keyframes portfolio-page-leave-prev {
+  0% { transform: perspective(1800px) rotateY(0); filter: brightness(1); }
+  55% { box-shadow: inset -20px 0 26px rgba(0,0,0,.08); }
+  100% { transform: perspective(1800px) rotateY(-82deg); filter: brightness(.86); }
+}
+@keyframes portfolio-page-arrive-prev {
+  0% { transform: perspective(1800px) rotateY(82deg); filter: brightness(.86); }
+  45% { box-shadow: inset 20px 0 26px rgba(0,0,0,.065); }
+  100% { transform: perspective(1800px) rotateY(0); filter: brightness(1); }
+}
+html[data-book-turn='next']::view-transition-old(root) {
+  transform-origin: right center;
+  animation: portfolio-page-leave-next 560ms cubic-bezier(.68, 0, .32, 1) both;
+}
+html[data-book-turn='next']::view-transition-new(root) {
+  transform-origin: left center;
+  animation: portfolio-page-arrive-next 560ms cubic-bezier(.68, 0, .32, 1) both;
+}
+html[data-book-turn='prev']::view-transition-old(root) {
+  transform-origin: left center;
+  animation: portfolio-page-leave-prev 560ms cubic-bezier(.68, 0, .32, 1) both;
+}
+html[data-book-turn='prev']::view-transition-new(root) {
+  transform-origin: right center;
+  animation: portfolio-page-arrive-prev 560ms cubic-bezier(.68, 0, .32, 1) both;
+}
