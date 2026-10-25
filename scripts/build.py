@@ -1,229 +1,8 @@
-#!/usr/bin/env python3
-"""Build the static portfolio from content/site-content.json (standard library only)."""
-from html import escape
-from hashlib import sha256
-import json
-from pathlib import Path
-
-ROOT = Path(__file__).resolve().parents[1]
-DATA = json.loads((ROOT / 'content/site-content.json').read_text())
-BASE = 'https://rohkyoungmin.github.io'
-CV = BASE + '/assets/Kyoungmin_Roh_CV.pdf'
-PAGES = [
-    ('index.html', 'About', 'Background and research interests.'),
-    ('education.html', 'Education', 'Education history.'),
-    ('experience.html', 'Experience', 'Research appointments and military service.'),
-    ('publications.html', 'Publications', 'Published papers and manuscripts.'),
-    ('patents.html', 'Patents', 'Filed patent applications and patents in preparation.'),
-    ('projects.html', 'Projects', 'Security tools, AI applications, and research software.'),
-    ('awards.html', 'Awards', 'Awards and scholarships.'),
-    ('certificate.html', 'Certificate', 'Language proficiency and certificates.'),
-    ('extracurricular.html', 'Extracurricular', 'Clubs, writing, CTF teams, and campus activities.'),
-    ('participation.html', 'Gallery', 'Conference presentations and photographs.'),
-]
-PROJECT_TYPES = [
-    ('coursework', 'Coursework Project', 'Course assignments, team projects, and capstone work.'),
-    ('research', 'Research Project', 'Research prototypes, published methods, and experimental software.'),
-    ('funded', 'Funded Research Project', 'Contributions to commissioned and funded research programs.'),
-    ('competition', 'Competition Project', 'Projects developed for competitions and hackathons.'),
-    ('personal', 'Personal Project', 'Independent applications and applied experiments.'),
-    ('toy', 'Toy Project', 'Small utilities and focused programming experiments.'),
-]
-
-def e(value):
-    return escape(str(value if value is not None else ''), quote=True)
-
-def external(url, text, cls=''):
-    return f'<a href="{e(url)}" class="{e(cls)}" target="_blank" rel="noopener noreferrer">{text}</a>'
-
-def head(title, description, path='', prefix='', active=''):
-    style_version=sha256((ROOT/'css/portfolio.css').read_bytes()).hexdigest()[:12]
-    script_version=sha256((ROOT/'js/portfolio.js').read_bytes()).hexdigest()[:12]
-    navigation=''.join(
-        f'<a href="{prefix}{route}"'+(' class="nav-gallery"' if route=='participation.html' else '')+(' aria-current="page"' if route==active else '')+f'>{label}</a>'
-        for route,label,_ in PAGES
-    )
-    return f'''<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>{e(title)}</title>
-  <meta name="description" content="{e(description)}">
-  <meta name="theme-color" content="#ffffff">
-  <link rel="canonical" href="{BASE}/{e(path)}">
-  <meta property="og:type" content="website">
-  <meta property="og:title" content="{e(title)}">
-  <meta property="og:description" content="{e(description)}">
-  <meta property="og:url" content="{BASE}/{e(path)}">
-  <meta property="og:image" content="{BASE}/assets/profile-kyoungmin-roh.jpg">
-  <meta name="twitter:card" content="summary">
-  <link rel="icon" href="{prefix}assets/favicon.svg" type="image/svg+xml">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="{prefix}css/portfolio.css?v={style_version}">
-  <script src="{prefix}js/portfolio.js?v={script_version}" defer></script>
-  <noscript><style>.menu-button{{display:none}}.nav{{flex-wrap:wrap}}.nav-links{{display:flex;position:static;width:100%;padding:0 0 18px;border:0;flex-wrap:wrap}}</style></noscript>
-</head>
-<body>
-<a class="skip-link" href="#main">Skip to content</a>
-<header id="top" class="header wrap">
-  <nav class="nav" aria-label="Main navigation">
-    <a href="{prefix}index.html" class="brand" aria-label="Kyoungmin Roh, home"><span class="brand-name">Kyoungmin Roh</span></a>
-    <button class="menu-button" aria-controls="main-navigation" aria-expanded="false" type="button">Menu +</button>
-    <div id="main-navigation" class="nav-links">
-      {navigation}<a href="#contact">Contact</a>
-      {external(CV, 'CV â†—')}
-    </div>
-  </nav>
-</header>'''
-
-def footer(prefix=''):
-    profiles = ''.join(external(item['url'], e(item['label'])+' â†—') for item in DATA['profiles'])
-    return f'''<section id="contact" class="contact wrap" aria-labelledby="contact-title">
-  <h2 id="contact-title" class="contact-heading">Contact</h2>
-  <p class="contact-email"><a href="mailto:{e(DATA['email'])}">{e(DATA['email'])}</a></p>
-  <div class="contact-bottom"><div class="social-links">{profiles}</div><a class="text-link" href="#top">Back to top <span class="arrow" aria-hidden="true">â†‘</span></a></div>
-  <footer class="footer"><span>Â© 2026 Kyoungmin Roh</span><span>Cybersecurity Â· Machine learning Â· Systems</span></footer>
-</section>
-</body>
-</html>'''
-
-def experience_row(item):
-    dates=e(item['period'])
-    title=e(item['organization'])
-    if item.get('url'): title=external(item['url'],title+' â†—')
-    return f'''<article class="timeline-item"><p class="mono timeline-date">{dates}</p><div class="timeline-position"><h3>{title}</h3><p class="role">{e(item['role'])}<br><span class="muted">{e(item['lab'])}</span></p></div><p class="description">{e(item['description'])}</p></article>'''
-
-def publication_status(pub):
-    return 'published' if pub['status'].strip().casefold()=='published' else 'unpublished'
-
-def publication_row(pub):
-    category='international' if pub['category'].startswith('International') else 'domestic'
-    title=e(pub['title'])
-    if pub.get('url'): title=external(pub['url'],title)
-    def author_label(name):
-        clean=name.replace('â€ ','').strip()
-        label='<strong>Kyoungmin Roh</strong>' if clean=='Kyoungmin Roh' else e(clean)
-        cofirst='â€ ' in name or (pub['id']=='mlkem' and clean in ['Kyoungmin Roh','Nahee Kwon'])
-        return label+('<sup>â€ </sup>' if cofirst else '')
-    authors=', '.join(author_label(name) for name in pub['authors'])
-    links=[]
-    if pub.get('url'): links.append(external(pub['url'],'Paper â†—'))
-    if pub.get('code'): links.append(external(pub['code'],'Code â†—'))
-    status=pub['status']
-    if status != 'Published': links.append(f'<span class="status">{e(status)}</span>')
-    labels=pub.get('badges',[])+([pub['award']] if pub.get('award') else [])
-    award=''.join(f'<span class="pub-award">{e(label)}</span>' for label in labels)
-    return f'''<article class="publication" data-category="{category}" data-publication-status="{publication_status(pub)}"><p class="mono pub-year">{e(pub.get('year') or 'â€”')}</p><div><h3 class="pub-title">{title}</h3><p class="pub-authors">{authors}</p><p class="pub-meta">{e(pub['venue'])}</p>{award}</div><div class="pub-links">{''.join(links)}</div></article>'''
-
-def project_row(project, number):
-    badges=''.join(f'<span class="pub-award">{e(label)}</span>' for label in project.get('badges',[]))
-    badges=f'<div class="project-badges">{badges}</div>' if badges else ''
-    role = f'<p class="project-role">Role: {e(project["role"])}</p>' if project.get('role') else ''
-    context = f'<p class="project-context">{e(project["context"])}</p>' if project.get('context') else ''
-    funding = f'<p class="project-context">Commissioned by: {e(project["commissionedBy"])}</p>' if project.get('commissionedBy') else ''
-    links=[]
-    for link in project['links']:
-        label=e(link['label'])
-        if link['url'].startswith('https://'):
-            links.append(external(link['url'],label+' â†—'))
-        else:
-            links.append(f'<a href="{e(link["url"])}">{label} â†’</a>')
-    case_slug={'scan':'scan','alarm':'alarm','mlkem-split':'mlkem'}.get(project['id'])
-    if case_slug:
-        links.append(f'<a href="research/{case_slug}.html">Research details â†’</a>')
-    return f'''<article id="project-{e(project['id'])}" class="project-row" data-project-type="{e(project['projectType'])}"><span class="mono number">{number:02d}</span><div><h3>{e(project['title'])}</h3><div class="tag">{e(' / '.join(project['tags']))}</div>{badges}{context}</div><div class="project-description"><p>{e(project['description'])}</p>{funding}{role}<div class="project-resource-links">{''.join(links)}</div></div></article>'''
-
-def award_row(award):
-    return f'''<article class="award-row"><span class="mono muted">{e(award['date'])}</span><div><h3>{e(award['title'])}</h3><p>{e(award['organization'])} Â· {e(award['description'])}</p></div></article>'''
-
-def scholarship_row(item):
-    amount=f'KRW {item["amountKrw"]:,}'
-    return f'''<article class="award-row scholarship-row"><span class="mono muted">{e(item['date'])}</span><div><h3>{e(item['title'])}</h3><p>{e(item['organization'])}</p><p>{e(item['description'])}</p><p class="scholarship-amount">{amount}</p></div></article>'''
-
-def build_home():
-    text=head('Kyoungmin Roh â€” Cybersecurity, Machine Learning & Systems',DATA['summary'],active='index.html')
-    contents=''.join(
-        f'<a class="page-link'+(' page-link-gallery' if route=='participation.html' else '')+f'" href="{e(route)}" aria-label="{e(label)}: {e(description)}"><span><strong>{e(label)}</strong><small>{e(description)}</small></span><span class="contents-arrow" aria-hidden="true">â†—</span></a>'
-        for route,label,description in PAGES[1:]
-    )
-    text+=f'''<main id="main" class="wrap home-spread">
-  <section id="about" class="section about-first book-page home-about" aria-labelledby="about-title">
-    <div class="section-heading"><div><p class="eyebrow section-kicker">01 / ABOUT</p><h1 id="about-title" class="section-title">About</h1></div></div>
-    <div class="about-layout">
-      <aside class="profile-card" aria-label="Profile">
-        <img class="portrait" src="assets/profile-kyoungmin-roh.jpg" width="1179" height="1462" alt="Portrait of Kyoungmin Roh" decoding="async">
-        <h3 class="profile-name">Kyoungmin Roh</h3>
-        <p class="profile-role">{e(DATA['profileRole'])}</p>
-        <p class="profile-location">South Korea</p>
-        <div class="profile-links">{external('https://scholar.google.com/citations?user=6O2OMlwAAAAJ','Google Scholar â†—')}{external('https://github.com/rohkyoungmin','GitHub â†—')}{external('https://www.linkedin.com/in/kyoungmin-roh-88bb09343/','LinkedIn â†—')}{external('https://medium.com/@kyoungminroh01','Blog â†—')}</div>
-      </aside>
-      <div class="professional-summary">
-        <p class="summary-label">Summary</p>
-        <p class="about-summary">{e(DATA['professionalSummary'])}</p>
-        <p class="about-affiliation">{e(DATA['currentAffiliation'])}</p>
-        <div class="about-links">{external(CV,'Curriculum vitae <span aria-hidden="true">â†—</span>','pill-link')}</div>
-      </div>
-    </div>
-  </section>
-  <section class="book-page contents-page" aria-labelledby="contents-title">
-    <div class="section-heading"><div><p class="eyebrow section-kicker">02 / CONTENTS</p><h2 id="contents-title" class="section-title contents-title">Contents</h2></div></div>
-    <nav class="page-directory home-contents" aria-label="Contents">{contents}</nav>
-    <p class="contents-footnote">SELECT A SECTION TO OPEN</p>
-  </section>
-</main>'''
-    text+=footer()
-    schema={'@context':'https://schema.org','@type':'Person','name':DATA['name'],'url':BASE,'email':DATA['email'],'description':DATA['summary'],'sameAs':[p['url'] for p in DATA['profiles']]}
-    text=text.replace('</head>',f'<script type="application/ld+json">{json.dumps(schema,ensure_ascii=False)}</script>\n</head>')
-    (ROOT/'index.html').write_text(text)
-
-def write_page(route, title, description, body):
-    text=head(title+' â€” Kyoungmin Roh',description,route,active=route)
-    text+='<main id="main" class="wrap">'+body+'</main>'+footer()
-    (ROOT/route).write_text(text)
-
-
-def build_sections():
-    research_experience=''.join(experience_row(item) for item in DATA['experience'] if item['type']=='Research')
-    military_service=''.join(experience_row(item) for item in DATA['experience'] if item['type']=='Military')
-    published=[pub for pub in DATA['publications'] if publication_status(pub)=='published']
-    unpublished=[pub for pub in DATA['publications'] if publication_status(pub)=='unpublished']
-    ordered_publications=published+unpublished
-    publications=''.join(publication_row(pub) for pub in ordered_publications)
-    awards=''.join(award_row(award) for award in DATA['awards'])
-    scholarships=''.join(scholarship_row(item) for item in DATA['scholarships'])
-    write_page('experience.html','Experience','Research appointments and military service of Kyoungmin Roh.',f'''  <section id="experience" class="section experience-section" aria-labelledby="experience-title">
-    <div class="section-heading"><div><p class="eyebrow section-kicker">03 / EXPERIENCE</p><h1 id="experience-title" class="section-title">Experience</h1></div><p>Research and military service.</p></div>
-    <section id="research-experience" class="experience-group" aria-labelledby="research-experience-title"><h2 id="research-experience-title" class="experience-group-title">Research Experience</h2><div class="timeline">{research_experience}</div></section>
-    <section id="military-service" class="experience-group" aria-labelledby="military-service-title"><h2 id="military-service-title" class="experience-group-title">Military Service</h2><div class="timeline">{military_service}</div></section>
-  </section>
-''')
-    write_page('education.html','Education','Kyoungmin Rohâ€™s education at Dankook University.',f'''  <section id="education" class="section education-section" aria-labelledby="education-title">
-    <div class="section-heading"><div><p class="eyebrow section-kicker">02 / EDUCATION</p><h1 id="education-title" class="section-title">Education</h1></div></div>
-    <div class="education-layout">
-      <div class="education-details"><div><h3>{e(DATA['education']['organization'])}</h3><p>{e(DATA['education']['degree'])}</p></div><p class="education-period">{e(DATA['education']['period'])}</p><p class="education-location">{e(DATA['education']['location'])}</p></div>
-      <figure class="education-photo"><img src="assets/dankook-campus.png" width="1024" height="768" alt="Dankook University campus with the DKU monument and surrounding buildings" decoding="async"><figcaption>Dankook University</figcaption></figure>
-    </div>
-  </section>
-''')
-    write_page('publications.html','Publications','Published research papers and unpublished manuscripts by Kyoungmin Roh.',f'''  <section id="publications" class="section" aria-labelledby="publications-title">
-    <div class="section-heading"><div><p class="eyebrow section-kicker">04 / PUBLICATIONS</p><h1 id="publications-title" class="section-title">Publications</h1></div><p>Published papers and manuscripts, with publication status indicated.</p></div>
-    <div class="publication-tools"><div class="filter-buttons" role="group" aria-label="Filter publications"><button type="button" class="filter-button" data-publication-filter="all" aria-pressed="true">All</button><button type="button" class="filter-button" data-publication-filter="international" aria-pressed="false">International</button><button type="button" class="filter-button" data-publication-filter="domestic" aria-pressed="false">Domestic</button><button type="button" class="filter-button" data-publication-filter="unpublished" aria-pressed="false">Unpublished</button></div><span id="publication-count" class="mono muted" role="status" aria-live="polite">{len(ordered_publications):02d} entries</span></div>
-    <div class="publication-list">{publications}</div><p class="pub-status-note">Authors are listed in contribution order. â€  Co-first authors.</p>
-  </section>
-''')
-    write_page('awards.html','Awards & Scholarships','Research awards, scholarships, and military honors of Kyoungmin Roh.',f'''  <section id="recognition" class="section" aria-labelledby="recognition-title"><div class="recognition-grid"><div><p class="eyebrow section-kicker">07 / RECOGNITION</p><h1 id="recognition-title" class="section-title">Awards<sup>{len(DATA['awards']):02d}</sup></h1><p class="about-note">Research, competitions, and military service.</p><div class="recognition-links"><a class="text-link" href="#scholarships">Scholarships â†“</a></div></div><div>{awards}</div></div></section>
-  <section id="scholarships" class="section" aria-labelledby="scholarships-title"><div class="recognition-grid"><div><p class="eyebrow section-kicker">07 / SCHOLARSHIPS</p><h2 id="scholarships-title" class="section-title">Scholarships<sup>{len(DATA['scholarships']):02d}</sup></h2><p class="about-note">Academic merit, research, and project scholarships.</p></div><div>{scholarships}</div></div></section>
-''')
-
-
-def build_patents():
-    entries=[]
-    for number,patent in enumerate(DATA['patents'],1):
-        inventors=', '.join('<strong>Kyoungmin Roh</strong>' if name=='Kyoungmin Roh' else e(name) for name in patent['inventors'])
-        entries.append(f'''<article id="patent-{number}" class="patent-entry"><p class="patent-year mono muted">{patent['year']}</p><div class="patent-details"><h2>{e(patent['title'])}</h2><p class="patent-title-ko" lang="ko">{e(patent['titleKorean'])}</p><p class="pub-authors">{inventors}</p><p class="patent-reference">{e(patent['reference'])}</p></div><span class="patent-status">{e(patent['status'])}</span></article>''')
-    body=f'''<section id="patents" class="section" aria-labelledby="patents-title"><div class="section-heading"><div><p class="eyebrow section-kicker">05 / PATENTS</p><h1 id="patents-title" class="section-title">Patents<sup>{len(DATA['patents']):02d}</sup></h1></div><p>Filed patent applications and patents in preparation.</p></div><div class="patent-list">{''.join(entries)}</div><p class="pub-status-note">The order of inventors does not reflect their level of contribution.</p></section>'''
+YªçŠx-®éÜj×¢ëiºÚ+Š§j[h‘éÜ¢éí÷Î»N‹Z–‹­¦ëeŠw¬ÔŒ„½ÕÍÈ½‰¥¸½•¹ØÁåÑ¡½¸Ì(ˆˆ‰	Õ¥±Ñ¡”ÍÑ…Ñ¥ŒÁ½ÉÑ™½±¥¼™É½´½¹Ñ•¹Ğ½Í¥Ñ”µ½¹Ñ•¹Ğ¹©Í½¸€¡ÍÑ…¹‘…É±¥‰É…Éä½¹±ä¤¸ˆˆˆ)™É½´¡Ñµ°¥µÁ½ÉĞ•Í…Á”)™É½´¡…Í¡±¥ˆ¥µÁ½ÉĞÍ¡„ÈÔØ)¥µÁ½ÉĞ©Í½¸)™É½´Á…Ñ¡±¥ˆ¥µÁ½ÉĞA…Ñ ()I==P€ôA…Ñ ¡}}™¥±•}|¤¹É•Í½±Ù” ¤¹Á…É•¹ÑÍlÅt)Q€ô©Í½¸¹±½…‘Ì ¡I==P€¼€½¹Ñ•¹Ğ½Í¥Ñ”µ½¹Ñ•¹Ğ¹©Í½¸œ¤¹É•…‘}Ñ•áĞ ¤¤)	M€ô€¡ÑÑÁÌè¼½É½¡­å½Õ¹µ¥¸¹¥Ñ¡Õˆ¹¥¼œ)X€ô	M€¬€œ½…ÍÍ•ÑÌ½-å½Õ¹µ¥¹}I½¡}X¹Á‘˜œ)AL€ôl(€€€€ ¥¹‘•à¹¡Ñµ°œ°€‰½ÕĞœ°€	…­É½Õ¹…¹É•Í•…É ¥¹Ñ•É•ÍÑÌ¸œ¤°(€€€€ •‘Õ…Ñ¥½¸¹¡Ñµ°œ°€‘Õ…Ñ¥½¸œ°€‘Õ…Ñ¥½¸¡¥ÍÑ½Éä¸œ¤°(€€€€ •áÁ•É¥•¹”¹¡Ñµ°œ°€áÁ•É¥•¹”œ°€I•Í•…É …ÁÁ½¥¹Ñµ•¹ÑÌ…¹µ¥±¥Ñ…ÉäÍ•ÉÙ¥”¸œ¤°(€€€€ ÁÕ‰±¥…Ñ¥½¹Ì¹¡Ñµ°œ°€AÕ‰±¥…Ñ¥½¹Ìœ°€AÕ‰±¥Í¡•Á…Á•ÉÌ…¹µ…¹ÕÍÉ¥ÁÑÌ¸œ¤°(€€€€ Á…Ñ•¹ÑÌ¹¡Ñµ°œ°€A…Ñ•¹ÑÌœ°€¥±•Á…Ñ•¹Ğ…ÁÁ±¥…Ñ¥½¹Ì…¹Á…Ñ•¹ÑÌ¥¸ÁÉ•Á…É…Ñ¥½¸¸œ¤°(€€€€ ÁÉ½©•ÑÌ¹¡Ñµ°œ°€AÉ½©•ÑÌœ°€M•ÕÉ¥ÑäÑ½½±Ì°$…ÁÁ±¥…Ñ¥½¹Ì°…¹É•Í•…É Í½™Ñİ…É”¸œ¤°(€€€€ …İ…É‘Ì¹¡Ñµ°œ°€İ…É‘Ìœ°€İ…É‘Ì…¹Í¡½±…ÉÍ¡¥ÁÌ¸œ¤°(€€€€ •ÉÑ¥™¥…Ñ”¹¡Ñµ°œ°€•ÉÑ¥™¥…Ñ”œ°€1…¹Õ…”ÁÉ½™¥¥•¹ä…¹•ÉÑ¥™¥…Ñ•Ì¸œ¤°(€€€€ •áÑÉ…ÕÉÉ¥Õ±…È¹¡Ñµ°œ°€áÑÉ…ÕÉÉ¥Õ±…Èœ°€±Õ‰Ì°İÉ¥Ñ¥¹œ°QÑ•…µÌ°…¹…µÁÕÌ…Ñ¥Ù¥Ñ¥•Ì¸œ¤°(€€€€ Á…ÉÑ¥¥Á…Ñ¥½¸¹¡Ñµ°œ°€…±±•Éäœ°€½¹™•É•¹”ÁÉ•Í•¹Ñ…Ñ¥½¹Ì…¹Á¡½Ñ½É…Á¡Ì¸œ¤°)t)AI=)Q}QeAL€ôl(€€€€ ½ÕÉÍ•İ½É¬œ°€½ÕÉÍ•İ½É¬AÉ½©•Ğœ°€½ÕÉÍ”…ÍÍ¥¹µ•¹ÑÌ°Ñ•…´ÁÉ½©•ÑÌ°…¹…ÁÍÑ½¹”İ½É¬¸œ¤°(€€€€ É•Í•…É œ°€I•Í•…É AÉ½©•Ğœ°€I•Í•…É ÁÉ½Ñ½ÑåÁ•Ì°ÁÕ‰±¥Í¡•µ•Ñ¡½‘Ì°…¹•áÁ•É¥µ•¹Ñ…°Í½™Ñİ…É”¸œ¤°(€€€€ ™Õ¹‘•œ°€Õ¹‘•I•Í•…É AÉ½©•Ğœ°€½¹ÑÉ¥‰ÕÑ¥½¹ÌÑ¼½µµ¥ÍÍ¥½¹•…¹™Õ¹‘•É•Í•…É ÁÉ½É…µÌ¸œ¤°(€€€€ ½µÁ•Ñ¥Ñ¥½¸œ°€½µÁ•Ñ¥Ñ¥½¸AÉ½©•Ğœ°€AÉ½©•ÑÌ‘•Ù•±½Á•™½È½µÁ•Ñ¥Ñ¥½¹Ì…¹¡…­…Ñ¡½¹Ì¸œ¤°(€€€€ Á•ÉÍ½¹…°œ°€A•ÉÍ½¹…°AÉ½©•Ğœ°€%¹‘•Á•¹‘•¹Ğ…ÁÁ±¥…Ñ¥½¹Ì…¹…ÁÁ±¥••áÁ•É¥µ•¹ÑÌ¸œ¤°(€€€€ Ñ½äœ°€Q½äAÉ½©•Ğœ°€Mµ…±°ÕÑ¥±¥Ñ¥•Ì…¹™½ÕÍ•ÁÉ½É…µµ¥¹œ•áÁ•É¥µ•¹ÑÌ¸œ¤°)t()‘•˜”¡Ù…±Õ”¤è(€€€É•ÑÕÉ¸•Í…Á”¡ÍÑÈ¡Ù…±Õ”¥˜Ù…±Õ”¥Ì¹½Ğ9½¹”•±Í”€œœ¤°ÅÕ½Ñ”õQÉÕ”¤()‘•˜•áÑ•É¹…°¡ÕÉ°°Ñ•áĞ°±Ìôœœ¤è(€€€É•ÑÕÉ¸˜œñ„¡É•˜ô‰í”¡ÕÉ°¥ôˆ±…ÍÌô‰í”¡±Ì¥ôˆÑ…É•Ğô‰}‰±…¹¬ˆÉ•°ô‰¹½½Á•¹•È¹½É•™•ÉÉ•ÈˆùíÑ•áÑôğ½„øœ()‘•˜¡•…¡Ñ¥Ñ±”°‘•ÍÉ¥ÁÑ¥½¸°Á…Ñ ôœœ°ÁÉ•™¥àôœœ°…Ñ¥Ù”ôœœ¤è(€€€ÍÑå±•}Ù•ÉÍ¥½¸õÍ¡„ÈÔØ ¡I==P¼ÍÌ½Á½ÉÑ™½±¥¼¹ÍÌœ¤¹É•…‘}‰åÑ•Ì ¤¤¹¡•á‘¥•ÍĞ ¥lèÄÉt(€€€ÍÉ¥ÁÑ}Ù•ÉÍ¥½¸õÍ¡„ÈÔØ ¡I==P¼©Ì½Á½ÉÑ™½±¥¼¹©Ìœ¤¹É•…‘}‰åÑ•Ì ¤¤¹¡•á‘¥•ÍĞ ¥lèÄÉt(€€€¹…Ù¥…Ñ¥½¸ôœœ¹©½¥¸ (€€€€€€€˜œñ„¡É•˜ô‰íÁÉ•™¥áõíÉ½ÕÑ•ôˆœ¬ œ±…ÍÌô‰¹…Øµ…±±•Éäˆœ¥˜É½ÕÑ”ôôÁ…ÉÑ¥¥Á…Ñ¥½¸¹¡Ñµ°œ•±Í”€œœ¤¬ œ…É¥„µÕÉÉ•¹Ğô‰Á…”ˆœ¥˜É½ÕÑ”ôõ…Ñ¥Ù”•±Í”€œœ¤­˜œùí±…‰•±ôğ½„øœ(€€€€€€€™½ÈÉ½ÕÑ”±±…‰•°±|¥¸AL(€€€€¤(€€€É•ÑÕÉ¸˜œœœğ…‘½ÑåÁ”¡Ñµ°ø(ñ¡Ñµ°±…¹œô‰•¸ˆø(ñ¡•…ø(€€ñµ•Ñ„¡…ÉÍ•Ğô‰ÕÑ˜´àˆø(€€ñµ•Ñ„¹…µ”ô‰Ù¥•İÁ½ÉĞˆ½¹Ñ•¹Ğô‰İ¥‘Ñ õ‘•Ù¥”µİ¥‘Ñ ±¥¹¥Ñ¥…°µÍ…±”ôÄˆø(€€ñÑ¥Ñ±”ùí”¡Ñ¥Ñ±”¥ôğ½Ñ¥Ñ±”ø(€€ñµ•Ñ„¹…µ”ô‰‘•ÍÉ¥ÁÑ¥½¸ˆ½¹Ñ•¹Ğô‰í”¡‘•ÍÉ¥ÁÑ¥½¸¥ôˆø(€€ñµ•Ñ„¹…µ”ô‰Ñ¡•µ”µ½±½Èˆ½¹Ñ•¹Ğôˆ™™™™™˜ˆø(€€ñ±¥¹¬É•°ô‰…¹½¹¥…°ˆ¡É•˜ô‰í	Mô½í”¡Á…Ñ ¥ôˆø(€€ñµ•Ñ„ÁÉ½Á•ÉÑäô‰½œéÑåÁ”ˆ½¹Ñ•¹Ğô‰İ•‰Í¥Ñ”ˆø(€€ñµ•Ñ„ÁÉ½Á•ÉÑäô‰½œéÑ¥Ñ±”ˆ½¹Ñ•¹Ğô‰í”¡Ñ¥Ñ±”¥ôˆø(€€ñµ•Ñ„ÁÉ½Á•ÉÑäô‰½œé‘•ÍÉ¥ÁÑ¥½¸ˆ½¹Ñ•¹Ğô‰í”¡‘•ÍÉ¥ÁÑ¥½¸¥ôˆø(€€ñµ•Ñ„ÁÉ½Á•ÉÑäô‰½œéÕÉ°ˆ½¹Ñ•¹Ğô‰í	Mô½í”¡Á…Ñ ¥ôˆø(€€ñµ•Ñ„ÁÉ½Á•ÉÑäô‰½œé¥µ…”ˆ½¹Ñ•¹Ğô‰í	Mô½…ÍÍ•ÑÌ½ÁÉ½™¥±”µ­å½Õ¹µ¥¸µÉ½ ¹©Áœˆø(€€ñµ•Ñ„¹…µ”ô‰Ñİ¥ÑÑ•Èé…Éˆ½¹Ñ•¹Ğô‰ÍÕµµ…Éäˆø(€€ñ±¥¹¬É•°ô‰¥½¸ˆ¡É•˜ô‰íÁÉ•™¥áõ…ÍÍ•ÑÌ½™…Ù¥½¸¹ÍÙœˆÑåÁ”ô‰¥µ…”½ÍÙœ­áµ°ˆø(€€ñ±¥¹¬É•°ô‰ÁÉ•½¹¹•Ğˆ¡É•˜ô‰¡ÑÑÁÌè¼½™½¹ÑÌ¹½½±•…Á¥Ì¹½´ˆø(€€ñ±¥¹¬É•°ô‰ÁÉ•½¹¹•Ğˆ¡É•˜ô‰¡ÑÑÁÌè¼½™½¹ÑÌ¹ÍÑ…Ñ¥Œ¹½´ˆÉ½ÍÍ½É¥¥¸ø(€€ñ±¥¹¬É•°ô‰ÍÑå±•Í¡••Ğˆ¡É•˜ô‰íÁÉ•™¥áõÍÌ½Á½ÉÑ™½±¥¼¹ÍÌıØõíÍÑå±•}Ù•ÉÍ¥½¹ôˆø(€€ñÍÉ¥ÁĞÍÉŒô‰íÁÉ•™¥áõ©Ì½Á½ÉÑ™½±¥¼¹©ÌıØõíÍÉ¥ÁÑ}Ù•ÉÍ¥½¹ôˆ‘•™•Èøğ½ÍÉ¥ÁĞø(€€ñ¹½ÍÉ¥ÁĞøñÍÑå±”ø¹µ•¹Ôµ‰ÕÑÑ½¹íí‘¥ÍÁ±…äé¹½¹•õô¹¹…Ùíí™±•àµİÉ…ÀéİÉ…Áõô¹¹…Øµ±¥¹­Ííí‘¥ÍÁ±…äé™±•àíÁ½Í¥Ñ¥½¸éÍÑ…Ñ¥Œíİ¥‘Ñ èÄÀÀ”íÁ…‘‘¥¹œèÀ€À€ÄáÁàí‰½É‘•ÈèÀí™±•àµİÉ…ÀéİÉ…Áõôğ½ÍÑå±”øğ½¹½ÍÉ¥ÁĞø(ğ½¡•…ø(ñ‰½‘äø(ñ„±…ÍÌô‰Í­¥Àµ±¥¹¬ˆ¡É•˜ôˆµ…¥¸ˆùM­¥ÀÑ¼½¹Ñ•¹Ğğ½„ø(ñ¡•…‘•È¥ô‰Ñ½Àˆ±…ÍÌô‰¡•…‘•ÈİÉ…Àˆø(€€ñ¹…Ø±…ÍÌô‰¹…Øˆ…É¥„µ±…‰•°ô‰5…¥¸¹…Ù¥…Ñ¥½¸ˆø(€€€€ñ„¡É•˜ô‰íÁÉ•™¥áõ¥¹‘•à¹¡Ñµ°ˆ±…ÍÌô‰‰É…¹ˆ…É¥„µ±…‰•°ô‰-å½Õ¹µ¥¸I½ °¡½µ”ˆøñÍÁ…¸±…ÍÌô‰‰É…¹µ¹…µ”ˆù-å½Õ¹µ¥¸I½ ğ½ÍÁ…¸øğ½„ø(€€€€ñ‰ÕÑÑ½¸±…ÍÌô‰µ•¹Ôµ‰ÕÑÑ½¸ˆ…É¥„µ½¹ÑÉ½±Ìô‰µ…¥¸µ¹…Ù¥…Ñ¥½¸ˆ…É¥„µ•áÁ…¹‘•ô‰™…±Í”ˆÑåÁ”ô‰‰ÕÑÑ½¸ˆù5•¹Ô€¬ğ½‰ÕÑÑ½¸ø(€€€€ñ‘¥Ø¥ô‰µ…¥¸µ¹…Ù¥…Ñ¥½¸ˆ±…ÍÌô‰¹…Øµ±¥¹­Ìˆø(€€€€€í¹…Ù¥…Ñ¥½¹ôñ„¡É•˜ôˆ½¹Ñ…Ğˆù½¹Ñ…Ğğ½„ø(€€€€€í•áÑ•É¹…°¡X°€XƒŠ\œ¥ô(€€€€ğ½‘¥Øø(€€ğ½¹…Øø(ğ½¡•…‘•Èøœœœ()‘•˜™½½Ñ•È¡ÁÉ•™¥àôœœ¤è(€€€ÁÉ½™¥±•Ì€ô€œœ¹©½¥¸¡•áÑ•É¹…°¡¥Ñ•µlÕÉ°t°”¡¥Ñ•µl±…‰•°t¤¬œƒŠ\œ¤™½È¥Ñ•´¥¸QlÁÉ½™¥±•Ìt¤(€€€É•ÑÕÉ¸˜œœœñÍ•Ñ¥½¸¥ô‰½¹Ñ…Ğˆ±…ÍÌô‰½¹Ñ…ĞİÉ…Àˆ…É¥„µ±…‰•±±•‘‰äô‰½¹Ñ…ĞµÑ¥Ñ±”ˆø(€€ñ È¥ô‰½¹Ñ…ĞµÑ¥Ñ±”ˆ±…ÍÌô‰½¹Ñ…Ğµ¡•…‘¥¹œˆù½¹Ñ…Ğğ½ Èø(€€ñÀ±…ÍÌô‰½¹Ñ…Ğµ•µ…¥°ˆøñ„¡É•˜ô‰µ…¥±Ñ¼éí”¡Ql•µ…¥°t¥ôˆùí”¡Ql•µ…¥°t¥ôğ½„øğ½Àø(€€ñ‘¥Ø±…ÍÌô‰½¹Ñ…Ğµ‰½ÑÑ½´ˆøñ‘¥Ø±…ÍÌô‰Í½¥…°µ±¥¹­ÌˆùíÁÉ½™¥±•Íôğ½‘¥Øøñ„±…ÍÌô‰Ñ•áĞµ±¥¹¬ˆ¡É•˜ôˆÑ½Àˆù	…¬Ñ¼Ñ½À€ñÍÁ…¸±…ÍÌô‰…ÉÉ½Üˆ…É¥„µ¡¥‘‘•¸ô‰ÑÉÕ”ˆûŠDğ½ÍÁ…¸øğ½„øğ½‘¥Øø(€€ñ™½½Ñ•È±…ÍÌô‰™½½Ñ•ÈˆøñÍÁ…¸û
+¤€ÈÀÈØ-å½Õ¹µ¥¸I½ ğ½ÍÁ…¸øñÍÁ…¸ùå‰•ÉÍ•ÕÉ¥Ñäƒ
+Ü5…¡¥¹”±•…É¹¥¹œƒ
+ÜMåÍÑ•µÌğ½ÍÁ…¸øğ½™½½Ñ•Èø(ğ½Í•Ñ¥½¸ø(ğ½‰½‘äø(ğ½¡Ñµ°øœœœ()‘•˜•áÁ•É¥•¹•}É½Ü¡¥Ñ•´¤è(€€€‘…Ñ•Ìõ”¡¥Ñ•µlÁ•É¥½t¤(€€€Ñ¥Ñ±”õ”¡¥Ñ•µl½É…¹¥é…Ñ¥½¸t¤(€€€¥˜¥Ñ•´¹•Ğ ÕÉ°œ¤èÑ¥Ñ±”õ•áÑ•É¹…°¡¥Ñ•µlÕÉ°t±Ñ¥Ñ±”¬œƒŠ\œ¤(€€€É•ÑÕÉ¸˜œœœñ…ÉÑ¥±”±…ÍÌô‰Ñ¥µ•±¥¹”µ¥Ñ•´ˆøñÀ±…ÍÌô‰µ½¹¼Ñ¥µ•±¥¹”µ‘…Ñ”ˆùí‘…Ñ•Íôğ½Àøñ‘¥Ø±…ÍÌô‰Ñ¥µ•±¥¹”µÁ½Í¥Ñ¥½¸ˆøñ ÌùíÑ¥Ñ±•ôğ½ ÌøñÀ±…ÍÌô‰É½±”ˆùí”¡¥Ñ•µlÉ½±”t¥ôñ‰ÈøñÍÁ…¸±…ÍÌô‰µÕÑ•ˆùí”¡¥Ñ•µl±…ˆt¥ôğ½ÍÁ…¸øğ½Àøğ½‘¥ØøñÀ±…ÍÌô‰‘•ÍÉ¥ÁÑ¥½¸ˆùí”¡¥Ñ•µl‘•ÍÉ¥ÁÑ¥½¸t¥ôğ½Àøğ½…ÉÑ¥±”øœœœ()‘•˜ÁÕ‰±¥…Ñ¥½¹}ÍÑ…ÑÕÌ¡ÁÕˆ¤è(€€€É•ÑÕÉ¸€ÁÕ‰±¥Í¡•œ¥˜ÁÕ‰lÍÑ…ÑÕÌt¹ÍÑÉ¥À ¤¹…Í•™½± ¤ôôÁÕ‰±¥Í¡•œ•±Í”€Õ¹ÁÕ‰±¥Í¡•œ()‘•˜ÁÕ‰±¥…Ñ¥½¹}É½Ü¡ÁÕˆ¤è(€€€…Ñ•½Éäô¥¹Ñ•É¹…Ñ¥½¹…°œ¥˜ÁÕ‰l…Ñ•½Éät¹ÍÑ…ÉÑÍİ¥Ñ  %¹Ñ•É¹…Ñ¥½¹…°œ¤•±Í”€‘½µ•ÍÑ¥Œœ(€€€Ñ¥Ñ±”õ”¡ÁÕ‰lÑ¥Ñ±”t¤(€€€¥˜ÁÕˆ¹•Ğ ÕÉ°œ¤èÑ¥Ñ±”õ•áÑ•É¹…°¡ÁÕ‰lÕÉ°t±Ñ¥Ñ±”¤(€€€‘•˜…ÕÑ¡½É}±…‰•°¡¹…µ”¤è(€€€€€€€±•…¸õ¹…µ”¹É•Á±…” ŸŠ€œ°œœ¤¹ÍÑÉ¥À ¤(€€€€€€€±…‰•°ôœñÍÑÉ½¹œù-å½Õ¹µ¥¸I½ ğ½ÍÑÉ½¹œøœ¥˜±•…¸ôô-å½Õ¹µ¥¸I½ œ•±Í””¡±•…¸¤(€€€€€€€½™¥ÉÍĞôŸŠ€œ¥¸¹…µ”½È€¡ÁÕ‰l¥tôôµ±­•´œ…¹±•…¸¥¸l-å½Õ¹µ¥¸I½ œ°9…¡•”-İ½¸t¤(€€€€€€€É•ÑÕÉ¸±…‰•°¬ œñÍÕÀûŠ€ğ½ÍÕÀøœ¥˜½™¥ÉÍĞ•±Í”€œœ¤(€€€…ÕÑ¡½ÉÌôœ°€œ¹©½¥¸¡…ÕÑ¡½É}±…‰•°¡¹…µ”¤™½È¹…µ”¥¸ÁÕ‰l…ÕÑ¡½ÉÌt¤(€€€±¥¹­Ìõmt(€€€¥˜ÁÕˆ¹•Ğ ÕÉ°œ¤è±¥¹­Ì¹…ÁÁ•¹¡•áÑ•É¹…°¡ÁÕ‰lÕÉ°t°A…Á•ÈƒŠ\œ¤¤(€€€¥˜ÁÕˆ¹•Ğ ½‘”œ¤è±¥¹­Ì¹…ÁÁ•¹¡•áÑ•É¹…°¡ÁÕ‰l½‘”t°½‘”ƒŠ\œ¤¤(€€€ÍÑ…ÑÕÌõÁÕ‰lÍÑ…ÑÕÌt(€€€¥˜ÍÑ…ÑÕÌ€„ô€AÕ‰±¥Í¡•œè±¥¹­Ì¹…ÁÁ•¹¡˜œñÍÁ…¸±…ÍÌô‰ÍÑ…ÑÕÌˆùí”¡ÍÑ…ÑÕÌ¥ôğ½ÍÁ…¸øœ¤(€€€±…‰•±ÌõÁÕˆ¹•Ğ ‰…‘•Ìœ±mt¤¬¡mÁÕ‰l…İ…Éut¥˜ÁÕˆ¹•Ğ …İ…Éœ¤•±Í”mt¤(€€€…İ…Éôœœ¹©½¥¸¡˜œñÍÁ…¸±…ÍÌô‰ÁÕˆµ…İ…Éˆùí”¡±…‰•°¥ôğ½ÍÁ…¸øœ™½È±…‰•°¥¸±…‰•±Ì¤(€€€É•ÑÕÉ¸˜œœœñ…ÉÑ¥±”±…ÍÌô‰ÁÕ‰±¥…Ñ¥½¸ˆ‘…Ñ„µ…Ñ•½Éäô‰í…Ñ•½Éåôˆ‘…Ñ„µÁÕ‰±¥…Ñ¥½¸µÍÑ…ÑÕÌô‰íÁÕ‰±¥…Ñ¥½¹}ÍÑ…ÑÕÌ¡ÁÕˆ¥ôˆøñÀ±…ÍÌô‰µ½¹¼ÁÕˆµå•…Èˆùí”¡ÁÕˆ¹•Ğ å•…Èœ¤½È€ŸŠPœ¥ôğ½Àøñ‘¥Øøñ Ì±…ÍÌô‰ÁÕˆµÑ¥Ñ±”ˆùíÑ¥Ñ±•ôğ½ ÌøñÀ±…ÍÌô‰ÁÕˆµ…ÕÑ¡½ÉÌˆùí…ÕÑ¡½ÉÍôğ½ÀøñÀ±…ÍÌô‰ÁÕˆµµ•Ñ„ˆùí”¡ÁÕ‰lÙ•¹Õ”t¥ôğ½Àùí…İ…É‘ôğ½‘¥Øøñ‘¥Ø±…ÍÌô‰ÁÕˆµ±¥¹­Ìˆùìœœ¹©½¥¸¡±¥¹­Ì¥ôğ½‘¥Øøğ½…ÉÑ¥±”øœœœ()‘•˜ÁÉ½©•Ñ}É½Ü¡ÁÉ½©•Ğ°¹Õµ‰•È¤è(€€€‰…‘•Ìôœœ¹©½¥¸¡˜œñÍÁ…¸±…ÍÌô‰ÁÕˆµ…İ…Éˆùí”¡±…‰•°¥ôğ½ÍÁ…¸øœ™½È±…‰•°¥¸ÁÉ½©•Ğ¹•Ğ ‰…‘•Ìœ±mt¤¤(€€€‰…‘•Ìõ˜œñ‘¥Ø±…ÍÌô‰ÁÉ½©•Ğµ‰…‘•Ìˆùí‰…‘•Íôğ½‘¥Øøœ¥˜‰…‘•Ì•±Í”€œœ(€€€É½±”€ô˜œñÀ±…ÍÌô‰ÁÉ½©•ĞµÉ½±”ˆùI½±”èí”¡ÁÉ½©•Ñl‰É½±”‰t¥ôğ½Àøœ¥˜ÁÉ½©•Ğ¹•Ğ É½±”œ¤•±Í”€œœ(€€€½¹Ñ•áĞ€ô˜œñÀ±…ÍÌô‰ÁÉ½©•Ğµ½¹Ñ•áĞˆùí”¡ÁÉ½©•Ñl‰½¹Ñ•áĞ‰t¥ôğ½Àøœ¥˜ÁÉ½©•Ğ¹•Ğ ½¹Ñ•áĞœ¤•±Í”€œœ(€€€™Õ¹‘¥¹œ€ô˜œñÀ±…ÍÌô‰ÁÉ½©•Ğµ½¹Ñ•áĞˆù½µµ¥ÍÍ¥½¹•‰äèí”¡ÁÉ½©•Ñl‰½µµ¥ÍÍ¥½¹•‘	ä‰t¥ôğ½Àøœ¥˜ÁÉ½©•Ğ¹•Ğ ½µµ¥ÍÍ¥½¹•‘	äœ¤•±Í”€œœ(€€€±¥¹­Ìõmt(€€€™½È±¥¹¬¥¸ÁÉ½©•Ñl±¥¹­Ìtè(€€€€€€€±…‰•°õ”¡±¥¹­l±…‰•°t¤(€€€€€€€¥˜±¥¹­lÕÉ°t¹ÍÑ…ÉÑÍİ¥Ñ  ¡ÑÑÁÌè¼¼œ¤è(€€€€€€€€€€€±¥¹­Ì¹…ÁÁ•¹¡•áÑ•É¹…°¡±¥¹­lÕÉ°t±±…‰•°¬œƒŠ\œ¤¤(€€€€€€€•±Í”è(€€€€€€€€€€€±¥¹­Ì¹…ÁÁ•¹¡˜œñ„¡É•˜ô‰í”¡±¥¹­l‰ÕÉ°‰t¥ôˆùí±…‰•±ôƒŠHğ½„øœ¤(€€€…Í•}Í±ÕœõìÍ…¸œèÍ…¸œ°…±…É´œè…±…É´œ°µ±­•´µÍÁ±¥Ğœèµ±­•´ô¹•Ğ¡ÁÉ½©•Ñl¥t¤(€€€¥˜…Í•}Í±Õœè(€€€€€€€±¥¹­Ì¹…ÁÁ•¹¡˜œñ„¡É•˜ô‰É•Í•…É ½í…Í•}Í±Õô¹¡Ñµ°ˆùI•Í•…É ‘•Ñ…¥±ÌƒŠHğ½„øœ¤(€€€É•ÑÕÉ¸˜œœœñ…ÉÑ¥±”¥ô‰ÁÉ½©•Ğµí”¡ÁÉ½©•Ñl¥t¥ôˆ±…ÍÌô‰ÁÉ½©•ĞµÉ½Üˆ‘…Ñ„µÁÉ½©•ĞµÑåÁ”ô‰í”¡ÁÉ½©•ÑlÁÉ½©•ÑQåÁ”t¥ôˆøñÍÁ…¸±…ÍÌô‰µ½¹¼¹Õµ‰•Èˆùí¹Õµ‰•ÈèÀÉ‘ôğ½ÍÁ…¸øñ‘¥Øøñ Ìùí”¡ÁÉ½©•ÑlÑ¥Ñ±”t¥ôğ½ Ìøñ‘¥Ø±…ÍÌô‰Ñ…œˆùí” œ€¼€œ¹©½¥¸¡ÁÉ½©•ÑlÑ…Ìt¤¥ôğ½‘¥Øùí‰…‘•Íõí½¹Ñ•áÑôğ½‘¥Øøñ‘¥Ø±…ÍÌô‰ÁÉ½©•Ğµ‘•ÍÉ¥ÁÑ¥½¸ˆøñÀùí”¡ÁÉ½©•Ñl‘•ÍÉ¥ÁÑ¥½¸t¥ôğ½Àùí™Õ¹‘¥¹õíÉ½±•ôñ‘¥Ø±…ÍÌô‰ÁÉ½©•ĞµÉ•Í½ÕÉ”µ±¥¹­Ìˆùìœœ¹©½¥¸¡±¥¹­Ì¥ôğ½‘¥Øøğ½‘¥Øøğ½…ÉÑ¥±”øœœœ()‘•˜…İ…É‘}É½Ü¡…İ…É¤è(€€€É•ÑÕÉ¸˜œœœñ…ÉÑ¥±”±…ÍÌô‰…İ…ÉµÉ½ÜˆøñÍÁ…¸±…ÍÌô‰µ½¹¼µÕÑ•ˆùí”¡…İ…É‘l‘…Ñ”t¥ôğ½ÍÁ…¸øñ‘¥Øøñ Ìùí”¡…İ…É‘lÑ¥Ñ±”t¥ôğ½ ÌøñÀùí”¡…İ…É‘l½É…¹¥é…Ñ¥½¸t¥ôƒ
+Üí”¡…İ…É‘l‘•ÍÉ¥ÁÑ¥½¸t¥ôğ½Àøğ½‘¥Øøğ½…ÉÑ¥±”øœœœ()‘•˜Í¡½±…ÉÍ¡¥Á}É½Ü¡¥Ñ•´¤è(€€€…µ½Õ¹Ğõ˜-I\í¥Ñ•µl‰…µ½Õ¹Ñ-ÉÜ‰tè±ôœ(€€€É•ÑÕÉ¸˜œœœñ…ÉÑ¥±”±…ÍÌô‰…İ…ÉµÉ½ÜÍ¡½±…ÉÍ¡¥ÀµÉ½ÜˆøñÍÁ…¸±…ÍÌô‰µ½¹¼µÕÑ•ˆùí”¡¥Ñ•µl‘…Ñ”t¥ôğ½ÍÁ…¸øñ‘¥Øøñ Ìùí”¡¥Ñ•µlÑ¥Ñ±”t¥ôğ½ ÌøñÀùí”¡¥Ñ•µl½É…¹¥é…Ñ¥½¸t¥ôğ½ÀøñÀùí”¡¥Ñ•µl‘•ÍÉ¥ÁÑ¥½¸t¥ôğ½ÀøñÀ±…ÍÌô‰Í¡½±…ÉÍ¡¥Àµ…µ½Õ¹Ğˆùí…µ½Õ¹Ñôğ½Àøğ½‘¥Øøğ½…ÉÑ¥±”øœœœ()‘•˜‰Õ¥±‘}¡½µ” ¤è(€€€Ñ•áĞõ¡•… -å½Õ¹µ¥¸I½ ƒŠPå‰•ÉÍ•ÕÉ¥Ñä°5…¡¥¹”1•…É¹¥¹œ€˜MåÍÑ•µÌœ±QlÍÕµµ…Éät±…Ñ¥Ù”ô¥¹‘•à¹¡Ñµ°œ¤(€€€½¹Ñ•¹ÑÌôœœ¹©½¥¸ (€€€€€€€˜œñ„±…ÍÌô‰Á…”µ±¥¹¬œ¬ œÁ…”µ±¥¹¬µ…±±•Éäœ¥˜É½ÕÑ”ôôÁ…ÉÑ¥¥Á…Ñ¥½¸¹¡Ñµ°œ•±Í”€œœ¤­˜œˆ¡É•˜ô‰í”¡É½ÕÑ”¥ôˆ…É¥„µ±…‰•°ô‰í”¡±…‰•°¥ôèí”¡‘•ÍÉ¥ÁÑ¥½¸¥ôˆøñÍÁ…¸øñÍÑÉ½¹œùí”¡±…‰•°¥ôğ½ÍÑÉ½¹œøñÍµ…±°ùí”¡‘•ÍÉ¥ÁÑ¥½¸¥ôğ½Íµ…±°øğ½ÍÁ…¸øñÍÁ…¸±…ÍÌô‰½¹Ñ•¹ÑÌµ…ÉÉ½Üˆ…É¥„µ¡¥‘‘•¸ô‰ÑÉÕ”ˆûŠ\ğ½ÍÁ…¸øğ½„øœ(€€€€€€€™½ÈÉ½ÕÑ”±±…‰•°±‘•ÍÉ¥ÁÑ¥½¸¥¸AMlÄét(€€€€¤(€€€Ñ•áĞ¬õ˜œœœñµ…¥¸¥ô‰µ…¥¸ˆ±…ÍÌô‰İÉ…À¡½µ”µ±…å½ÕĞˆø(€€ñÍ•Ñ¥½¸¥ô‰…‰½ÕĞˆ±…ÍÌô‰Í•Ñ¥½¸…‰½ÕĞµ™¥ÉÍĞ¡½µ”µ…‰½ÕĞˆ…É¥„µ±…‰•±±•‘‰äô‰…‰½ÕĞµÑ¥Ñ±”ˆø(€€€€ñ‘¥Ø±…ÍÌô‰Í•Ñ¥½¸µ¡•…‘¥¹œˆøñ‘¥ØøñÀ±…ÍÌô‰•å•‰É½ÜÍ•Ñ¥½¸µ­¥­•ÈˆøÀÄ€¼	=UPğ½Àøñ Ä¥ô‰…‰½ÕĞµÑ¥Ñ±”ˆ±…ÍÌô‰Í•Ñ¥½¸µÑ¥Ñ±”ˆù‰½ÕĞğ½ Äøğ½‘¥Øøğ½‘¥Øø(€€€€ñ‘¥Ø±…ÍÌô‰…‰½ÕĞµ±…å½ÕĞˆø(€€€€€€ñ…Í¥‘”±…ÍÌô‰ÁÉ½™¥±”µ…Éˆ…É¥„µ±…‰•°ô‰AÉ½™¥±”ˆø(€€€€€€€€ñ¥µœ±…ÍÌô‰Á½ÉÑÉ…¥ĞˆÍÉŒô‰…ÍÍ•ÑÌ½ÁÉ½™¥±”µ­å½Õ¹µ¥¸µÉ½ ¹©Áœˆİ¥‘Ñ ôˆÄÄÜäˆ¡•¥¡ĞôˆÄĞØÈˆ…±Ğô‰A½ÉÑÉ…¥Ğ½˜-å½Õ¹µ¥¸I½ ˆ‘•½‘¥¹œô‰…Íå¹Œˆø(€€€€€€€€ñ Ì±…ÍÌô‰ÁÉ½™¥±”µ¹…µ”ˆù-å½Õ¹µ¥¸I½ ğ½ Ìø(€€€€€€€€ñÀ±…ÍÌô‰ÁÉ½™¥±”µÉ½±”ˆùí”¡QlÁÉ½™¥±•I½±”t¥ôğ½Àø(€€€€€€€€ñÀ±…ÍÌô‰ÁÉ½™¥±”µ±½…Ñ¥½¸ˆùM½ÕÑ -½É•„ğ½Àø(€€€€€€€€ñ‘¥Ø±…ÍÌô‰ÁÉ½™¥±”µ±¥¹­Ìˆùí•áÑ•É¹…° ¡ÑÑÁÌè¼½Í¡½±…È¹½½±”¹½´½¥Ñ…Ñ¥½¹ÌıÕÍ•ÈôÙ<É=5±İ(œ°½½±”M¡½±…ÈƒŠ\œ¥õí•áÑ•É¹…° ¡ÑÑÁÌè¼½¥Ñ¡Õˆ¹½´½É½¡­å½Õ¹µ¥¸œ°¥Ñ!ÕˆƒŠ\œ¥õí•áÑ•É¹…° ¡ÑÑÁÌè¼½İİÜ¹±¥¹­•‘¥¸¹½´½¥¸½­å½Õ¹µ¥¸µÉ½ ´àá‰ˆÀäÌĞÌ¼œ°1¥¹­•‘%¸ƒŠ\œ¥õí•áÑ•É¹…° ¡ÑÑÁÌè¼½µ•‘¥Õ´¹½´½­å½Õ¹µ¥¹É½ ÀÄœ°	±½œƒŠ\œ¥ôğ½‘¥Øø(€€€€€€ğ½…Í¥‘”ø(€€€€€€ñ‘¥Ø±…ÍÌô‰ÁÉ½™•ÍÍ¥½¹…°µÍÕµµ…Éäˆø(€€€€€€€€ñÀ±…ÍÌô‰ÍÕµµ…Éäµ±…‰•°ˆùMÕµµ…Éäğ½Àø(€€€€€€€€ñÀ±…ÍÌô‰…‰½ÕĞµÍÕµµ…Éäˆùí”¡QlÁÉ½™•ÍÍ¥½¹…±MÕµµ…Éät¥ôğ½Àø(€€€€€€€€ñÀ±…ÍÌô‰…‰½ÕĞµ…™™¥±¥…Ñ¥½¸ˆùí”¡QlÕÉÉ•¹Ñ™™¥±¥…Ñ¥½¸t¥ôğ½Àø(€€€€€€€€ñ‘¥Ø±…ÍÌô‰…‰½ÕĞµ±¥¹­Ìˆùí•áÑ•É¹…°¡X°ÕÉÉ¥Õ±Õ´Ù¥Ñ…”€ñÍÁ…¸…É¥„µ¡¥‘‘•¸ô‰ÑÉÕ”ˆûŠ\ğ½ÍÁ…¸øœ°Á¥±°µ±¥¹¬œ¥ôğ½‘¥Øø(€€€€€€ğ½‘¥Øø(€€€€ğ½‘¥Øø(€€ğ½Í•Ñ¥½¸ø(€€ñÍ•Ñ¥½¸±…ÍÌô‰½¹Ñ•¹ÑÌµÍ•Ñ¥½¸ˆ…É¥„µ±…‰•±±•‘‰äô‰½¹Ñ•¹ÑÌµÑ¥Ñ±”ˆø(€€€€ñ‘¥Ø±…ÍÌô‰Í•Ñ¥½¸µ¡•…‘¥¹œˆøñ‘¥ØøñÀ±…ÍÌô‰•å•‰É½ÜÍ•Ñ¥½¸µ­¥­•ÈˆøÀÈ€¼=9Q9QLğ½Àøñ È¥ô‰½¹Ñ•¹ÑÌµÑ¥Ñ±”ˆ±…ÍÌô‰Í•Ñ¥½¸µÑ¥Ñ±”½¹Ñ•¹ÑÌµÑ¥Ñ±”ˆù½¹Ñ•¹ÑÌğ½ Èøğ½‘¥Øøğ½‘¥Øø(€€€€ñ¹…Ø±…ÍÌô‰Á…”µ‘¥É•Ñ½Éä¡½µ”µ½¹Ñ•¹ÑÌˆ…É¥„µ±…‰•°ô‰½¹Ñ•¹ÑÌˆùí½¹Ñ•¹ÑÍôğ½¹…Øø(€€ğ½Í•Ñ¥½¸ø(ğ½µ…¥¸øœœœ(€€€Ñ•áĞ¬õ™½½Ñ•È ¤(€€€Í¡•µ„õì½¹Ñ•áĞœè¡ÑÑÁÌè¼½Í¡•µ„¹½Éœœ°ÑåÁ”œèA•ÉÍ½¸œ°¹…µ”œéQl¹…µ”t°ÕÉ°œé	M°•µ…¥°œéQl•µ…¥°t°‘•ÍÉ¥ÁÑ¥½¸œéQlÍÕµµ…Éät°Í…µ•ÌœémÁlÕÉ°t™½ÈÀ¥¸QlÁÉ½™¥±•Ìuuô(€€€Ñ•áĞõÑ•áĞ¹É•Á±…” œğ½¡•…øœ±˜œñÍÉ¥ÁĞÑåÁ”ô‰…ÁÁ±¥…Ñ¥½¸½±­©Í½¸ˆùí©Í½¸¹‘ÕµÁÌ¡Í¡•µ„±•¹ÍÕÉ•}…Í¥¤õ…±Í”¥ôğ½ÍÉ¥ÁĞùq¸ğ½¡•…øœ¤(€€€€¡I==P¼¥¹‘•à¹¡Ñµ°œ¤¹İÉ¥Ñ•}Ñ•áĞ¡Ñ•áĞ¤()‘•˜İÉ¥Ñ•}Á…”¡É½ÕÑ”°Ñ¥Ñ±”°‘•ÍÉ¥ÁÑ¥½¸°‰½‘ä¤è(€€€Ñ•áĞõ¡•…¡Ñ¥Ñ±”¬œƒŠP-å½Õ¹µ¥¸I½ œ±‘•ÍÉ¥ÁÑ¥½¸±É½ÕÑ”±…Ñ¥Ù”õÉ½ÕÑ”¤(€€€Ñ•áĞ¬ôœñµ…¥¸¥ô‰µ…¥¸ˆ±…ÍÌô‰İÉ…Àˆøœ­‰½‘ä¬œğ½µ…¥¸øœ­™½½Ñ•È ¤(€€€€¡I==P½É½ÕÑ”¤¹İÉ¥Ñ•}Ñ•áĞ¡Ñ•áĞ¤(()‘•˜‰Õ¥±‘}Í•Ñ¥½¹Ì ¤è(€€€É•Í•…É¡}•áÁ•É¥•¹”ôœœ¹©½¥¸¡•áÁ•É¥•¹•}É½Ü¡¥Ñ•´¤™½È¥Ñ•´¥¸Ql•áÁ•É¥•¹”t¥˜¥Ñ•µlÑåÁ”tôôI•Í•…É œ¤(€€€µ¥±¥Ñ…Éå}Í•ÉÙ¥”ôœœ¹©½¥¸¡•áÃ_:îÚ$z{-®éÜj×<h1 id="patents-title" class="section-title">Patents<sup>{len(DATA['patents']):02d}</sup></h1></div><p>Filed patent applications and patents in preparation.</p></div><div class="patent-list">{''.join(entries)}</div><p class="pub-status-note">The order of inventors does not reflect their level of contribution.</p></section>'''
     write_page('patents.html','Patents','Filed patent applications and patents in preparation by Kyoungmin Roh.',body)
 
 
@@ -249,9 +28,10 @@ def build_participation():
     for event in DATA['participation']:
         photos=[]
         for number,photo in enumerate(event['photos'],1):
-            loading='eager' if photo_index==0 else 'lazy'
+            loading='eager' if number<=4 else 'lazy'
+            fetchpriority='high' if photo_index==0 else 'auto'
             position=f' style="object-position:{e(photo["objectPosition"])}"' if photo.get('objectPosition') else ''
-            photos.append(f'''<figure class="participation-photo"><a class="photo-open" href="{e(photo['src'])}" data-photo-index="{photo_index}" data-photo-caption="{e(photo['caption'])}" data-photo-album="{e(event['title'])}" aria-label="Open photograph {number}: {e(photo['caption'])}"><img src="{e(photo['src'])}" width="{photo['width']}" height="{photo['height']}" alt="{e(photo['alt'])}" loading="{loading}" decoding="async"{position}></a><figcaption><span class="mono">{number:02d}</span><span>{e(photo['caption'])}</span></figcaption></figure>''')
+            photos.append(f'''<figure class="participation-photo"><a class="photo-open" href="{e(photo['src'])}" data-photo-index="{photo_index}" data-photo-caption="{e(photo['caption'])}" data-photo-album="{e(event['title'])}" aria-label="Open photograph {number}: {e(photo['caption'])}"><img src="{e(photo['src'])}" width="{photo['width']}" height="{photo['height']}" alt="{e(photo['alt'])}" loading="{loading}" decoding="async" fetchpriority="{fetchpriority}"{position}></a><figcaption><span class="mono">{number:02d}</span><span>{e(photo['caption'])}</span></figcaption></figure>''')
             photo_index+=1
         paper_link=external(event['paperUrl'],e(event.get('paperLabel','Paper'))+' â†—','text-link')
         albums.append(f'''<article id="{e(event['id'])}" class="conference-album" aria-labelledby="{e(event['id'])}-title"><div class="conference-heading"><div class="conference-meta"><p class="eyebrow">CONFERENCE / {event['year']}</p><h2 id="{e(event['id'])}-title">{e(event['title'])}</h2><p class="conference-name">{e(event['name'])}</p><p class="mono">{e(event['period'])}<br>{e(event['location'])}</p>{paper_link}</div><div class="conference-summary"><p>{e(event['description'])}</p><p class="mono muted">{len(event['photos']):02d} PHOTOGRAPHS Â· SELECT TO ENLARGE</p></div></div><div class="participation-grid">{''.join(photos)}</div></article>''')
