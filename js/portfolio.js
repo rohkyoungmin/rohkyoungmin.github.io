@@ -195,7 +195,7 @@
       leaf.addEventListener('animationend', event => {
         if (event.target === leaf && event.animationName.indexOf('portfolio-leaf-') === 0) finish();
       }, {once:true});
-      window.setTimeout(finish, 430);
+      window.setTimeout(finish, 540);
     };
 
     const turnPage = direction => {

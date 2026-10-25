@@ -1167,7 +1167,7 @@ main.book-spread:not(.home-spread) {
   --book-visible-pages:2;
   position:relative; isolation:isolate; display:block !important;
   height:calc(100svh - 145px); min-height:min(380px, calc(100svh - 145px)); max-height:780px;
-  padding-block:0; border-block:1px solid #f0f0ed; background:#fff;
+  padding-block:clamp(20px,3vh,28px) 0; border-block:1px solid #f0f0ed; background:#fff;
   column-count:2; column-gap:clamp(48px, 8vw, 120px); column-fill:balance;
   overflow-x:auto; overflow-y:hidden; overscroll-behavior-x:contain;
   scroll-snap-type:x mandatory; scroll-behavior:auto; scrollbar-width:none;
@@ -1265,11 +1265,11 @@ main.home-spread.book-is-turning-prev::after { left:0; width:50%; }
 }
 .book-flip-layer[data-turn='next'] {
   clip-path:inset(0 0 0 50%); transform-origin:50% 50%;
-  animation:portfolio-leaf-next 340ms cubic-bezier(.2,.74,.25,1) both;
+  animation:portfolio-leaf-next 420ms cubic-bezier(.45,0,.55,1) both;
 }
 .book-flip-layer[data-turn='prev'] {
   clip-path:inset(0 50% 0 0); transform-origin:50% 50%;
-  animation:portfolio-leaf-prev 340ms cubic-bezier(.2,.74,.25,1) both;
+  animation:portfolio-leaf-prev 420ms cubic-bezier(.45,0,.55,1) both;
 }
 @media (max-width:1000px) {
   main.book-spread:not(.home-spread) { --book-visible-pages:1; column-count:1; }
