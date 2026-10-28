@@ -82,7 +82,7 @@
       publication.hidden = !show;
       if (show) visible++;
     });
-    if (count) count.textContent = `${String(visible).padStart(2, '0')} entries`;
+    if (count) count.textContent = document.documentElement.lang === 'ko' ? `${String(visible).padStart(2, '0')}편` : `${String(visible).padStart(2, '0')} entries`;
   }));
 
   // Photo links remain usable without JavaScript; enhance them with a modal viewer.
