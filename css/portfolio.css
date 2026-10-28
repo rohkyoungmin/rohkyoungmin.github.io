@@ -546,13 +546,14 @@ main.wrap {
   .nav-links a.nav-gallery:focus-visible::after { transform: scaleX(1); }
 }
 
-/* About and Contents share a clean two-column start on the homepage. */
+/* About sits above the full-width Contents list on the homepage. */
 .home-layout {
-  display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-  align-items: start; column-gap: clamp(42px, 7vw, 104px);
+  display: grid; grid-template-columns: minmax(0, 1fr);
+  align-items: start; row-gap: 64px;
 }
 .home-layout > .home-about,
 .home-layout > .contents-section { min-width: 0; margin: 0; padding: 0; border: 0; }
+.home-layout > .contents-section { padding-top: 42px; border-top: 1px solid var(--ink); }
 .home-about .section-heading,
 .contents-section .section-heading {
   display: block; margin: 0 0 26px;
